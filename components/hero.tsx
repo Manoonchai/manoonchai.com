@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <section className="text-center py-20 mx-16">
-      <h1 className="text-6xl font-bold sm:text-8xl">ทดสอบ</h1>
+      <h1 className="text-6xl font-bold sm:text-8xl">มนูญชัย</h1>
       <p className="text-2xl text-gray-500 my-8">
         Praesent dui mus porta mollis hendrerit et quis diam torquent, iaculis
         cubilia leo sapien aptent imperdiet sollicitudin primis vivamus euismod,
