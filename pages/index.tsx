@@ -6,6 +6,7 @@ import styles from '../styles/Home.module.css';
 import Nav from '../components/nav';
 import Hero from 'components/hero';
 import Features from 'components/features';
+import Articles from 'components/articles';
 
 export default function Home() {
   return (
@@ -33,6 +34,8 @@ export default function Home() {
       </span>
 
       <Features />
+
+      <Articles />
 
       {/*
       <main className={styles.main}>

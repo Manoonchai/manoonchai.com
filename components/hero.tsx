@@ -24,6 +24,14 @@ export default function Hero() {
         >
           ดาวน์โหลด
         </a>
+        <a
+          href="https://manoontype.web.app"
+          className="text-gray-700 text-xl px-2 py-4 mx-2 hover:text-white transition duration-200 ease-in-out delay-600"
+          target="_blank"
+          rel="noreferrer"
+        >
+          ทดลองพิมพ์
+        </a>
       </div>
     </section>
   );
