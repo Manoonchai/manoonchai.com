@@ -7,6 +7,7 @@ import Nav from '../components/nav';
 import Hero from 'components/hero';
 import Features from 'components/features';
 import Articles from 'components/articles';
+import Download from 'components/download';
 
 export default function Home() {
   return (
@@ -36,6 +37,8 @@ export default function Home() {
       <Features />
 
       <Articles />
+
+      <Download />
 
       {/*
       <main className={styles.main}>
