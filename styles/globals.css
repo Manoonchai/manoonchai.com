@@ -2,3 +2,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fonts */
+@font-face {
+  font-family: 'Anakotmai';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../public/fonts/anakotmai/anakotmai-medium.eot'); /* IE9 Compat Modes */
+  src: url('../public/fonts/anakotmai/anakotmai-medium.eot#iefix')
+      format('embedded-opentype'),
+    url('../public/fonts/anakotmai/anakotmai-medium.woff2') format('woff2'),
+    url('../public/fonts/anakotmai/anakotmai-medium.woff') format('woff');
+}
+@font-face {
+  font-family: 'Anakotmai';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../public/fonts/anakotmai/anakotmai-bold.eot'); /* IE9 Compat Modes */
+  src: url('../public/fonts/anakotmai/anakotmai-bold.eot#iefix')
+      format('embedded-opentype'),
+    url('../public/fonts/anakotmai/anakotmai-bold.woff2') format('woff2'),
+    url('../public/fonts/anakotmai/anakotmai-bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Anakotmai';
+  font-style: normal;
+  font-weight: light;
+  src: url('../public/fonts/anakotmai/anakotmai-light.eot'); /* IE9 Compat Modes */
+  src: url('../public/fonts/anakotmai/anakotmai-light.eot#iefix')
+      format('embedded-opentype'),
+    url('../public/fonts/anakotmai/anakotmai-light.woff2') format('woff2'),
+    url('../public/fonts/anakotmai/anakotmai-light.woff') format('woff');
+}
+
+* {
+  font-family: 'Anakotmai';
+}
