@@ -53,7 +53,7 @@ export default function Features() {
           <div className="relative" key={idx}>
             <dt>
               {iconType == 'fontawesome' ? (
-                <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white p-3">
                   <FontAwesomeIcon icon={icon as IconDefinition} />
                 </div>
               ) : (
