@@ -3,13 +3,9 @@ export default function Hero() {
     <section className="text-center py-20 mx-16">
       <h1 className="text-6xl font-bold sm:text-8xl">มนูญชัย</h1>
       <p className="text-2xl text-gray-500 my-8">
-        Praesent dui mus porta mollis hendrerit et quis diam torquent, iaculis
-        cubilia leo sapien aptent imperdiet sollicitudin primis vivamus euismod,
-        mattis ipsum sagittis himenaeos scelerisque ante cras dapibus. Urna
-        natoque faucibus sit lacus nulla tortor sapien cras quam, fusce dui
-        vulputate cum consequat ridiculus ultricies at proin dictumst, tincidunt
-        massa habitant feugiat cursus bibendum nostra eget. Nam elit per
-        condimentum nisi justo.
+        แป้นพิมพ์ภาษาไทยยุคใหม่
+        สร้างจากปัญญาประดิษฐ์และฐานข้อมูลขนาดใหญ่ของการพิมพ์ภาษาไทยในยุคปัจจุบัน
+        พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%
       </p>
       <div className="mt-12">
         <a

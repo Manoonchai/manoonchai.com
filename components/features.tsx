@@ -1,39 +1,33 @@
 const features = [
   {
     icon: '',
-    title: '1111111',
+    title: 'สร้างจากข้อมูลขนาดใหญ่ ผ่าน Algorithm และ AI',
     description:
-      'Nulla mi ornare suspendisse convallis arcu fames integer turpis torquent elit vehicula erat nibh ante egestas elementum curae, interdum fusce nisl pulvinar nascetur habitant semper justo in sociosqu conubia ut ridiculus porta consequat. Pretium per at dis purus lectus consequat cubilia, morbi lacus porttitor felis massa malesuada volutpat, elementum et nunc vivamus commodo ipsum. Consequat et dapibus hac gravida mi venenatis felis morbi lacinia magna egestas, hendrerit eget conubia elementum vehicula aliquet himenaeos dolor nunc ultricies vel, potenti scelerisque eleifend fringilla etiam ut maecenas erat eros arcu.',
+      'เพื่อลดความเอนเอียง (Bias) ของข้อมูล เราใช้ฐานข้อมูลจากหลายแหล่งเพื่อเฉลี่ย และสร้างแป้นพิมพ์ด้วย Algorithm โดยใช้ AI ในการประมวลผลหาแป้นพิมพ์ที่มีประสิทธิภาพมากที่สุด',
   },
   {
     icon: '',
-    title: '22222222222',
+    title: 'ใช้เลขอารบิกเป็นค่าเริ่มต้น',
     description:
-      'Nulla mi ornare suspendisse convallis arcu fames integer turpis torquent elit vehicula erat nibh ante egestas elementum curae, interdum fusce nisl pulvinar nascetur habitant semper justo in sociosqu conubia ut ridiculus porta consequat. Pretium per at dis purus lectus consequat cubilia, morbi lacus porttitor felis massa malesuada volutpat, elementum et nunc vivamus commodo ipsum. Consequat et dapibus hac gravida mi venenatis felis morbi lacinia magna egestas, hendrerit eget conubia elementum vehicula aliquet himenaeos dolor nunc ultricies vel, potenti scelerisque eleifend fringilla etiam ut maecenas erat eros arcu.',
+      'การใช้งานภาษาไทยในปัจจุบันแทบไม่มีการพิมพ์เลขไทยแล้ว เราจึงนำเลขอารบิกเป็นค่าเริ่มต้นแทน เมื่อต้องการพิมพ์ตัวเลข ผู้ใช้ไม่จำเป็นต้องสลับเป็นแป้นพิมพ์ภาษาอังกฤษอีกต่อไป (หากต้องการพิมพ์เลขไทยยังสามารถพิมพ์ด้วยการกด <code>Alt</code> ค้างเอาไว้ได้)',
   },
   {
     icon: '',
-    title: '3 exchange rates',
+    title: 'สมดุลย์การพิมพ์ด้วยมือซ้ายและขวา',
     description:
-      'Nulla mi ornare suspendisse convallis arcu fames integer turpis torquent elit vehicula erat nibh ante egestas elementum curae, interdum fusce nisl pulvinar nascetur habitant semper justo in sociosqu conubia ut ridiculus porta consequat. Pretium per at dis purus lectus consequat cubilia, morbi lacus porttitor felis massa malesuada volutpat, elementum et nunc vivamus commodo ipsum. Consequat et dapibus hac gravida mi venenatis felis morbi lacinia magna egestas, hendrerit eget conubia elementum vehicula aliquet himenaeos dolor nunc ultricies vel, potenti scelerisque eleifend fringilla etiam ut maecenas erat eros arcu.',
+      'ตัวอักษรไทยบนแป้นพิมพ์เกษมณีมีความไม่สมดุลย์ โดยหนักไปทางมือขวาถึง 70% แต่แป้นพิมพ์มนูญชัยจะมีน้ำหนักโดยสัดส่วน มือซ้าย:มือขวา อยู่ที่ 47%:53%',
   },
   {
     icon: '',
-    title: '4',
+    title: 'ไม่มีตัวอักษรไทยบนแถวตัวเลข',
     description:
-      'Nulla mi ornare suspendisse convallis arcu fames integer turpis torquent elit vehicula erat nibh ante egestas elementum curae, interdum fusce nisl pulvinar nascetur habitant semper justo in sociosqu conubia ut ridiculus porta consequat. Pretium per at dis purus lectus consequat cubilia, morbi lacus porttitor felis massa malesuada volutpat, elementum et nunc vivamus commodo ipsum. Consequat et dapibus hac gravida mi venenatis felis morbi lacinia magna egestas, hendrerit eget conubia elementum vehicula aliquet himenaeos dolor nunc ultricies vel, potenti scelerisque eleifend fringilla etiam ut maecenas erat eros arcu.',
+      'บนแป้นพิมพ์มนูญชัย ตัวจะไม่มีตัวอักษรไทยอยู่บนแถวตัวเลข เหมาะกับการใช้กับคีย์บอร์ดแลปทอป หรือคีย์บอร์ดขนาดเล็กที่มีความนิยมมากขึ้นในปัจจุบัน',
   },
   {
     icon: '',
-    title: '5',
+    title: 'Open-Source',
     description:
-      'Nulla mi ornare suspendisse convallis arcu fames integer turpis torquent elit vehicula erat nibh ante egestas elementum curae, interdum fusce nisl pulvinar nascetur habitant semper justo in sociosqu conubia ut ridiculus porta consequat. Pretium per at dis purus lectus consequat cubilia, morbi lacus porttitor felis massa malesuada volutpat, elementum et nunc vivamus commodo ipsum. Consequat et dapibus hac gravida mi venenatis felis morbi lacinia magna egestas, hendrerit eget conubia elementum vehicula aliquet himenaeos dolor nunc ultricies vel, potenti scelerisque eleifend fringilla etiam ut maecenas erat eros arcu.',
-  },
-  {
-    icon: '',
-    title: '6',
-    description:
-      'Nulla mi ornare suspendisse convallis arcu fames integer turpis torquent elit vehicula erat nibh ante egestas elementum curae, interdum fusce nisl pulvinar nascetur habitant semper justo in sociosqu conubia ut ridiculus porta consequat. Pretium per at dis purus lectus consequat cubilia, morbi lacus porttitor felis massa malesuada volutpat, elementum et nunc vivamus commodo ipsum. Consequat et dapibus hac gravida mi venenatis felis morbi lacinia magna egestas, hendrerit eget conubia elementum vehicula aliquet himenaeos dolor nunc ultricies vel, potenti scelerisque eleifend fringilla etiam ut maecenas erat eros arcu.',
+      'โค้ดทั้งหมดเปิดเผยแบบ Open-Source ด้วยสัญญาอนุญาตแบบ MIT สามารถนำไปใช้ซ้ำ หรือต่อยอดเป็นแป้นพิมพ์รูปแบบอื่นๆ ได้ อีกทั้งยังเปิดโอกาสให้ผู้ที่สนใจมา Contribute ในโครงการได้ด้วย',
   },
 ];
 
@@ -54,21 +48,20 @@ export default function Features() {
                   stroke="currentColor"
                   aria-hidden="true"
                 >
-                  <path
+                  {/* <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
                     d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                  />
+                  /> */}
                 </svg>
               </div>
-              <p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-                {title}
-              </p>
+              <p className="ml-16 text-lg leading-6 text-gray-900">{title}</p>
             </dt>
-            <dd className="mt-2 ml-16 text-base text-gray-500">
-              {description}
-            </dd>
+            <dd
+              className="mt-2 ml-16 text-base font-light text-gray-500"
+              dangerouslySetInnerHTML={{ __html: description }}
+            ></dd>
           </div>
         ))}
       </dl>

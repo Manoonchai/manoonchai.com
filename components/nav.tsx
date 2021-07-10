@@ -5,7 +5,7 @@ export default function Nav() {
         <div className="relative flex items-center justify-between h-16">
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <span className="mx-2 text-2xl">
-              <a href="#">Title</a>
+              <a href="#">แป้นพิมพ์มนูญชัย</a>
             </span>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
