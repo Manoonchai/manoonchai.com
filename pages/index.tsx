@@ -4,11 +4,11 @@ import Image from 'next/image';
 
 import styles from '../styles/Home.module.css';
 import Nav from '../components/nav';
-import Hero from 'components/hero';
-import Features from 'components/features';
-import Articles from 'components/articles';
-import Download from 'components/download';
-import Footer from 'components/footer';
+import Hero from '../components/hero';
+import Features from '../components/features';
+import Articles from '../components/articles';
+import Download from '../components/download';
+import Footer from '../components/footer';
 
 export default function Home() {
   return (
