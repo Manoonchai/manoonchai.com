@@ -17,7 +17,7 @@ export default function Home() {
         <title>แป้นพิมพ์มนูญชัย</title>
         <meta
           name="description"
-          content="Volutpat semper aenean pulvinar pretium posuere convallis"
+          content="แป้นพิมพ์ภาษาไทยยุคใหม่ พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
