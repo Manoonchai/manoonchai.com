@@ -22,7 +22,7 @@ export default function Download() {
         </div>
         <div className="shadow-lg mx-auto w-64">
           <a
-            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0b/Manoonchai.klc"
+            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0b/Manoonchai.zip"
             target="_blank"
             rel="noreferrer"
           >
@@ -51,7 +51,7 @@ export default function Download() {
           <li>
             วางไฟล์ <code>Manoonchai.keylayout</code>
           </li>
-          <li>Log out หรือ Restart เครื่องเพื่อเริ่มใช้งานแป้นพิมพ์มนูญชัย</li>
+          <li>Log out หรือ Restart เพื่อเริ่มใช้งานแป้นพิมพ์มนูญชัย</li>
         </ul>
       </div>
 
@@ -59,25 +59,12 @@ export default function Download() {
         <h3 className="text-3xl font-bold my-4">วิธีติดตั้งสำหรับ Windows</h3>
         <ul className="list-disc pl-4">
           <li>
-            <a
-              href="https://www.microsoft.com/en-us/download/details.aspx?id=102134"
-              target="_blank"
-              rel="noreferrer"
-            >
-              ดาวน์โหลดโปรแกรม Microsoft Keyboard Layout Creator (MSKLC) จาก
-              Microsoft.com
-            </a>
+            Unzip ไฟล์ <code>Manoonchai.zip</code>
           </li>
           <li>
-            เปิดโปรแกรม MSKLC แล้วทำการ Import ไฟล์ <code>Manoonchai.klc</code>
+            เปิดไฟล์ <code>setup</code> เพื่อติดตั้ง
           </li>
-          <li>
-            สร้าง <code>.msi</code> Installer
-          </li>
-          <li>
-            เปิดไฟล์ <code>.msi</code> เพื่อติดตั้ง
-            และเริ่มใช้งานแป้นพิมพ์มนูญชัย
-          </li>
+          <li>Sign out หรือ Restart เพื่อเริ่มใช้งานแป้นพิมพ์มนูญชัย</li>
         </ul>
       </div>
     </section>
