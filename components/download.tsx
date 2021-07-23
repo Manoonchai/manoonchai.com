@@ -1,22 +1,36 @@
+import { faApple, faWindows } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 export default function Download() {
   return (
-    <section className="text-center py-20 mx-16">
+    <section id="download" className="text-center py-20 mx-16">
       <h2 className="text-3xl font-bold sm:text-6xl">ดาวน์โหลด</h2>
-
       <div className="flex mt-8">
-        <div className="shadow-lg mx-auto max-w-sm ">
-          <a href="https://medium.com/@narze" target="_blank" rel="noreferrer">
-            <div className="p-7 my-auto pb-10 ">
+        <div className="shadow-lg mx-auto w-64">
+          <a
+            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0b/Manoonchai.keylayout"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="p-8 my-auto">
               <h3 className="text-2xl font-semibold text-gray-800">macOS</h3>
-              <p className="text-base text-gray-400 mt-2"></p>
+              <p className="mt-2 w-16 mx-auto">
+                <FontAwesomeIcon icon={faApple} />
+              </p>
             </div>
           </a>
         </div>
-        <div className="shadow-lg mx-auto max-w-sm ">
-          <a href="https://medium.com/@narze" target="_blank" rel="noreferrer">
-            <div className="p-7 my-auto pb-10 ">
+        <div className="shadow-lg mx-auto w-64">
+          <a
+            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0b/Manoonchai.klc"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="p-8 my-auto">
               <h3 className="text-2xl font-semibold text-gray-800">Windows</h3>
-              <p className="text-base text-gray-400 mt-2"></p>
+              <p className="mt-2 w-16 mx-auto">
+                <FontAwesomeIcon icon={faWindows} className="mt-4" />
+              </p>
             </div>
           </a>
         </div>
@@ -26,19 +40,18 @@ export default function Download() {
         <h3 className="text-3xl font-bold my-4">วิธีติดตั้งสำหรับ macOS</h3>
         <ul className="list-disc pl-4">
           <li>
-            Arcu taciti inceptos mollis hendrerit quis habitant molestie mi
-            nascetur dui erat habitasse, cursus maecenas primis congue tempus et
-            est platea bibendum vestibulum.
+            เปิด <code>Finder</code>
           </li>
           <li>
-            Nisl placerat enim augue laoreet habitant tristique ante parturient
-            vivamus proin, primis porta ullamcorper penatibus amet vehicula
-            convallis phasellus.
+            เลือกเมนู <code>Go &rarr; Go to Folder...</code>
           </li>
           <li>
-            Primis vel in libero consectetur torquent cum mi rutrum, elementum
-            nulla lorem potenti viverra ultrices.
+            ใส่ <code>~/Library/Keyboard Layouts</code> แล้วคลิก <code>Go</code>
           </li>
+          <li>
+            วางไฟล์ <code>Manoonchai.keylayout</code>
+          </li>
+          <li>Log out หรือ Restart เครื่องเพื่อเริ่มใช้งานแป้นพิมพ์มนูญชัย</li>
         </ul>
       </div>
 
@@ -46,18 +59,24 @@ export default function Download() {
         <h3 className="text-3xl font-bold my-4">วิธีติดตั้งสำหรับ Windows</h3>
         <ul className="list-disc pl-4">
           <li>
-            Arcu taciti inceptos mollis hendrerit quis habitant molestie mi
-            nascetur dui erat habitasse, cursus maecenas primis congue tempus et
-            est platea bibendum vestibulum.
+            <a
+              href="https://www.microsoft.com/en-us/download/details.aspx?id=102134"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ดาวน์โหลดโปรแกรม Microsoft Keyboard Layout Creator (MSKLC) จาก
+              Microsoft.com
+            </a>
           </li>
           <li>
-            Nisl placerat enim augue laoreet habitant tristique ante parturient
-            vivamus proin, primis porta ullamcorper penatibus amet vehicula
-            convallis phasellus.
+            เปิดโปรแกรม MSKLC แล้วทำการ Import ไฟล์ <code>Manoonchai.klc</code>
           </li>
           <li>
-            Primis vel in libero consectetur torquent cum mi rutrum, elementum
-            nulla lorem potenti viverra ultrices.
+            สร้าง <code>.msi</code> Installer
+          </li>
+          <li>
+            เปิดไฟล์ <code>.msi</code> เพื่อติดตั้ง
+            และเริ่มใช้งานแป้นพิมพ์มนูญชัย
           </li>
         </ul>
       </div>

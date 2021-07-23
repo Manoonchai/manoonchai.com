@@ -9,20 +9,14 @@ export default function Hero() {
       </p>
       <div className="mt-12">
         <a
-          href="#"
+          href="#download"
           className="border-2 border-gray-500 bg-gray-500 text-white text-xl px-8 py-4 mx-2 rounded hover:bg-gray-700 transition duration-200 ease-in-out delay-600"
-        >
-          ดูรายละเอียด
-        </a>
-        <a
-          href="#"
-          className="border-2 border-gray-500 bordered text-xl px-8 py-4 mx-2 rounded hover:bg-gray-700 hover:text-white transition duration-200 ease-in-out delay-600"
         >
           ดาวน์โหลด
         </a>
         <a
           href="https://manoontype.web.app"
-          className="text-gray-700 text-xl px-2 py-4 mx-2 hover:text-white transition duration-200 ease-in-out delay-600"
+          className="border-2 border-gray-500 bordered text-xl px-8 py-4 mx-2 rounded hover:bg-gray-700 hover:text-white transition duration-200 ease-in-out delay-600"
           target="_blank"
           rel="noreferrer"
         >
