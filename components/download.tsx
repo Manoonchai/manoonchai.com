@@ -8,7 +8,7 @@ export default function Download() {
       <div className="flex mt-8">
         <div className="shadow-lg mx-auto w-64">
           <a
-            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0b/Manoonchai.keylayout"
+            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai.keylayout"
             target="_blank"
             rel="noreferrer"
           >
@@ -22,7 +22,7 @@ export default function Download() {
         </div>
         <div className="shadow-lg mx-auto w-64">
           <a
-            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0b/Manoonchai.zip"
+            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai.zip"
             target="_blank"
             rel="noreferrer"
           >
