@@ -46,12 +46,20 @@ export default function Download() {
             เลือกเมนู <code>Go &rarr; Go to Folder...</code>
           </li>
           <li>
-            ใส่ <code>~/Library/Keyboard Layouts</code> แล้วคลิก <code>Go</code>
+            ใส่ <code>/Library/Keyboard Layouts</code> แล้วคลิก <code>Go</code>
           </li>
           <li>
             วางไฟล์ <code>Manoonchai.keylayout</code>
           </li>
-          <li>Log out หรือ Restart เพื่อเริ่มใช้งานแป้นพิมพ์มนูญชัย</li>
+          <li>Log out หรือ Restart</li>
+          <li>
+            เปิด System Preferences &rarr; Keyboard &rarr; Input Sources &rarr;{' '}
+            <code>+</code>
+          </li>
+          <li>
+            เลือก <code>Others</code> หรือค้นหาว่า <code>Manoonchai</code>{' '}
+            แล้วทำการ Add เพื่อเริ่มใช้งานแป้นพิมพ์มนูญชัย
+          </li>
         </ul>
       </div>
 
@@ -62,7 +70,7 @@ export default function Download() {
             Unzip ไฟล์ <code>Manoonchai.zip</code>
           </li>
           <li>
-            เปิดไฟล์ <code>setup</code> เพื่อติดตั้ง
+            เปิดไฟล์ <code>setup.exe</code> เพื่อติดตั้ง
           </li>
           <li>Sign out หรือ Restart เพื่อเริ่มใช้งานแป้นพิมพ์มนูญชัย</li>
         </ul>
