@@ -2,7 +2,6 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import styles from '../styles/Home.module.css';
 import Nav from '../components/nav';
 import Hero from '../components/hero';
 import Features from '../components/features';
@@ -12,9 +11,12 @@ import Footer from '../components/footer';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div >
       <Head>
         <title>แป้นพิมพ์มนูญชัย</title>
+        <meta charSet="UTF-8"/>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta
           name="description"
           content="แป้นพิมพ์ภาษาไทยยุคใหม่ พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%"
@@ -26,8 +28,8 @@ export default function Home() {
 
       <Hero />
 
-      <span className="flex justify-center">
-        <Image
+      <span className="flex justify-center px-4">
+      <Image
           src="/manoonchai-layout.png"
           alt="แป้นพิมพ์มนูญชัย"
           width={850}
