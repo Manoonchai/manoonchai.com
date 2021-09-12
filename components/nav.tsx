@@ -12,6 +12,9 @@ export default function Nav() {
             <span className="mx-2 text-sm sm:text-md">
               <a href="#download">ดาวน์โหลด</a>
             </span>
+            <span className="mx-2 text-sm sm:text-md">
+              <a href="https://discord.gg/aNbFWTmuHU" target="_blank">Discord</a>
+            </span>
             {/* <span className="mx-2 text-nm">
               <a href="#">EN</a>
             </span> */}

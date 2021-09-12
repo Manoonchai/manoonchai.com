@@ -8,7 +8,7 @@ export default function Hero() {
         พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%
       </p>
       <div className="mt-12 flex justify-center">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
       <a
           href="#download"
           className="border-2 border-gray-500 bg-gray-500 text-white text-xl px-8 py-4 mx-2 rounded hover:bg-gray-700 transition duration-200 ease-in-out delay-600"
@@ -22,6 +22,14 @@ export default function Hero() {
           rel="noreferrer"
         >
           ทดลองพิมพ์
+        </a>
+        <a
+          href="https://discord.gg/aNbFWTmuHU"
+          className="text-xl px-4 py-4 mx-0 rounded hover:bg-gray-700 hover:text-white transition duration-200 ease-in-out delay-600"
+          target="_blank"
+          rel="noreferrer"
+        >
+          เข้าคอมมูนิตี้ Discord
         </a>
       </div>
       </div>
