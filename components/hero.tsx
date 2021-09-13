@@ -25,7 +25,7 @@ export default function Hero() {
         </a>
         <a
           href="https://discord.gg/aNbFWTmuHU"
-          className="text-xl px-4 py-4 mx-0 rounded hover:bg-gray-700 hover:text-white transition duration-200 ease-in-out delay-600"
+          className="border-2 border-gray-500 bg-gray-500 text-xl px-4 py-4 mx-0 rounded hover:bg-gray-700 hover:bg-gray-700 text-white transition duration-200 ease-in-out delay-600"
           target="_blank"
           rel="noreferrer"
         >
