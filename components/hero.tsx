@@ -3,7 +3,7 @@ export default function Hero() {
     <section className="text-center py-20 mx-16">
       <h1 className="text-5xl font-bold sm:text-8xl">มนูญชัย</h1>
       <p className="text-2xl text-gray-500 my-8">
-        แป้นพิมพ์ภาษาไทยยุคใหม่
+        แป้นพิมพ์ภาษาไทยทางเลือกใหม่
         สร้างจากปัญญาประดิษฐ์และฐานข้อมูลขนาดใหญ่ของการพิมพ์ภาษาไทยในยุคปัจจุบัน
         พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%
       </p>
