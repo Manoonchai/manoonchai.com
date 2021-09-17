@@ -59,10 +59,17 @@ export default function Home() {
             answer="ใช้เวลาประมาณ 2 อาทิตย์ถึง 2 เดือน แล้วแต่บุคคล" />
           <Question
             question="ฝึกพิมพ์มนูญชัยอย่างไร?"
-            answer="สามารถฝึกได้ที่เว็บ Manoontype" />
-          <a className="text-gray-600 underline" href="https://narze.medium.com/manoonchai-layout-%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%80%E0%B8%A7%E0%B9%87%E0%B8%9A-manoontype-%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%AA%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B9%86-5a4937856f78" target="_blank" rel="noreferrer">
-            อ่านวิธีใช้เว็บ Manoontype ในการฝึกแป้นพิมพ์มนูญชัย
-          </a>
+            answer="สามารถฝึกได้ที่เว็บ Manoontype หรือพิมพ์รูปแป้นพิมพ์ในกระดาษแล้วติดไว้ใต้จอคอมพิวเตอร์ หรือเปิดโปรแกรม On-Screen Keyboard และฝึกพิมพ์" />
+          <div>
+            <a className="text-gray-600 underline" href="https://narze.medium.com/manoonchai-layout-%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%80%E0%B8%A7%E0%B9%87%E0%B8%9A-manoontype-%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%AA%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B9%86-5a4937856f78" target="_blank" rel="noreferrer">
+              อ่านวิธีใช้เว็บ Manoontype ในการฝึกแป้นพิมพ์มนูญชัย
+            </a>
+          </div>
+          <div>
+            <a className="text-gray-600 underline" href="/Manoonchai-print.pdf" target="_blank" rel="noreferrer">
+              รูปแป้นพิมพ์มนูญชัย สำหรับฝึกพิมพ์
+            </a>
+          </div>
           <Question
             question="ถ้าเคยชินกับการพิมพ์ด้วยแป้นเกษมณีแล้ว สามารถฝึกพิมพ์แป้นมนูญชัยได้หรือไม่?"
             answer="ได้ แต่เมื่อปรับเปลี่ยนการพิมพ์แล้ว คนส่วนมากจะพิมพ์แป้นพิมพ์เดิมได้ช้าลง แต่จะยังจำตำแหน่งได้อยู่" />
