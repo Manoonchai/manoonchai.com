@@ -5,7 +5,7 @@ export default function Nav() {
         <div className="relative flex items-center justify-between h-16">
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <span className="mx-2 text-md sm:text-2xl">
-              <a href="#">แป้นพิมพ์มนูญชัย</a>
+              <a href="/">แป้นพิมพ์มนูญชัย</a>
             </span>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -13,11 +13,11 @@ export default function Nav() {
               <a href="#download">ดาวน์โหลด</a>
             </span>
             <span className="mx-2 text-sm sm:text-md">
+              <a href="/faq">คำถามที่พบบ่อย</a>
+            </span>
+            <span className="mx-2 text-sm sm:text-md">
               <a href="https://discord.gg/aNbFWTmuHU" target="_blank" rel="noreferrer">Discord</a>
             </span>
-            {/* <span className="mx-2 text-nm">
-              <a href="#">EN</a>
-            </span> */}
           </div>
         </div>
       </div>
