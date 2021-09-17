@@ -76,7 +76,12 @@ export default function Home() {
           <Question
             question="จะทำสติ๊กเกอร์แปะบนคีย์บอร์ด หรือคีย์บอร์ดที่เป็นแป้นพิมพ์มนูญชัยหรือไม่?"
             answer="ไม่มีแผนที่จะทำ เพราะผู้พัฒนาต้องการส่งเสริมการฝึกพิมพ์ด้วยวิธีพิมพ์สัมผัส แต่หากต้องการทำด้วยตัวเอง สามารถทำได้" />
-
+          <div>
+            <h2 className="text-2xl font-bold my-4">ต้องมาเรียนใหม่ จำใหม่อีกแล้วหรือ?</h2>
+            <p className="text-gray-400">
+              สบายใจได้! คุณยังสามารถใช้แป้นพิมพ์เดิมได้อยู่ หากคุณพบว่าแป้นพิมพ์ของคุณกลายร่างเป็นแป้นพิมพ์มนูญชัยโดยไม่ทราบสาเหตุ โปรดติดต่อเราโดยด่วนได้<a className="underline text-gray-600" href="https://bitly.com/98K8eH">ที่นี่</a>
+            </p>
+          </div>
           <div className="mt-8">
             <a className="underline text-gray-600" href="https://discord.gg/aNbFWTmuHU" target="_blank" rel="noreferrer">หากมีข้อสงสัยเพิ่มเติม สามารถเข้ามาถามในคอมมูนิตี้ Discord ได้</a>
           </div>
