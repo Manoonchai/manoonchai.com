@@ -79,7 +79,7 @@ export default function Home() {
           <div>
             <h2 className="text-2xl font-bold my-4">ต้องมาเรียนใหม่ จำใหม่อีกแล้วหรือ?</h2>
             <p className="text-gray-400">
-              สบายใจได้! คุณยังสามารถใช้แป้นพิมพ์เดิมได้อยู่ หากคุณพบว่าแป้นพิมพ์ของคุณกลายร่างเป็นแป้นพิมพ์มนูญชัยโดยไม่ทราบสาเหตุ โปรดติดต่อเราโดยด่วนได้<a className="underline text-gray-600" href="https://bitly.com/98K8eH">ที่นี่</a>
+              สบายใจได้! คุณยังสามารถใช้แป้นพิมพ์เดิมได้อยู่ หากคุณพบว่าแป้นพิมพ์ของคุณกลายร่างเป็นแป้นพิมพ์มนูญชัยโดยไม่ทราบสาเหตุ โปรดติดต่อเราโดยด่วนได้<a className="underline text-gray-600" href="https://bit.ly/3kjtSYL">ที่นี่</a>
             </p>
           </div>
           <div className="mt-8">
