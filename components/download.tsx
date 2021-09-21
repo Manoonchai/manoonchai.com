@@ -35,6 +35,27 @@ export default function Download() {
             </div>
           </a>
         </div>
+        <div className="shadow-lg mx-auto w-64">
+          <a
+            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai_xkb"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="p-8 my-auto">
+              <h3 className="text-2xl font-semibold text-gray-800">XKB</h3>
+              <p className="mt-2 w-16 mx-auto">
+              <div className="relative" style={{ height: "100px" }}>
+               <Image
+                src="/X11.svg"
+                alt="X11Logo"
+                layout={"fill"}
+                objectFit={"contain"}
+              />
+              </div>
+              </p>
+            </div>
+          </a>
+        </div>
       </div>
 
       <div className="mt-8 text-left">
