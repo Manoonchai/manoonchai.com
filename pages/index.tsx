@@ -8,6 +8,8 @@ import Features from '../components/features';
 import Articles from '../components/articles';
 import Download from '../components/download';
 import Footer from '../components/footer';
+import Share from '../components/share'
+
 
 export default function Home() {
   return (
@@ -42,6 +44,8 @@ export default function Home() {
       <Articles />
 
       <Download />
+
+      <Share />
 
       <Footer />
 
