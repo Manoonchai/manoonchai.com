@@ -5,9 +5,10 @@ export default function Nav() {
     <nav className="bg-gray-300">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
-          <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="flex-1 flex items-center sm:items-stretch sm:justify-start">
             <span className="mx-2 text-md sm:text-2xl">
-              <Link href="/"><a>แป้นพิมพ์มนูญชัย</a></Link>
+              
+              <Link href="/"><a><img class="h-12 w-auto" src="/manoonchai.png" alt="manoonchai" /></a></Link>
             </span>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
