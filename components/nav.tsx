@@ -10,7 +10,7 @@ export default function Nav() {
           <div className="flex-1 flex items-center sm:items-stretch sm:justify-start">
             <span className="mx-2 text-md sm:text-2xl">
               
-              <Link href="/"><a><span className="h-12 w-auto"><Image src="/manoonchai.png" alt="manoonchai" /></span></a></Link>
+              <Link href="/"><a>uto"><Image src="/manoonchai.png" alt="manoonchai" height={12} width={auto} /></a></Link>
             </span>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
