@@ -10,15 +10,14 @@ import Download from '../components/download';
 import Footer from '../components/footer';
 import Share from '../components/share'
 
-
 export default function Home() {
   return (
-    <div >
+    <div className="container min-h-screen mx-auto">
       <Head>
         <title>แป้นพิมพ์มนูญชัย</title>
-        <meta charSet="UTF-8"/>
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
           content="แป้นพิมพ์ภาษาไทยทางเลือกใหม่ พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%"
@@ -31,7 +30,7 @@ export default function Home() {
       <Hero />
 
       <span className="flex justify-center px-4">
-      <Image
+        <Image
           src="/manoonchai-layout.png"
           alt="แป้นพิมพ์มนูญชัย"
           width={850}
