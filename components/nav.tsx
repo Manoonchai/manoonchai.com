@@ -5,10 +5,10 @@ import Image from 'next/image';
 export default function Nav() {
   return (
     <nav className="bg-gray-300 absolute w-full left-0">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-2">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex-1 flex items-center sm:items-stretch sm:justify-start">
-            <span className="mx-2 text-md sm:text-2xl">
+            <span className="mx-2 leading-3">
 
               <Link href="/"><a><Image src="/manoonchai.png" alt="manoonchai" height={50} width={50} /></a></Link>
             </span>
