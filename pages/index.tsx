@@ -12,7 +12,7 @@ import Share from '../components/share'
 
 export default function Home() {
   return (
-    <div className="container min-h-screen mx-auto">
+    <div className={"container min-h-screen mx-auto " + (process.env.NODE_ENV == "production" ? '' : 'debug-screens')}>
       <Head>
         <title>แป้นพิมพ์มนูญชัย</title>
         <meta charSet="UTF-8" />
