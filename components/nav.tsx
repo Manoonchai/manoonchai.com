@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function Nav() {
   return (
-    <nav className="bg-gray-300 absolute w-full left-0">
+    <nav className="bg-gray-300 absolute w-full left-0 top-0">
       <div className="container mx-auto px-2">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex-1 flex items-center sm:items-stretch sm:justify-start">

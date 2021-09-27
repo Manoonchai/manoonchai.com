@@ -29,7 +29,7 @@ export default function Home() {
 
       <Hero />
 
-      <span className="flex justify-center px-4">
+      <span className="flex justify-center p-4">
         <Image
           src="/manoonchai-layout.png"
           alt="แป้นพิมพ์มนูญชัย"
