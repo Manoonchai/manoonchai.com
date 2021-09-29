@@ -1,4 +1,6 @@
-export default function Hero() {
+import { FC } from 'react';
+
+const Hero: FC = () => {
   return (
     <section className="text-center py-10 mx-16 mt-16">
       <h1 className="text-5xl font-bold sm:text-8xl">มนูญชัย</h1>
@@ -7,6 +9,7 @@ export default function Hero() {
         สร้างจากปัญญาประดิษฐ์และฐานข้อมูลขนาดใหญ่ของการพิมพ์ภาษาไทยในยุคปัจจุบัน
         พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%
       </p>
+
       <div className="mt-12 flex justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <a
@@ -25,7 +28,7 @@ export default function Hero() {
           </a>
           <a
             href="https://discord.gg/aNbFWTmuHU"
-            className="border-2 border-gray-500 bg-gray-500 text-xl px-4 py-4 mx-0 rounded hover:bg-gray-700 hover:bg-gray-700 text-white transition duration-200 ease-in-out delay-600"
+            className="border-2 border-indigo-500 bg-indigo-500 text-xl px-4 py-4 mx-0 rounded hover:bg-indigo-700 hover:bg-indigo-700 text-white transition duration-200 ease-in-out delay-600"
             target="_blank"
             rel="noreferrer"
           >
@@ -35,4 +38,6 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   FacebookShareButton,
   LineShareButton,
@@ -5,14 +6,12 @@ import {
   FacebookIcon,
   TwitterIcon,
   LineIcon,
-} from "react-share";
+} from 'react-share';
 
-export default function Nav() {
+const Share: FC = () => {
   return (
     <div className="bg-white text-center mb-20 mx-16">
-      <div className="mt-8 text-left text-3xl">
-        Share
-      </div>
+      <div className="mt-8 text-left text-3xl">Share</div>
       <p className="mt-8 text-left">
         <span>
           <FacebookShareButton
@@ -38,5 +37,6 @@ export default function Nav() {
       </p>
     </div>
   );
-}
+};
 
+export default Share;
