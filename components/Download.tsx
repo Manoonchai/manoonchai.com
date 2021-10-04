@@ -1,8 +1,9 @@
+import { FC } from 'react';
+import Image from 'next/image';
 import { faApple, faWindows } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from 'next/image';
 
-export default function Download() {
+const Download: FC = () => {
   return (
     <section id="download" className="text-center py-20 mx-16">
       <h2 className="text-3xl font-bold sm:text-6xl">ดาวน์โหลด</h2>
@@ -44,14 +45,14 @@ export default function Download() {
             <div className="p-8 my-auto">
               <h3 className="text-2xl font-semibold text-gray-800">XKB</h3>
               <p className="mt-2 w-16 mx-auto">
-              <div className="relative" style={{ height: "100px" }}>
-               <Image
-                src="/X11.svg"
-                alt="X11Logo"
-                layout={"fill"}
-                objectFit={"contain"}
-              />
-              </div>
+                <div className="relative" style={{ height: '100px' }}>
+                  <Image
+                    src="/X11.svg"
+                    alt="X11Logo"
+                    layout={'fill'}
+                    objectFit={'contain'}
+                  />
+                </div>
               </p>
             </div>
           </a>
@@ -99,16 +100,23 @@ export default function Download() {
       </div>
 
       <div className="mt-8 text-left">
-        <h3 className="text-3xl font-bold my-4">รูปแป้นพิมพ์มนูญชัย สำหรับฝึกพิมพ์</h3>
+        <h3 className="text-3xl font-bold my-4">
+          รูปแป้นพิมพ์มนูญชัย สำหรับฝึกพิมพ์
+        </h3>
 
         <div className="">
-          <a className="flex flex-col justify-center text-gray-600 underline" href="/Manoonchai-print.pdf" target="_blank" rel="noreferrer">
-            <div className="w-full relative" style={{ height: "320px" }}>
+          <a
+            className="flex flex-col justify-center text-gray-600 underline"
+            href="/Manoonchai-print.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="w-full relative" style={{ height: '320px' }}>
               <Image
                 src="/manoonchai-print.png"
                 alt="แป้นพิมพ์มนูญชัย"
-                layout={"fill"}
-                objectFit={"contain"}
+                layout={'fill'}
+                objectFit={'contain'}
               />
             </div>
             <p className="text-center">ดาวน์โหลดไฟล์ PDF</p>
@@ -117,4 +125,6 @@ export default function Download() {
       </div>
     </section>
   );
-}
+};
+
+export default Download;

@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { faOsi } from '@fortawesome/free-brands-svg-icons';
 import {
   faEquals,
@@ -5,9 +6,15 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 
-const features = [
+interface IFeature {
+  icon: string | IconDefinition;
+  iconType: `svg` | `text` | `fontawesome`;
+  title: string;
+  description: string;
+}
+
+const features: IFeature[] = [
   {
     icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>',
     iconType: 'svg',
@@ -45,7 +52,7 @@ const features = [
   },
 ];
 
-export default function Features() {
+const Features: FC = () => {
   return (
     <div className="mt-10 px-10">
       <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
@@ -73,4 +80,6 @@ export default function Features() {
       </dl>
     </div>
   );
-}
+};
+
+export default Features;

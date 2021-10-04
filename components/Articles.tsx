@@ -1,6 +1,7 @@
+import { FC } from 'react';
 // import Image from 'next/image';
 
-export default function Articles() {
+const Article: FC = () => {
   return (
     <section className="text-center py-20 mx-16">
       <h2 className="text-3xl font-bold sm:text-6xl">บทความ</h2>
@@ -84,4 +85,6 @@ export default function Articles() {
       </div>
     </section>
   );
-}
+};
+
+export default Article;
