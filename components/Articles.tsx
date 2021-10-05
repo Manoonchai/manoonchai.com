@@ -19,7 +19,7 @@ const Article: FC = () => {
               alt=""
             /> */}
             <div className="p-7">
-              <h3 className="h-32 text-xl text-gray-800 flex flex-col justify-center underline">
+              <h3 className="md:h-32 md:text-xl text-gray-800 flex flex-col justify-center underline">
                 บันทึกการสร้างแป้นพิมพ์ไทย Manoonchai (1) : หนทางสู่ Layout
                 ที่ดีกว่า
               </h3>
@@ -38,7 +38,7 @@ const Article: FC = () => {
               alt=""
             /> */}
             <div className="p-7">
-              <h3 className="h-32 text-xl text-gray-800 flex flex-col justify-center underline">
+              <h3 className="md:h-32 md:text-xl h-full text-md text-gray-800 flex flex-col justify-center underline">
                 บันทึกการสร้างแป้นพิมพ์ไทย Manoonchai (2) : สร้าง Typing Effort
                 Model เพื่อให้คะแนนความ “พิมพ์ง่าย”
               </h3>
@@ -57,7 +57,7 @@ const Article: FC = () => {
               alt=""
             /> */}
             <div className="p-7">
-              <h3 className="h-32 text-xl text-gray-800 flex flex-col justify-center underline">
+              <h3 className="md:h-32 md:text-xl text-gray-800 flex flex-col justify-center underline">
                 บันทึกการสร้างแป้นพิมพ์ไทย Manoonchai (3) : วิเคราะห์แป้นพิมพ์
                 Manoonchai เทียบกับเกษมณี,ปัตตโชติ และเปิดตัวเว็บ Manoonchai.com
               </h3>
@@ -76,7 +76,7 @@ const Article: FC = () => {
               alt=""
             /> */}
             <div className="p-7">
-              <h3 className="h-32 text-xl text-gray-800 flex flex-col justify-center underline">
+              <h3 className="md:h-32 md:text-xl text-gray-800 flex flex-col justify-center underline">
                 วิธีใช้งานเว็บ Manoontype แบบสั้นๆ
               </h3>
             </div>

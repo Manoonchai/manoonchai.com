@@ -36,3 +36,24 @@
     url('../public/fonts/anakotmai/anakotmai-light.woff2') format('woff2'),
     url('../public/fonts/anakotmai/anakotmai-light.woff') format('woff');
 }
+
+html {
+	scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+	width: 7px;
+}
+
+html::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #aaaaaa;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+	background-color: #888888;
+}
+
+html::-webkit-scrollbar-track {
+	background-color: transparent;
+}
