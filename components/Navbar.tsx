@@ -23,7 +23,7 @@ const Navbar: FC = () => {
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <span className="mx-2 text-sm sm:text-md">
-              <Link href="/#download">
+              <Link href="/download">
                 <a>ดาวน์โหลด</a>
               </Link>
             </span>

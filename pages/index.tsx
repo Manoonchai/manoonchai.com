@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Hero from 'components/Hero';
 import Features from 'components/Features';
 import Articles from 'components/Articles';
-import Download from 'components/Download';
+import Practice from 'components/Practice';
 import Share from 'components/Share';
 
 const HomePage: NextPage = () => {
@@ -26,7 +26,7 @@ const HomePage: NextPage = () => {
 
       <Articles />
 
-      <Download />
+      <Practice />
 
       <Share />
     </div>
