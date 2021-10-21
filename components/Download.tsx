@@ -110,6 +110,7 @@ const Download: FC = () => {
             href="/Manoonchai-print.pdf"
             target="_blank"
             rel="noreferrer"
+            download
           >
             <div className="w-full relative" style={{ height: '320px' }}>
               <Image
