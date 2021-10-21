@@ -14,11 +14,9 @@ const Hero: FC = () => {
       <div className="mt-12 flex justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <Link href="/download">
-          <a
-            className="border-2 border-gray-500 bg-gray-500 text-white text-xl px-8 py-4 mx-2 rounded hover:bg-gray-700 transition duration-200 ease-in-out delay-600"
-          >
-            ดาวน์โหลด
-          </a>
+            <a className="border-2 border-gray-500 bg-gray-500 text-white text-xl px-8 py-4 mx-2 rounded hover:bg-gray-700 transition duration-200 ease-in-out delay-600">
+              ดาวน์โหลด
+            </a>
           </Link>
           <a
             href="https://manoontype.web.app"

@@ -5,7 +5,7 @@ import { faApple, faWindows } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Download: FC = () => {
-  const variantList = "<variantList>"
+  const variantList = '<variantList>';
 
   const example = [
     `
@@ -34,8 +34,8 @@ const Download: FC = () => {
       </variant>
     </variantList>
   </layout>
-  `
-  ]
+  `,
+  ];
   const example2 = [
     `
     <variant>
@@ -44,19 +44,19 @@ const Download: FC = () => {
       <description>Thai (Manoonchai v1.0)</description>
     </configItem>
   </variant>
-    `
-  ]
+    `,
+  ];
   const example3 = [
     `
     tis             th: Thai (TIS-820.2538)
     pat             th: Thai (Pattachote)
-    `
-  ]
+    `,
+  ];
   const example4 = [
     `
     ThaiMnc         th: Thai (Manoonchai v1.0)
-    `
-  ]
+    `,
+  ];
   return (
     <section id="download" className="text-center py-20 mx-16">
       <h2 className="text-3xl font-bold sm:text-6xl">ดาวน์โหลด</h2>
@@ -154,75 +154,123 @@ const Download: FC = () => {
 
       <div className="mt-8 text-left">
         <h3 className="text-3xl font-bold my-4">วิธีติดตั้งสำหรับ Linux</h3>
-        <h6 className="text-xl">แบบ setxkbmap, สำหรับเซสชัน X ปัจจุบันเท่านั้น</h6>
+        <h6 className="text-xl">
+          แบบ setxkbmap, สำหรับเซสชัน X ปัจจุบันเท่านั้น
+        </h6>
         <ul className="list-disc pl-4">
           <li>
-            <code>wget https://github.com/hiohlan/kiimo/raw/main/output/Manoonchai/Manoonchai_xkb --output-document=Manoonchai_xkb</code>
+            <code>
+              wget
+              https://github.com/hiohlan/kiimo/raw/main/output/Manoonchai/Manoonchai_xkb
+              --output-document=Manoonchai_xkb
+            </code>
           </li>
           <li>
             <code>cp ./Manoonchai_xkb /usr/share/X11/xkb/symbols/</code>
           </li>
           <li>
-            <code>xkbcomp Manoonchai_xkb</code> เพื่อ check syntex error ถ้าไม่มี output คืออาจจะไม่มี error
+            <code>xkbcomp Manoonchai_xkb</code> เพื่อ check syntex error
+            ถ้าไม่มี output คืออาจจะไม่มี error
           </li>
           <li>
-            <code>setxkbmap -layout &apos;us,Manoonchai_xkb&apos; -option &apos;grp:caps_toggle&apos;</code> เพื่อตั้งคียบอร์ดเป็น us-qwerty กับ Manoonchai, เปลี่ยนเลย์เอาต์โดยการกด CAPS
+            <code>
+              setxkbmap -layout &apos;us,Manoonchai_xkb&apos; -option
+              &apos;grp:caps_toggle&apos;
+            </code>{' '}
+            เพื่อตั้งคียบอร์ดเป็น us-qwerty กับ Manoonchai,
+            เปลี่ยนเลย์เอาต์โดยการกด CAPS
           </li>
         </ul>
-        <h6 className="text-xl mt-2">แบบลงเป็นvariantส่วนหนึ่งของkeyboardภาษาไทยที่มีอยู่เดิม</h6>
+        <h6 className="text-xl mt-2">
+          แบบลงเป็นvariantส่วนหนึ่งของkeyboardภาษาไทยที่มีอยู่เดิม
+        </h6>
         <ul className="list-disc pl-4">
           <li>
-            คัดลอก text ที่อยู่ใน <code>Manoonchai_xkb</code> ทั้งหมด. (อย่าลืมตรวจด้วยเป็น UTF-8 without <Link href="https://en.wikipedia.org/wiki/Byte_order_mark"><a className="underline" target="_blank">BOM</a></Link> ไหม, ถ้ามี BOM ให้กำจัดออก. )
+            คัดลอก text ที่อยู่ใน <code>Manoonchai_xkb</code> ทั้งหมด.
+            (อย่าลืมตรวจด้วยเป็น UTF-8 without{' '}
+            <Link href="https://en.wikipedia.org/wiki/Byte_order_mark">
+              <a className="underline" target="_blank">
+                BOM
+              </a>
+            </Link>{' '}
+            ไหม, ถ้ามี BOM ให้กำจัดออก. )
           </li>
           <li>
             root แก้ไขไฟล์ <code>/usr/share/X11/xkb/symbols/th</code>
           </li>
+          <li>วาง text ที่คัดลอกมา, ไว้ด้านล่างสุดของไฟล์, แล้วบันทึก.</li>
           <li>
-            วาง text ที่คัดลอกมา, ไว้ด้านล่างสุดของไฟล์, แล้วบันทึก.
-          </li>
-          <li>
-          root แก้ไขไฟล์ <code>/usr/share/X11/xkb/rules/evdev.xml</code>
+            root แก้ไขไฟล์ <code>/usr/share/X11/xkb/rules/evdev.xml</code>
           </li>
           <li>
             มองหา (อาจจะมีจุดแตกต่างกัน)
             <br />
-            <textarea name="" id="" value={example} className="h-80 w-96"></textarea>
+            <textarea
+              name=""
+              id=""
+              value={example}
+              className="h-80 w-96"
+            ></textarea>
           </li>
           <li>
-          เพิ่ม text ข้างล่าง ลงในแท็ก <code>{variantList}</code> แล้วบันทึก
-          <br />
-          <textarea name="" id="" value={example2} className="h-40 w-96"></textarea>
-          </li>
-          <li>
-          ทำข้อ 5-6 เช่นเดียวกับ ไฟล์ <code>/usr/share/X11/xkb/rules/base.xml</code>
-          </li>
-          <li>
-          root แก้ไขไฟล์ <code>/usr/share/X11/xkb/rules/base.lst</code>
-          </li>
-          <li>
-          มองหา
-          <br />
-          <textarea name="" id="" value={example3} className="h-20 w-96"></textarea>
-          </li>
-          <li>
-            เพิ่ม text ข้างล่าง ไว้ใต้ <code>pat th: Thai (Pattachote)</code> แล้วบันทึก
+            เพิ่ม text ข้างล่าง ลงในแท็ก <code>{variantList}</code> แล้วบันทึก
             <br />
-            <textarea name="" id="" value={example4} className="h-10 w-96"></textarea>
+            <textarea
+              name=""
+              id=""
+              value={example2}
+              className="h-40 w-96"
+            ></textarea>
           </li>
           <li>
-          logout จาก X, หรือ restart. (ถ้าUbuntu ลองล้าง xkb cache ด้วย, โดย <code>sudo dpkg-reconfigure xkb-data</code>)
+            ทำข้อ 5-6 เช่นเดียวกับ ไฟล์{' '}
+            <code>/usr/share/X11/xkb/rules/base.xml</code>
           </li>
           <li>
-          ไปที่ Keyboard setting, มองหา/เพิ่ม <code>Thai (Manoonchai v1.0)</code>. (แตกต่างกันตาม distro ที่ท่านใช้.)
+            root แก้ไขไฟล์ <code>/usr/share/X11/xkb/rules/base.lst</code>
           </li>
           <li>
-          เริ่มใช้งานแป้นมนูญชัย
+            มองหา
+            <br />
+            <textarea
+              name=""
+              id=""
+              value={example3}
+              className="h-20 w-96"
+            ></textarea>
           </li>
+          <li>
+            เพิ่ม text ข้างล่าง ไว้ใต้ <code>pat th: Thai (Pattachote)</code>{' '}
+            แล้วบันทึก
+            <br />
+            <textarea
+              name=""
+              id=""
+              value={example4}
+              className="h-10 w-96"
+            ></textarea>
+          </li>
+          <li>
+            logout จาก X, หรือ restart. (ถ้าUbuntu ลองล้าง xkb cache ด้วย, โดย{' '}
+            <code>sudo dpkg-reconfigure xkb-data</code>)
+          </li>
+          <li>
+            ไปที่ Keyboard setting, มองหา/เพิ่ม{' '}
+            <code>Thai (Manoonchai v1.0)</code>. (แตกต่างกันตาม distro
+            ที่ท่านใช้.)
+          </li>
+          <li>เริ่มใช้งานแป้นมนูญชัย</li>
         </ul>
         <p>(หากอัปเดต Kernel, แล้วแป้นพิมพ์หาย, ให้ซ้ำขั้นตอนทั้งหมดใหม่)</p>
-        <p className="mt-10">Linux installation source from <Link href="https://github.com/hiohlan"><a target="_blank" className="underline">hiohlan</a></Link></p>
+        <p className="mt-10">
+          Linux installation source from{' '}
+          <Link href="https://github.com/hiohlan">
+            <a target="_blank" className="underline">
+              hiohlan
+            </a>
+          </Link>
+        </p>
       </div>
-
     </section>
   );
 };
