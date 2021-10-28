@@ -159,7 +159,7 @@ const Download: FC = () => {
         </h6>
         <ul className="list-disc pl-4">
           <li>
-            <code>
+            <code className="block overflow-scroll">
               wget
               https://github.com/hiohlan/kiimo/raw/main/output/Manoonchai/Manoonchai_xkb
               --output-document=Manoonchai_xkb
@@ -196,11 +196,17 @@ const Download: FC = () => {
             ไหม, ถ้ามี BOM ให้กำจัดออก. )
           </li>
           <li>
-            root แก้ไขไฟล์ <code>/usr/share/X11/xkb/symbols/th</code>
+            root แก้ไขไฟล์{' '}
+            <code className="block overflow-scroll">
+              /usr/share/X11/xkb/symbols/th
+            </code>
           </li>
           <li>วาง text ที่คัดลอกมา, ไว้ด้านล่างสุดของไฟล์, แล้วบันทึก.</li>
           <li>
-            root แก้ไขไฟล์ <code>/usr/share/X11/xkb/rules/evdev.xml</code>
+            root แก้ไขไฟล์{' '}
+            <code className="block overflow-scroll">
+              /usr/share/X11/xkb/rules/evdev.xml
+            </code>
           </li>
           <li>
             มองหา (อาจจะมีจุดแตกต่างกัน)
@@ -209,7 +215,8 @@ const Download: FC = () => {
               name=""
               id=""
               value={example}
-              className="h-80 w-96"
+              rows={4}
+              className="sm:h-80 w-full sm:w-96"
             ></textarea>
           </li>
           <li>
@@ -219,15 +226,21 @@ const Download: FC = () => {
               name=""
               id=""
               value={example2}
-              className="h-40 w-96"
+              rows={4}
+              className="sm:h-40 w-full sm:w-96"
             ></textarea>
           </li>
           <li>
             ทำข้อ 5-6 เช่นเดียวกับ ไฟล์{' '}
-            <code>/usr/share/X11/xkb/rules/base.xml</code>
+            <code className="block overflow-scroll">
+              /usr/share/X11/xkb/rules/base.xml
+            </code>
           </li>
           <li>
-            root แก้ไขไฟล์ <code>/usr/share/X11/xkb/rules/base.lst</code>
+            root แก้ไขไฟล์{' '}
+            <code className="block overflow-scroll">
+              /usr/share/X11/xkb/rules/base.lst
+            </code>
           </li>
           <li>
             มองหา
@@ -236,7 +249,8 @@ const Download: FC = () => {
               name=""
               id=""
               value={example3}
-              className="h-20 w-96"
+              rows={4}
+              className="sm:h-20 w-full sm:w-96"
             ></textarea>
           </li>
           <li>
@@ -247,7 +261,8 @@ const Download: FC = () => {
               name=""
               id=""
               value={example4}
-              className="h-10 w-96"
+              className="sm:h-10 w-full sm:w-96"
+              rows={4}
             ></textarea>
           </li>
           <li>
