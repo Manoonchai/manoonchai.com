@@ -60,8 +60,8 @@ const Download: FC = () => {
   return (
     <section id="download" className="text-center py-20 mx-16">
       <h2 className="text-3xl font-bold sm:text-6xl">ดาวน์โหลด</h2>
-      <div className="flex flex-wrap mt-8">
-        <div className="shadow-lg mx-auto w-64">
+      <div className="flex flex-wrap mt-8 gap-8 justify-evenly">
+        <div className="shadow-lg w-64">
           <a
             href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai.keylayout"
             target="_blank"
@@ -75,7 +75,7 @@ const Download: FC = () => {
             </div>
           </a>
         </div>
-        <div className="shadow-lg mx-auto w-64">
+        <div className="shadow-lg w-64">
           <a
             href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai.zip"
             target="_blank"
@@ -89,7 +89,7 @@ const Download: FC = () => {
             </div>
           </a>
         </div>
-        <div className="shadow-lg mx-auto w-64">
+        <div className="shadow-lg w-64">
           <a
             href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai_xkb"
             target="_blank"
