@@ -122,7 +122,7 @@ const Download: FC = () => {
             เลือกเมนู <code>Go &rarr; Go to Folder...</code>
           </li>
           <li>
-            ใส่ <code>/Library/Keyboard Layouts</code> แล้วคลิก <code>Go</code>
+            ใส่ <code>~/Library/Keyboard Layouts</code> แล้วคลิก <code>Go</code>
           </li>
           <li>
             วางไฟล์ <code>Manoonchai.keylayout</code>
