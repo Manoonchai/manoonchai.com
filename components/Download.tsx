@@ -252,7 +252,7 @@ const Download: FC = () => {
           </li>
           <li>
             logout จาก X, หรือ restart. หรือถ้าใช้ Debian-based ล้าง xkb cache ด้วย, โดย{' '}
-            <code>sudo dpkg-reconfigure xkb-data</code>)
+            <code>sudo dpkg-reconfigure xkb-data</code>
           </li>
           <li>
             ไปที่ Keyboard setting, มองหา/เพิ่ม{' '}
