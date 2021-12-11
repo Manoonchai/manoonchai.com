@@ -8,7 +8,7 @@ const Download: FC = () => {
   const variantList = '<variantList>';
 
   const example = [
-    `
+    `\
     <layout>
     <configItem>
       <name>th</name>
@@ -33,28 +33,28 @@ const Download: FC = () => {
         </configItem>
       </variant>
     </variantList>
-  </layout>
+  </layout>\
   `,
   ];
   const example2 = [
-    `
+    `\
     <variant>
-    <configItem>
-      <name>ThaiMnc</name>
-      <description>Thai (Manoonchai v1.0)</description>
-    </configItem>
-  </variant>
+      <configItem>
+        <name>ThaiMnc</name>
+        <description>Thai (Manoonchai v1.0)</description>
+      </configItem>
+    </variant>\
     `,
   ];
   const example3 = [
-    `
+    `\
     tis             th: Thai (TIS-820.2538)
-    pat             th: Thai (Pattachote)
+    pat             th: Thai (Pattachote)\
     `,
   ];
   const example4 = [
-    `
-    ThaiMnc         th: Thai (Manoonchai v1.0)
+    `\
+    ThaiMnc         th: Thai (Manoonchai v1.0)\
     `,
   ];
   return (
@@ -154,30 +154,27 @@ const Download: FC = () => {
 
       <div className="mt-8 text-left">
         <h3 className="text-3xl font-bold my-4">วิธีติดตั้งสำหรับ Linux</h3>
+        <code className="block overflow-auto">
+          wget
+          https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai_xkb
+          --output-document=Manoonchai_xkb
+        </code>
         <h6 className="text-xl">
           แบบ setxkbmap, สำหรับเซสชัน X ปัจจุบันเท่านั้น
         </h6>
         <ul className="list-disc pl-4">
           <li>
-            <code className="block overflow-scroll">
-              wget
-              https://github.com/hiohlan/kiimo/raw/main/output/Manoonchai/Manoonchai_xkb
-              --output-document=Manoonchai_xkb
-            </code>
-          </li>
-          <li>
-            <code>cp ./Manoonchai_xkb /usr/share/X11/xkb/symbols/</code>
+            <code>sudo cp ./Manoonchai_xkb /usr/share/X11/xkb/symbols/</code>
           </li>
           <li>
             <code>xkbcomp Manoonchai_xkb</code> เพื่อ check syntex error
-            ถ้าไม่มี output คืออาจจะไม่มี error
           </li>
           <li>
             <code>
               setxkbmap -layout &apos;us,Manoonchai_xkb&apos; -option
               &apos;grp:caps_toggle&apos;
             </code>{' '}
-            เพื่อตั้งคียบอร์ดเป็น us-qwerty กับ Manoonchai,
+            เพื่อตั้งคีย์บอร์ดเป็น us-qwerty กับ Manoonchai,
             เปลี่ยนเลย์เอาต์โดยการกด CAPS
           </li>
         </ul>
@@ -186,25 +183,13 @@ const Download: FC = () => {
         </h6>
         <ul className="list-disc pl-4">
           <li>
-            คัดลอก text ที่อยู่ใน <code>Manoonchai_xkb</code> ทั้งหมด.
-            (อย่าลืมตรวจด้วยเป็น UTF-8 without{' '}
-            <Link href="https://en.wikipedia.org/wiki/Byte_order_mark">
-              <a className="underline" target="_blank">
-                BOM
-              </a>
-            </Link>{' '}
-            ไหม, ถ้ามี BOM ให้กำจัดออก. )
+            <code className="block overflow-auto">
+    cat Manoonchai_xkb | sudo tee -a /usr/share/X11/xkb/symbols/th
+           </code>
           </li>
           <li>
             root แก้ไขไฟล์{' '}
-            <code className="block overflow-scroll">
-              /usr/share/X11/xkb/symbols/th
-            </code>
-          </li>
-          <li>วาง text ที่คัดลอกมา, ไว้ด้านล่างสุดของไฟล์, แล้วบันทึก.</li>
-          <li>
-            root แก้ไขไฟล์{' '}
-            <code className="block overflow-scroll">
+            <code className="block overflow-auto">
               /usr/share/X11/xkb/rules/evdev.xml
             </code>
           </li>
@@ -232,13 +217,13 @@ const Download: FC = () => {
           </li>
           <li>
             ทำข้อ 5-6 เช่นเดียวกับ ไฟล์{' '}
-            <code className="block overflow-scroll">
+            <code className="block overflow-auto">
               /usr/share/X11/xkb/rules/base.xml
             </code>
           </li>
           <li>
             root แก้ไขไฟล์{' '}
-            <code className="block overflow-scroll">
+            <code className="block overflow-auto">
               /usr/share/X11/xkb/rules/base.lst
             </code>
           </li>
@@ -266,15 +251,14 @@ const Download: FC = () => {
             ></textarea>
           </li>
           <li>
-            logout จาก X, หรือ restart. (ถ้าUbuntu ลองล้าง xkb cache ด้วย, โดย{' '}
+            logout จาก X, หรือ restart. หรือถ้าใช้ Debian-based ล้าง xkb cache ด้วย, โดย{' '}
             <code>sudo dpkg-reconfigure xkb-data</code>)
           </li>
           <li>
             ไปที่ Keyboard setting, มองหา/เพิ่ม{' '}
-            <code>Thai (Manoonchai v1.0)</code>. (แตกต่างกันตาม distro
-            ที่ท่านใช้.)
+            <code>Thai (Manoonchai v1.0)</code>. (แตกต่างกันตาม desktop environment
+            ที่ท่านใช้)
           </li>
-          <li>เริ่มใช้งานแป้นมนูญชัย</li>
         </ul>
         <p>(หากอัปเดต Kernel, แล้วแป้นพิมพ์หาย, ให้ซ้ำขั้นตอนทั้งหมดใหม่)</p>
         <p className="mt-10">
