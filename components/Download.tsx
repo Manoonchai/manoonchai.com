@@ -156,7 +156,7 @@ const Download: FC = () => {
         <h3 className="text-3xl font-bold my-4">วิธีติดตั้งสำหรับ Linux</h3>
         <code className="block overflow-auto">
           wget
-          https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai_xkb
+          https://github.com/hiohlan/kiimo/raw/main/output/Manoonchai/Manoonchai_xkb
           --output-document=Manoonchai_xkb
         </code>
         <h6 className="text-xl">
