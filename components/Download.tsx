@@ -63,7 +63,7 @@ const Download: FC = () => {
       <div className="flex flex-wrap mt-8 gap-8 justify-evenly">
         <div className="shadow-lg w-64">
           <a
-            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai.keylayout"
+            href="https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai.bundle.zip"
             target="_blank"
             rel="noreferrer"
           >
@@ -116,6 +116,9 @@ const Download: FC = () => {
         <h3 className="text-3xl font-bold my-4">วิธีติดตั้งสำหรับ macOS</h3>
         <ul className="list-disc pl-4">
           <li>
+            Unzip ไฟล์ <code>Manoonchai.bundle.zip</code>
+          </li>
+          <li>
             เปิด <code>Finder</code>
           </li>
           <li>
@@ -125,7 +128,7 @@ const Download: FC = () => {
             ใส่ <code>~/Library/Keyboard Layouts</code> แล้วคลิก <code>Go</code>
           </li>
           <li>
-            วางไฟล์ <code>Manoonchai.keylayout</code>
+            วางไฟล์ <code>Manoonchai.bundle</code>
           </li>
           <li>Log out หรือ Restart</li>
           <li>
