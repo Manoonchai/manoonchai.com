@@ -1,4 +1,4 @@
 dist
 node_modules
 .github
-.changeset
+types.generated.d.ts
