@@ -1,22 +1,23 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: แป้นพิมพ์มนูญชัย
+  site: 'https://manoonchai.com'
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  # googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  googleSiteVerificationId: no
 
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: แป้นพิมพ์มนูญชัย
+    template: '%s — แป้นพิมพ์มนูญชัย'
+  description: 'แป้นพิมพ์ภาษาไทยทางเลือกใหม่ สร้างจากปัญญาประดิษฐ์และฐานข้อมูลขนาดใหญ่ของการพิมพ์ภาษาไทยในยุคปัจจุบัน พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: แป้นพิมพ์มนูญชัย
     images:
       - url: '~/assets/images/default.png'
         width: 1200
