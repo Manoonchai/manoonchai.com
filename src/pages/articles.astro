@@ -1,0 +1,62 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+
+const metadata = {
+  title: 'Articles',
+};
+
+const articles = [
+  {
+    title: 'บันทึกการสร้างแป้นพิมพ์ไทย Manoonchai (1)',
+    excerpt: 'หนทางสู่ Layout ที่ดีกว่า',
+    permalink:
+      'https://narze.medium.com/บันทึกการสร้างแป้นพิมพ์ไทย-manoonchai-1-หนทางสู่-layout-ที่ดีกว่า-8088ca83b1c3',
+  },
+  {
+    title: 'บันทึกการสร้างแป้นพิมพ์ไทย Manoonchai (2)',
+    excerpt: 'สร้าง Typing Effort Model เพื่อให้คะแนนความ “พิมพ์ง่าย”',
+    permalink:
+      'https://narze.medium.com/บันทึกการสร้างแป้นพิมพ์ไทย-manoonchai-2-สร้าง-typing-effort-model-เพื่อให้คะแนนความ-พิมพ์ง่าย-ed729b67d52',
+  },
+  {
+    title: 'บันทึกการสร้างแป้นพิมพ์ไทย Manoonchai (3)',
+    excerpt:
+      'วิเคราะห์แป้นพิมพ์ Manoonchai เทียบกับเกษมณี,ปัตตโชติ และเปิดตัวเว็บ Manoonchai.com',
+    permalink:
+      'https://narze.medium.com/บันทึกการสร้างแป้นพิมพ์ไทย-manoonchai-3-วิเคราะห์แป้นพิมพ์-manoonchai-เทียบกับเกษมณี-ปัตตโชติ-e4d9bd82f2ea',
+  },
+  {
+    title: 'วิธีใช้งานเว็บ Manoontype',
+    excerpt: 'คู่มือสั้นๆ',
+    permalink:
+      'https://narze.medium.com/manoonchai-layout-วิธีใช้งานเว็บ-manoontype-แบบสั้นๆ-5a4937856f78',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText tagline="Articles" title="บทความ" />
+
+  <div
+    class="intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter intersect-no-queue relative grid gap-6 row-gap-5 max-w-7xl mx-auto px-4 md:grid-cols-2 lg:grid-cols-4 mb-10"
+  >
+    {
+      articles.map(a => (
+        <a
+          href={a.permalink}
+          target="_blank"
+          rel="noreferrer"
+          class="rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900 p-6"
+        >
+          <h3 class="md:h-32 md:text-xl font-bold">
+            {a.title}
+          </h3>
+          <p class="text-muted dark:text-slate-400 text-lg">{a.excerpt}</p>
+        </a>
+      ))
+    }
+  </div>
+</Layout>

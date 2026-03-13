@@ -1,0 +1,146 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import { Image } from 'astro:assets';
+import img_manoochaiLayout from '~/assets/images/manoonchai-layout.png';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title:
+    'มนูญชัย — แป้นพิมพ์ภาษาไทยทางเลือกใหม่ สร้างจากปัญญาประดิษฐ์และฐานข้อมูลขนาดใหญ่ของการพิมพ์ภาษาไทยในยุคปัจจุบัน พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+  <Hero2
+    actions={[
+      {
+        variant: 'primary',
+        text: '<span class=\"whitespace-nowrap\">ดาวน์โหลด</span>',
+        href: '/download',
+        icon: 'tabler:download',
+        class: 'whitespace-nowrap',
+      },
+      {
+        text: '<span class=\"whitespace-nowrap\">ทดลองพิมพ์</span>',
+        href: '/try',
+        icon: 'tabler:keyboard',
+        class: 'whitespace-nowrap',
+      },
+      {
+        text: '<span class=\"whitespace-nowrap\">Discord</span>',
+        href: 'https://discord.gg/aNbFWTmuHU',
+        target: '_blank',
+        icon: 'tabler:brand-discord',
+        class: 'whitespace-nowrap',
+      },
+    ]}
+  >
+    <Fragment slot="title"><span id="type-title" class="typewriter">มนูญชัย</span></Fragment>
+    <Fragment slot="subtitle">
+      <span class="font-light"
+        >แป้นพิมพ์ภาษาไทยทางเลือกใหม่
+        สร้างจากปัญญาประดิษฐ์และฐานข้อมูลขนาดใหญ่ของการพิมพ์ภาษาไทยในยุคปัจจุบัน
+      </span>
+      <a
+        href="https://narze.medium.com/บันทึกการสร้างแป้นพิมพ์ไทย-manoonchai-2-สร้าง-typing-effort-model-เพื่อให้คะแนนความ-พิมพ์ง่าย-ed729b67d52#7ad2"
+        target="_blank"
+        rel="noreferrer"
+        class="inline-flex items-center gap-1 underline decoration-blue-500 decoration-2 underline-offset-4 hover:text-blue-600"
+        >พิมพ์ง่ายกว่าแป้นพิมพ์เกษมณีถึง 45%
+        <Icon name="tabler:external-link" class="w-4 h-4 opacity-70" /></a
+      >
+    </Fragment>
+    <Image slot="image" src={img_manoochaiLayout} alt="Manoonchai Layout" />
+  </Hero2>
+  <!-- Features Widget *************** -->
+  <Features2
+    id="features"
+    tagline="Features"
+    items={[
+      {
+        title: 'สร้างจากข้อมูลขนาดใหญ่ ผ่าน Algorithm และ AI',
+        description:
+          'เพื่อลดความเอนเอียง (Bias) ของข้อมูล เราใช้ฐานข้อมูลจากหลายแหล่งเพื่อเฉลี่ย และสร้างแป้นพิมพ์ด้วย Algorithm โดยใช้ AI ในการประมวลผลหาแป้นพิมพ์ที่มีประสิทธิภาพมากที่สุด',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'ใช้เลขอารบิกเป็นค่าเริ่มต้น',
+        description:
+          'การใช้งานภาษาไทยในปัจจุบันแทบไม่มีการพิมพ์เลขไทยแล้ว เราจึงนำเลขอารบิกเป็นค่าเริ่มต้นแทน เมื่อต้องการพิมพ์ตัวเลข ผู้ใช้ไม่จำเป็นต้องสลับเป็นแป้นพิมพ์ภาษาอังกฤษอีกต่อไป (หากต้องการพิมพ์เลขไทยยังสามารถพิมพ์ด้วยการกด <code class="key-symbol">Alt</code>ขวา หรือ <code class="key-symbol">⌥option</code> ค้างเอาไว้ได้)',
+        icon: 'tabler:number-123',
+      },
+      {
+        title: 'สมดุลการพิมพ์ด้วยมือซ้ายและขวา',
+        description:
+          'ตัวอักษรไทยบนแป้นพิมพ์เกษมณีมีความไม่สมดุล โดยหนักไปทางมือขวาถึง 70% แต่แป้นพิมพ์มนูญชัยจะมีน้ำหนักโดยสัดส่วน มือซ้าย:มือขวา อยู่ที่ 47%:53%',
+        icon: 'tabler:hand-love-you',
+      },
+      {
+        title: 'ไม่มีตัวอักษรไทยบนแถวตัวเลข',
+        description:
+          'บนแป้นพิมพ์มนูญชัย จะไม่มีตัวอักษรไทยอยู่บนแถวตัวเลข เหมาะกับการใช้กับคีย์บอร์ดแลปทอป หรือคีย์บอร์ดขนาดเล็กที่มีความนิยมมากขึ้นในปัจจุบัน',
+        icon: 'tabler:device-laptop',
+      },
+      {
+        title: 'โครงการแบบ Open-Source',
+        description:
+          "โค้ดทั้งหมดเปิดเผยแบบ Open-Source ด้วยสัญญาอนุญาตแบบ MIT สามารถนำไปใช้ซ้ำ หรือต่อยอดเป็นแป้นพิมพ์รูปแบบอื่นๆ ได้ อีกทั้งยังเปิดโอกาสให้ผู้ที่สนใจมา Contribute ในโครงการได้ด้วย",
+        icon: 'tabler:brand-open-source',
+      },
+    ]}
+  />
+
+</Layout>
+
+<style>
+.typewriter::after {
+  content: "|";
+  margin-left: 1px;
+  animation: blink 1.5s infinite;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%,49% { opacity: 1; }
+  50%,100% { opacity: 0; }
+}
+</style>
+
+<script>
+const el = document.getElementById("type-title");
+if (el) {
+  const text = el.textContent;
+  const h1 = el.closest("h1");
+  el.textContent = "";
+  let z = 0;
+  function type() {
+    z++;
+    el.textContent = text.slice(0, z);
+    if (z < text.length) {
+      setTimeout(type, 90);
+    }
+  }
+  let started = false;
+  function startTyping() {
+    if (started) return;
+    started = true;
+    type();
+  }
+  if (h1) {
+    const style = getComputedStyle(h1);
+    if (style.animationName !== "none") {
+      h1.addEventListener("animationend", startTyping, { once: true });
+      setTimeout(startTyping, 2400);
+    } else {
+      setTimeout(startTyping, 1200);
+    }
+  } else {
+    startTyping();
+  }
+}
+</script>

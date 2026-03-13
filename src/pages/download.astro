@@ -1,0 +1,189 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import { Icon } from 'astro-icon/components';
+const metadata = {
+  title: 'Download',
+};
+
+const articles = [
+  {
+    title: 'macOS',
+    icon: 'tabler:brand-apple',
+    href: 'https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai.bundle.zip',
+  },
+  {
+    title: 'Windows',
+    icon: 'tabler:brand-windows',
+    href: 'https://github.com/Manoonchai/Manoonchai/releases/download/v1.0/Manoonchai.zip',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText tagline="Download" title="ดาวน์โหลด" />
+
+  <div
+    class="intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter intersect-no-queue relative grid gap-6 row-gap-5 max-w-7xl mx-auto px-4 md:grid-cols-2 lg:grid-cols-4 mb-10"
+  >
+    {
+      articles.map(a => (
+        <a
+          href={a.href}
+          target="_blank"
+          rel="noreferrer"
+          class="rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900 p-6"
+        >
+          <h3 class="md:h-32 md:text-xl font-bold">{a.title}</h3>
+          <Icon name={a.icon} class="w-12 h-12" />
+        </a>
+      ))
+    }
+    <a
+      href="#xkb"
+      class="rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900 p-6"
+    >
+      <h3 class="md:h-32 md:text-xl font-bold">XKB Linux</h3>
+      <div class="flex">
+        <img src="/images/X11.svg" alt="logo" class="h-10" />
+      </div>
+    </a>
+    <a
+      href="https://github.com/Manoonchai/kiimo"
+      target="_blank"
+      rel="noreferrer"
+      class="rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900 p-6"
+    >
+      <h3 class="md:h-32 md:text-xl font-bold">ChromeOS และอื่นๆ</h3>
+      <div class="flex">
+        <Icon name="tabler:brand-chrome" class="w-12 h-12" />
+        <Icon name="tabler:brand-android" class="w-12 h-12" />
+      </div>
+    </a>
+  </div>
+
+  <Steps
+    id="macOS"
+    title="วิธีติดตั้งสำหรับ macOS"
+    items={[
+      {
+        title:
+          'Step 1: <span class="font-light">Unzip ไฟล์ <code class="inline-code">Manoonchai.bundle.zip</code></span>',
+        description:
+          'จะได้ไฟล์ที่มีชื่อว่า <code class="inline-code">Manoonchai.bundle</code>',
+        icon: 'tabler:zip',
+      },
+      {
+        title:
+          'Step 2: <span class="font-light">เปิด <code class="inline-code">Finder</code></span>',
+        icon: 'tabler:brand-finder',
+      },
+      {
+        title:
+          'Step 3: <span class="font-light">เลือกเมนู <code class="inline-code">Go</code> &rarr; <code class="inline-code">Go to Folder...</code></span>',
+        description:
+          'หรือเมนูภาษาไทยจะเป็น <code class="inline-code">ไป</code> &rarr; <code class="inline-code">ไปยังโฟลเดอร์...</code> หรือกดคีย์ลัด <code class="key-symbol">⇧⌘G</code>',
+        icon: 'tabler:brand-finder',
+      },
+      {
+        title:
+          'Step 4: <span class="font-light">ใส่ <code class="inline-code">~/Library/Keyboard Layouts</code> แล้วคลิก <code class="inline-code">Go</code>/<code class="inline-code">ไป</code> หรือกดปุ่ม<code class="key-symbol">⏎enter</code></span>',
+        description:
+          'หรือใส่ <code class="inline-code">/Library/Keyboard Layouts</code> หากต้องการติดตั้งให้ผู้ใช้หลายราย',
+        icon: 'tabler:brand-finder',
+      },
+      {
+        title:
+          'Step 5: <span class="font-light">วางไฟล์ <code class="inline-code">Manoonchai.bundle</code></span>',
+        icon: 'tabler:brand-finder',
+      },
+      {
+        title:
+          'Step 6: <span class="font-light">Logout/ออกจากระบบ หรือ Restart/เริ่มการทำงานเครื่องใหม่</span>',
+        icon: 'tabler:power',
+      },
+      {
+        title:
+          'Step 7: <span class="font-light">เปิด System Preferences &rarr; Keyboard &rarr; Input Sources &rarr; Edit... &rarr; <code class="key-symbol">+</code></span>',
+        description:
+          'หรือเมนูภาษาไทยจะเป็น การตั้งค่าระบบ &rarr; แป้นพิมพ์ &rarr; แหล่งป้อนเข้า &rarr; แก้ไข... &rarr; <code class="key-symbol">+</code>',
+        icon: 'tabler:settings',
+      },
+      {
+        title:
+          'Step 8: <span class="font-light"> เลือก <code class="inline-code">Thai</code>/<code class="inline-code">ภาษาไทย</code> หรือค้นหาว่า <code class="inline-code">Manoonchai</code>แล้วทำการ Add/เพิ่ม จากนั้นกด Done/เสร็จสิ้น</span>',
+        description:
+          'หากไม่พบในหมวดหมู่ <code class="inline-code">Thai</code> ลองไปที่ <code class="inline-code">Other</code>/<code class="inline-code">อื่นๆ</code>',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'พร้อมพิมพ์แล้ว!',
+        icon: 'tabler:check',
+      },
+    ]}
+  />
+
+  <Steps
+    id="Windows"
+    title="วิธีติดตั้งสำหรับ Windows"
+    ,
+    items={[
+      {
+        title:
+          'Step 1: <span class="font-light">Unzip ไฟล์ <code class="inline-code">Manoonchai.zip</code></span>',
+        description:
+          'จะได้ไฟล์ที่มีชื่อว่า <code class="inline-code">setup.exe</code>',
+        icon: 'tabler:zip',
+      },
+      {
+        title:
+          'Step 2: <span class="font-light">เปิด <code class="inline-code">setup.exe</code> เพื่อติดตั้งแป้นพิมพ์</span>',
+        icon: 'tabler:folder',
+      },
+      {
+        title:
+          'Step 3: <span class="font-light">Logout/ออกจากระบบ หรือ Restart/เริ่มการทำงานเครื่องใหม่</span>',
+        icon: 'tabler:power',
+      },
+      {
+        title: 'พร้อมพิมพ์แล้ว!',
+        icon: 'tabler:check',
+      },
+      {
+        title:
+          'Step 3.1: <span class="font-light"> หากยังไม่ขึ้นให้เปลี่ยนเป็น Manoonchai ได้ ลองไปตรวจสอบการตั้งค่าแป้นพิมพ์ดู</span>',
+        icon: 'tabler:settings',
+      },
+    ]}
+  />
+
+  <Steps
+    id="xkb"
+    title="วิธีติดตั้งสำหรับ XKB (Linux/BSD)"
+    subtitle=`ข่าวดี! สำหรับท่านผู้ใช้ Linux <a target="_blank"
+      rel="noreferrer" class="underline link-external"
+      href="https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/merge_requests/820">ที่ได้รับการอัปเดต XKB ตั้งแต่ปลายปี 2025</a> เป็นต้นไป <span class="bg-yellow-200 dark:bg-yellow-400 dark:text-black">มีแป้นพิมพ์มนูญชัยให้เลือกติดตั้งจากตัวระบบปฏิบัติการเป็นที่เรียบร้อยแล้ว!</span> ท่านไม่จำเป็นต้องติดตั้งซ้ำอีก`
+    ,
+    items={[
+      {
+        title: 'วิธีติดตั้งมีมากเหลือเกิน',
+        description: `<span class="text-xl font-light">เนื่องจากความหลากหลายของดิสโทรลินุกซ์ การติดตั้งจึงมากวิธีตามความเหมาะสมของแต่ละดิสโทร แนะนำให้ท่านอ่าน<a 
+          target="_blank"
+          rel="noreferrer" class="underline link-external"
+          href="https://github.com/hiohlan/mnc">วิธีการโหลดและติดตั้งที่นี่</a> แล้วเลือกวิธีที่เหมาะสมกับระบบของท่าน</span>`,
+        icon: 'tabler:question-mark',
+      },
+      {
+        title: 'ท่านสามารถเลือกใช้ผ่าน Ibus-LibThai ก็ได้',
+        description: `<span class="text-xl font-light">สำหรับท่านที่ใช้ระบบการพิมพ์ผ่าน<a 
+          target="_blank"
+          rel="noreferrer" class="underline link-external"
+          href="https://github.com/tlwg/ibus-libthai">Ibus-LibThai</a> ลองตรวจสอบการตั้งค่าแป้นพิมพ์ของท่าน น่าจะมีมนูญชัยให้เลือกใช้แล้ว</span>`,
+        icon: 'tabler:question-mark',
+      },
+    ]},
+  />
+</Layout>

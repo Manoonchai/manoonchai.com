@@ -1,0 +1,102 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+const metadata = {
+  title: 'Frequently Asked Questions',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- FAQs Widget ******************* -->
+  <FAQs
+    title="คำถามที่พบบ่อย"
+    items={[
+      {
+        title: 'หลักการของการสร้างแป้นพิมพ์มนูญชัยคืออะไร?',
+        description: `อ่านได้จาก<a class="underline link-external" target="_blank" rel="noreferrer" href="https://narze.medium.com/บันทึกการสร้างแป้นพิมพ์ไทย-manoonchai-1-หนทางสู่-layout-ที่ดีกว่า-8088ca83b1c3">บทความ มี 3 ตอนด้วยกัน</a>`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'แป้นพิมพ์นี้จะมาแทนแป้นพิมพ์เกษมณีในอนาคตหรือไม่?',
+        description: `แป้นพิมพ์มนูญชัยเป็นเพียง<span class="underline decoration-dotted">แป้นพิมพ์ทางเลือก<span>เท่านั้น`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'มีแป้นพิมพ์มนูญชัยบนสมาร์ตโฟนหรือไม่?',
+        description:
+          'ณ ตอนนี้ (2021) ยังไม่มีแอปแป้นพิมพ์มนูญชัยบนสมาร์ตโฟน เนื่องจากแป้นพิมพ์นี้ตั้งใจสร้างมาเพื่อแก้ปัญหาในการพิมพ์ด้วยแป้นพิมพ์สำหรับคอมพิวเตอร์เท่านั้น แต่ถ้าหากมีผู้สนใจ สามารถนำตัวแป้นพิมพ์ไปดัดแปลงเป็นแอปบนสมาร์ตโฟนได้ โดยไม่มีค่าใช้จ่าย',
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'ก ไก่อยู่ตรงไหน?',
+        description: `นิ้วกลางมือขวาแถวบน (ตัว I)`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'เลขไทยหายไปไหน? จุลภาค, มหัพภาค, ทับ อยู่ที่ไหน?',
+        description: `ใน AltGr Layer ซึ่งสามารถเข้าถึงได้โดยการกด <code class="key-symbol">Alt</code>ขวา (หรือ <code class="key-symbol">Ctrl</code> + <code class="key-symbol">Alt</code> ด้านซ้าย สำหรับระบบปฏิบัติการ Windows) หรือกด <code class="key-symbol">⌥option</code> สำหรับระบบปฏิบัติการ macOS โดยตำแหน่งจะอยู่ตรงกับตัวเลขอารบิกทุก ๆ ตัวของแป้นพิมพ์ภาษาอังกฤษแบบอเมริกา ANSI`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'ฃ ฃวด, ฅ ฅน อยู่ที่ไหน?',
+        description: `ใน AltGr Layer ซึ่งสามารถเข้าถึงได้โดยการกด <code class="key-symbol">Alt</code>ขวา (หรือ <code class="key-symbol">Ctrl</code> + <code class="key-symbol">Alt</code> ด้านซ้าย สำหรับระบบปฏิบัติการ Windows) หรือกด <code class="key-symbol">⌥option</code> สำหรับระบบปฏิบัติการ macOS โดยตำแหน่งจะอยู่ตรงกับตัว ข ไข่ และ ค ควาย เพื่อให้จำง่าย`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title:
+          'ฝึกพิมพ์มนูญชัยแล้วจะกลับไปพิมพ์บนจอสัมผัสสมาร์ตโฟนที่เป็นเกษมณีได้มั้ย?',
+        description: `สามารถทำได้ เพราะการพิมพ์บนแป้นพิมพ์สมาร์ตโฟนจะใช้เพียง 1-2 นิ้ว ซึ่งต่างจากการพิมพ์บนแป้นพิมพ์สำหรับคอมพิวเตอร์ ที่ต้องใช้นิ้ว 8-10 นิ้ว ในการพิมพ์สัมผัส กล่าวคือ สามารถพิมพ์ด้วยแป้นมนูญชัยบนคอมพิวเตอร์ พร้อมกันกับการใช้แป้นเกษมณีบนสมาร์ตโฟนได้`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'ใช้เวลาฝึกพิมพ์สัมผัสนานหรือไม่?',
+        description: `ใช้เวลาประมาณ 2 อาทิตย์ถึง 2 เดือน แล้วแต่บุคคล`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title: 'ฝึกพิมพ์มนูญชัยอย่างไร?',
+        description: `สามารถฝึกได้ที่เว็บ Manoontype หรือพิมพ์รูปแป้นพิมพ์ในกระดาษแล้วติดไว้ใต้จอคอมพิวเตอร์ หรือเปิดโปรแกรม On-Screen Keyboard และฝึกพิมพ์
+            <a
+              class="underline link-external"
+              href="https://narze.medium.com/manoonchai-layout-วิธีใช้งานเว็บ-manoontype-แบบสั้นๆ-5a4937856f78"
+              target="_blank"
+              rel="noreferrer"
+            >อ่านวิธีใช้เว็บ Manoontype ในการฝึกแป้นพิมพ์มนูญชัย</a>
+            <a
+              class="underline link-external"
+              href="Manoonchai-print.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >รูปแป้นพิมพ์มนูญชัย สำหรับฝึกพิมพ์</a>`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title:
+          'ถ้าเคยชินกับการพิมพ์ด้วยแป้นเกษมณีแล้ว สามารถฝึกพิมพ์แป้นมนูญชัยได้หรือไม่?',
+        description: `ได้ แต่เมื่อปรับเปลี่ยนการพิมพ์แล้ว คนส่วนมากจะพิมพ์แป้นพิมพ์เดิมได้ช้าลง แต่จะยังจำตำแหน่งได้อยู่`,
+        icon: 'tabler:chevrons-right',
+      },
+      {
+        title:
+          'จะทำสติ๊กเกอร์แปะบนคีย์บอร์ด คีย์แคป หรือตัวคีย์บอร์ดที่เป็นแป้นพิมพ์มนูญชัยหรือไม่?',
+        description: `ไม่มีแผนที่จะทำ เพราะผู้พัฒนาต้องการส่งเสริมการฝึกพิมพ์ด้วยวิธีพิมพ์สัมผัส แต่หากต้องการทำด้วยตัวเอง สามารถทำได้`,
+        icon: 'tabler:chevrons-right',
+      },
+        {
+        title:
+          'ต้องมาเรียนใหม่ จำใหม่อีกแล้วหรือ?',
+        description: `สบายใจได้! คุณยังสามารถใช้แป้นพิมพ์เดิมได้อยู่ หากคุณพบว่าแป้นพิมพ์ของคุณกลายร่างเป็นแป้นพิมพ์มนูญชัยโดยไม่ทราบสาเหตุ โปรดติดต่อเราโดยด่วนได้<a
+                class="underline link-external"
+                href="https://bit.ly/3kjtSYL"
+              >ที่นี่</a>`,
+        icon: 'tabler:chevrons-right',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+</Layout>
