@@ -12,7 +12,7 @@
 }
 
 .inline-code {
-  @apply bg-gray-200 px-1.5 py-0.5 rounded border border-gray-300;
+  @apply bg-gray-200 px-1.5 py-0.5 rounded border border-gray-300 dark:bg-black dark:text-white;
   font-family: 'SF Mono', Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
