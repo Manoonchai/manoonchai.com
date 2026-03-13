@@ -18,7 +18,7 @@ metadata:
   openGraph:
     site_name: แป้นพิมพ์มนูญชัย
     images:
-      - url: '~/assets/images/default.png'
+      - url: '~/assets/images/manoonchai-layout.png'
         width: 1200
         height: 628
     type: website
