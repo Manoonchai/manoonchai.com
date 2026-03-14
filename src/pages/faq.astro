@@ -1,16 +1,21 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 
 const metadata = {
   title: 'Frequently Asked Questions',
 };
 ---
-
+<style>
+:global(#faq-manoonchai a),
+:global(#faq-manoonchai p) {
+  font-family: 'Sarabun', sans-serif;
+}
+</style>
 <Layout metadata={metadata}>
   <!-- FAQs Widget ******************* -->
   <FAQs
+    id="faq-manoonchai"
     title="คำถามที่พบบ่อย"
     items={[
       {
@@ -84,9 +89,8 @@ const metadata = {
         description: `ไม่มีแผนที่จะทำ เพราะผู้พัฒนาต้องการส่งเสริมการฝึกพิมพ์ด้วยวิธีพิมพ์สัมผัส แต่หากต้องการทำด้วยตัวเอง สามารถทำได้`,
         icon: 'tabler:chevrons-right',
       },
-        {
-        title:
-          'ต้องมาเรียนใหม่ จำใหม่อีกแล้วหรือ?',
+      {
+        title: 'ต้องมาเรียนใหม่ จำใหม่อีกแล้วหรือ?',
         description: `สบายใจได้! คุณยังสามารถใช้แป้นพิมพ์เดิมได้อยู่ หากคุณพบว่าแป้นพิมพ์ของคุณกลายร่างเป็นแป้นพิมพ์มนูญชัยโดยไม่ทราบสาเหตุ โปรดติดต่อเราโดยด่วนได้<a
                 class="underline link-external"
                 href="https://bit.ly/3kjtSYL"

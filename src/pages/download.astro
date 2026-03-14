@@ -21,6 +21,12 @@ const articles = [
 ];
 ---
 
+<style>
+  :global(.text-muted),
+  :global(.text-muted a) {
+    font-family: 'Sarabun', sans-serif;
+  }
+</style>
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
 
@@ -184,6 +190,7 @@ const articles = [
           href="https://github.com/tlwg/ibus-libthai">Ibus-LibThai</a> ลองตรวจสอบการตั้งค่าแป้นพิมพ์ของท่าน น่าจะมีมนูญชัยให้เลือกใช้แล้ว</span>`,
         icon: 'tabler:question-mark',
       },
-    ]},
+    ]}
+    ,
   />
 </Layout>

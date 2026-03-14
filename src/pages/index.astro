@@ -8,12 +8,17 @@ import img_manoochaiLayout from '~/assets/images/manoonchai-layout.png';
 import { Icon } from 'astro-icon/components';
 
 const metadata = {
-  title:
-    'มนูญชัย — แป้นพิมพ์ภาษาไทยทางเลือกใหม่',
+  title: 'มนูญชัย — แป้นพิมพ์ภาษาไทยทางเลือกใหม่',
   ignoreTitleTemplate: true,
 };
 ---
 
+<style>
+  :global(#features a),
+  :global(#features p) {
+    font-family: 'Sarabun', sans-serif;
+  }
+</style>
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
   <Hero2
@@ -40,7 +45,9 @@ const metadata = {
       },
     ]}
   >
-    <Fragment slot="title"><span id="type-title" class="typewriter">มนูญชัย</span></Fragment>
+    <Fragment slot="title"
+      ><span id="type-title" class="typewriter">มนูญชัย</span></Fragment
+    >
     <Fragment slot="subtitle">
       <span class="font-light"
         >แป้นพิมพ์ภาษาไทยทางเลือกใหม่
@@ -89,58 +96,63 @@ const metadata = {
       {
         title: 'โครงการแบบ Open-Source',
         description:
-          "โค้ดทั้งหมดเปิดเผยแบบ Open-Source ด้วยสัญญาอนุญาตแบบ MIT สามารถนำไปใช้ซ้ำ หรือต่อยอดเป็นแป้นพิมพ์รูปแบบอื่นๆ ได้ อีกทั้งยังเปิดโอกาสให้ผู้ที่สนใจมา Contribute ในโครงการได้ด้วย",
+          'โค้ดทั้งหมดเปิดเผยแบบ Open-Source ด้วยสัญญาอนุญาตแบบ MIT สามารถนำไปใช้ซ้ำ หรือต่อยอดเป็นแป้นพิมพ์รูปแบบอื่นๆ ได้ อีกทั้งยังเปิดโอกาสให้ผู้ที่สนใจมา Contribute ในโครงการได้ด้วย',
         icon: 'tabler:brand-open-source',
       },
     ]}
   />
-
 </Layout>
 
 <style>
-.typewriter::after {
-  content: "|";
-  margin-left: 1px;
-  animation: blink 1.5s infinite;
-  font-weight: 300;
-}
+  .typewriter::after {
+    content: '|';
+    margin-left: 1px;
+    animation: blink 1.5s infinite;
+    font-weight: 300;
+  }
 
-@keyframes blink {
-  0%,49% { opacity: 1; }
-  50%,100% { opacity: 0; }
-}
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
 </style>
 
 <script>
-const el = document.getElementById("type-title");
-if (el) {
-  const text = el.textContent;
-  const h1 = el.closest("h1");
-  el.textContent = "";
-  let z = 0;
-  function type() {
-    z++;
-    el.textContent = text.slice(0, z);
-    if (z < text.length) {
-      setTimeout(type, 90);
+  const el = document.getElementById('type-title');
+  if (el) {
+    const text = el.textContent;
+    const h1 = el.closest('h1');
+    el.textContent = '';
+    let z = 0;
+    function type() {
+      z++;
+      el.textContent = text.slice(0, z);
+      if (z < text.length) {
+        setTimeout(type, 90);
+      }
     }
-  }
-  let started = false;
-  function startTyping() {
-    if (started) return;
-    started = true;
-    type();
-  }
-  if (h1) {
-    const style = getComputedStyle(h1);
-    if (style.animationName !== "none") {
-      h1.addEventListener("animationend", startTyping, { once: true });
-      setTimeout(startTyping, 2400);
+    let started = false;
+    function startTyping() {
+      if (started) return;
+      started = true;
+      type();
+    }
+    if (h1) {
+      const style = getComputedStyle(h1);
+      if (style.animationName !== 'none') {
+        h1.addEventListener('animationend', startTyping, { once: true });
+        setTimeout(startTyping, 2400);
+      } else {
+        setTimeout(startTyping, 1200);
+      }
     } else {
-      setTimeout(startTyping, 1200);
+      startTyping();
     }
-  } else {
-    startTyping();
   }
-}
 </script>
