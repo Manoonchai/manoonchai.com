@@ -1,5 +1,4 @@
 ---
-import HeroText from '~/components/widgets/HeroText.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
@@ -7,7 +6,54 @@ const metadata = {
 };
 ---
 
+<style>
+  textarea {
+    font-family: Sarabun, SF-Pro, Thonburi, Garuda, Tahoma, sans-serif;
+  }
+</style>
 <Layout metadata={metadata}>
+  <div class="max-w-7xl mx-auto px-4">
+    <div id="sydiime-textEditor">
+      <textarea
+        id="sydiime-textArea"
+        class="w-full h-full min-h-screen text-xl px-1.5 py-0.5 rounded border border-gray-300 bg-orange-50 dark:bg-black dark:text-white"
+        aria-label="text area"
+        inputmode="none"
+        placeholder="พิมพ์ตรงนี้ได้เลย! ตัวเปลี่ยนแป้นอยู่มุมขวาล่าง กดTabเพื่อสลับแป้นที่ใช้ล่าสุด..."
+      ></textarea>
+    </div>
 
-<HeroText tagline="WIP" title="กำลังพัฒนา" />
+    <div
+      id="sydiime-kbd"
+      class="fixed p-1 right-0 bottom-0 z-30 rounded border border-gray-300 bg-white dark:bg-slate-900"
+    >
+      <button
+        id="sydiime-btnF1"
+        class="h-10 text-xl px-1.5 py-0.5 rounded border border-gray-300 bg-white dark:bg-slate-900"
+        >aก</button
+      >
+      <select
+        id="sydiime-seltrLays"
+        class="h-10 text-xl px-1.5 py-0.5 rounded border border-gray-300 bg-white dark:bg-slate-900"
+      >
+        <option value="default">System</option>
+        <option value="thai-mnc">Thai Manoonchai</option>
+        <option value="thai-mnc-jis">Thai Manoonchai JIS</option>
+      </select>
+    </div>
+  </div>
 </Layout>
+
+<script>
+  import SyDiIME from '../scripts/sydiime.js';
+  document.addEventListener('astro:page-load', () => {
+    if (location.pathname === '/try') {
+      SyDiIME.init();
+    }
+  });
+  document.addEventListener('astro:before-swap', () => {
+    if (location.pathname === '/try') {
+      SyDiIME.destroy();
+    }
+  });
+</script>
