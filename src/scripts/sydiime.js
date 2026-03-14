@@ -131,25 +131,6 @@ const SyDiIME = (() => {
 		altToggle: false,
 	};
 
-	/**
-		* State for tracking recent input units (characters and variation selectors),
-		* and language-specific flags for Myanmar, Tai-Tham, and Vietnamese.
-		*
-		* @typedef {Object} InputState
-		* @property {Array.<number|string>} recentUnits - Array holding recent input code points or characters (can be sequences of 2–3 items).
-		* @property {boolean} isSakot - Flag used in Myanmar and Tai-Tham for sakot check.
-		* @property {boolean} isSakotWithRa - Flag used in Myanmar and Tai-Tham for sakot+ra check.
-		* @property {Array.<number|string>} vnRecentUnits - Vietnamese-specific recent input units.
-		*/
-
-	/** @type {InputState} */
-	const inputState = {
-		recentUnits: [],
-		isSakot: false,
-		isSakotWithRa: false,
-		vnRecentUnits: []
-	};
-
 	// const boxCnsl = {
 	// 	logs: [],
 	// 	maxLines: 10,
@@ -350,14 +331,9 @@ const SyDiIME = (() => {
 	function handleKeyPress(key) {
 		switch (key) {
 			case 'Backspace':
-				inputState.isSakot = false;
-				inputState.recentUnits = [];
-				inputState.vnRecentUnits.pop();
 				modifyText.rm();
 				break;
 			case 'Enter':
-				inputState.recentUnits = [];
-				inputState.vnRecentUnits = [];
 				modifyText.add("\n")
 				break;
 			case 'BLANK':
@@ -431,39 +407,6 @@ const SyDiIME = (() => {
 				}
 			}
 
-			if (
-				sinput.currentLayout.startsWith("lana") ||
-				sinput.currentLayout.startsWith("mymr_") ||
-				sinput.currentLayout.startsWith("ahom")
-			) {
-				let endf = end;
-				if (boxText.value.charCodeAt(endf - 3) === 0x7C && boxText.value.charCodeAt(endf - 2) === 0x200B) {
-					start++;
-				}
-				while (endf > 0) {
-					if (sinput.currentLayout.startsWith("ahom")) {
-						if (boxText.value.charCodeAt(endf - 6) === 0x7C && boxText.value.charCodeAt(endf - 5) === 0x200B) {
-							endf -= 2;
-							start -= 2;
-							continue;
-						} else if (boxText.value.charCodeAt(endf - 5) === 0x7C && boxText.value.charCodeAt(endf - 4) === 0x200B) {
-							endf -= 1;
-							continue;
-						}
-					}
-					if (boxText.value.charCodeAt(endf - 4) === 0x7C && boxText.value.charCodeAt(endf - 3) === 0x200B) {
-						endf -= 2;
-						start -= 2;
-						continue;
-					} else if (boxText.value.charCodeAt(endf - 3) === 0x7C && boxText.value.charCodeAt(endf - 2) === 0x200B) {
-						endf -= 3;
-						start -= 3;
-						continue;
-					}
-					break;
-				}
-			}
-
 			boxText.value = boxText.value.slice(0, start - 1) + boxText.value.slice(end);
 			setCursor(start - 1);
 		}
@@ -531,26 +474,6 @@ const SyDiIME = (() => {
 				case "ZWJ": return "\u200D";   // Zero-width joiner
 			}
 		});
-		if (sinput.currentLayout.startsWith("lana")) {
-			if (/[\u1A6E-\u1A72\u1A55]/u.test(output)) {
-				if (inputState.recentUnits.length > 0) {
-					modifyText.rm();
-				}
-				const lastCodePointsString = inputState.recentUnits
-					.map(codePoint => codePoint + "|\u200B")
-					.join("");
-				inputState.recentUnits.push(output);
-				output = "|​" + lastCodePointsString + output;
-
-			} else if (inputState.recentUnits.length > 0) {
-				const lastCodePointsString = inputState.recentUnits.reverse().join("");
-
-				output = output + lastCodePointsString;
-				modifyText.rm();
-				inputState.recentUnits = [];
-			}
-		}
-
 		if (sinput.currentLayout.startsWith("latn-")) {
 			const allTnMk = /[̨̧̣̤̦̀́̂̃̄̆̇̈̊̌]/u;
 			if (allTnMk.test(output)) {
@@ -607,10 +530,6 @@ const SyDiIME = (() => {
 		modifState.shiftToggle = false;
 		modifState.altPressed = false;
 		modifState.altToggle = false;
-		inputState.isSakot = false;
-		inputState.isSakotWithRa = false;
-		inputState.recentUnits = [];
-		inputState.vnRecentUnits = [];
 	}
 
 	function boxTextUnReadOnly() {
