@@ -6,6 +6,7 @@
 // They are independent components of this project and
 // are distributed under the MIT License.
 import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
 import { layoutsData } from '../scripts/sydiime-layouts.js';
 
 const metadata = {
@@ -70,6 +71,7 @@ const pc = [
   'seltrLays',
   'Space',
   'AltRight',
+  'btnHide',
 ];
 ---
 
@@ -85,9 +87,13 @@ const pc = [
   textarea {
     font-family: var(--sydiime-font-family);
   }
+  #sydiime-fltCont {
+    @apply  fixed right-0 bottom-0 p-2 bg-gray-200 dark:bg-gray-900 rounded-[8px];
+  }
   #sydiime-kbdvtCont {
     @apply mx-auto max-w-[860px] w-full z-20 fixed bottom-0 tall-sm:bottom-4 left-0 right-0;
     touch-action: manipulation;
+    transition: transform 0.1s ease-out, max-width 0.1s ease-out, bottom 0.1s ease-out, right 0.1s ease-out, opacity 0.1s ease-out;
     &::before {
       content: ' ';
       @apply z-[-1] absolute inset-0 bg-gray-200 dark:bg-gray-900 rounded-[8px];
@@ -162,7 +168,8 @@ const pc = [
   #sydiime-k-Tab,
   #sydiime-k-AltRight,
   #sydiime-k-CapsLock,
-  #sydiime-k-btnF1 {
+  #sydiime-k-btnF1,
+  #sydiime-k-btnHide {
     @apply bg-gray-300 dark:bg-gray-600;
     font-family: var(--mnc-font-key-symbol);
 
@@ -247,6 +254,13 @@ const pc = [
     grid-column-start: 18;
     grid-column-end: span 20;
   }
+
+  #sydiime-k-btnHide{
+    grid-column-start: 55;
+    &::after {
+      content: '▼';
+    }
+  }
 </style>
 <Layout metadata={metadata}>
   <div class="max-w-7xl mx-auto px-4">
@@ -263,7 +277,7 @@ const pc = [
 
   <div
     id="sydiime-kbdvtCont"
-    class="intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter intersect-no-queue"
+    class=""
   >
     <div id="sydiime-kbd" class="sydiime-kbd">
       {
@@ -295,6 +309,9 @@ const pc = [
         )
       }
     </div>
+  </div>
+  <div id="sydiime-fltCont" class="hidden">
+    <button id="sydiime-btnShow" class="text-lg">▲<Icon name="tabler:keyboard" class="w-6 h-6 inline-block" /></button>
   </div>
 </Layout>
 

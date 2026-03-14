@@ -19,8 +19,12 @@ const SyDiIME = (() => {
 
 	// let boxLog;
 	let boxText;
+	let kbdvtCont;
+	let fltCont;
 	let seltrLays;
 	let btnF1;
+	let btnHide;
+	let btnShow;
 	let keyTimeouts = {};
 	const keyCache = {};
 
@@ -42,8 +46,12 @@ const SyDiIME = (() => {
 		if (isActive) return;
 		isActive = true;
 		boxText = document.getElementById('sydiime-textArea');
+		kbdvtCont = document.getElementById('sydiime-kbdvtCont');
+		fltCont = document.getElementById('sydiime-fltCont');
 		seltrLays = document.getElementById('sydiime-seltrLays');
 		btnF1 = document.getElementById('sydiime-k-btnF1');
+		btnHide = document.getElementById('sydiime-k-btnHide');
+		btnShow = document.getElementById('sydiime-btnShow');
 		initKeyCache();
 		if (!boxText) return;
 
@@ -66,6 +74,8 @@ const SyDiIME = (() => {
 
 		on(btnF1, "click", btnF1Click);
 		on(seltrLays, "change", changeLayoutHandler);
+		on(btnHide, "click", btnHideClick);
+		on(btnShow, "click", btnShowClick);
 
 		on(window, "beforeunload", beforeUnloadHandler);
 		on(document, "visibilitychange", visibilityChangeHandler);
@@ -534,6 +544,14 @@ const SyDiIME = (() => {
 		setTimeout(() => keyCache["btnF1"]?.div.classList.remove('sydiime-active'), 100);
 	}
 
+	function btnHideClick() {
+		hideKbdvt();
+	}
+
+	function btnShowClick() {
+		hideKbdvt(1);
+	}
+
 	function chLang() {
 		if (!flags.isGbd) {
 			seltrLays.value = sinput.beforeLayout;
@@ -674,6 +692,38 @@ const SyDiIME = (() => {
 				k.t3?.classList.remove('sydiime-active');
 			}
 
+		}
+	}
+
+	function hideKbdvt(type) {
+		const showKeyboard = () => {
+			fltCont.classList.add('hidden');
+			kbdvtCont.style.display = "block";
+			setTimeout(() => {
+				kbdvtCont.style.transform = "translateY(0%)";
+				kbdvtCont.style.opacity = "1";
+			}, 100);
+			setTimeout(() => {
+				kbdvtCont.style.removeProperty("display");
+				kbdvtCont.style.removeProperty("transform");
+				kbdvtCont.style.removeProperty("opacity");
+			}, 350);
+		};
+		const hideKeyboard = () => {
+			kbdvtCont.style.transform = "translateY(20%)";
+			kbdvtCont.style.opacity = "0";
+			fltCont.classList.remove('hidden');
+			setTimeout(() => {
+				kbdvtCont.style.display = "none";
+			}, 350);
+		};
+		switch (type) {
+			case 1:
+				showKeyboard();
+				break;
+			default:
+				hideKeyboard();
+				break;
 		}
 	}
 
