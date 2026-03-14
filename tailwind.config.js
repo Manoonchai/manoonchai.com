@@ -29,6 +29,12 @@ export default {
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
       },
+
+      screens: {
+        'h-sm': { 'raw': '(min-height: 400px)' },
+        'h-md': { 'raw': '(min-height: 800px)' },
+        'tall-sm': { 'raw': '(min-width: 640px) and (min-height: 700px)' },
+      },
     },
   },
   plugins: [

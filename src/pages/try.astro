@@ -1,14 +1,249 @@
 ---
+// Although this file imports `sydiime`,
+// many parts of this page depend on SyDiIME but are not
+// considered part of the SyDiIME codebase.
+//
+// They are independent components of this project and
+// are distributed under the MIT License.
 import Layout from '~/layouts/PageLayout.astro';
+import { layoutsData } from '../scripts/sydiime-layouts.js';
 
 const metadata = {
   title: 'Try Manoonchai',
 };
+
+const pc = [
+  'Backquote',
+  'Digit1',
+  'Digit2',
+  'Digit3',
+  'Digit4',
+  'Digit5',
+  'Digit6',
+  'Digit7',
+  'Digit8',
+  'Digit9',
+  'Digit0',
+  'Minus',
+  'Equal',
+  'Backspace',
+  'Tab',
+  'KeyQ',
+  'KeyW',
+  'KeyE',
+  'KeyR',
+  'KeyT',
+  'KeyY',
+  'KeyU',
+  'KeyI',
+  'KeyO',
+  'KeyP',
+  'BracketLeft',
+  'BracketRight',
+  'Backslash',
+  'CapsLock',
+  'KeyA',
+  'KeyS',
+  'KeyD',
+  'KeyF',
+  'KeyG',
+  'KeyH',
+  'KeyJ',
+  'KeyK',
+  'KeyL',
+  'Semicolon',
+  'Quote',
+  'Enter',
+  'ShiftLeft',
+  'KeyZ',
+  'KeyX',
+  'KeyC',
+  'KeyV',
+  'KeyB',
+  'KeyN',
+  'KeyM',
+  'Comma',
+  'Period',
+  'Slash',
+  'ShiftRight',
+  'btnF1',
+  'seltrLays',
+  'Space',
+  'AltRight',
+];
 ---
 
-<style>
+<style is:global>
+  :root {
+    --sydiime-font-family:
+      Sarabun, 'Hiragino Kaku Gothic Pro', 'Hiragino Sans', '游ゴシック',
+      'Yu Gothic', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic',
+      'Noto Sans JP', 'Noto Sans CJK JP', 'IPAMonaPGothic',
+      'IPA モナー Pゴシック', 'Chocolate Classical Sans', SF-Pro, Thonburi,
+      Garuda, Tahoma, sans-serif;
+  }
   textarea {
-    font-family: Sarabun, "Hiragino Kaku Gothic Pro","Hiragino Sans","游ゴシック","Yu Gothic","メイリオ","Meiryo","ＭＳ Ｐゴシック","MS PGothic","Noto Sans JP","Noto Sans CJK JP","IPAMonaPGothic","IPA モナー Pゴシック","Chocolate Classical Sans",SF-Pro, Thonburi, Garuda, Tahoma, sans-serif;
+    font-family: var(--sydiime-font-family);
+  }
+  #sydiime-kbdvtCont {
+    @apply mx-auto max-w-[860px] w-full z-20 fixed bottom-0 tall-sm:bottom-4 left-0 right-0;
+    &::before {
+      content: ' ';
+      @apply z-[-1] absolute inset-0 bg-gray-200 dark:bg-gray-900 rounded-[8px];
+      /* @apply  md:bg-gray-200/50 md:backdrop-blur-md; หนักเครื่องเกินไป */
+      box-shadow:
+        rgba(66, 68, 90, 0.5) 0px 0px 1px 0px,
+        rgba(0, 0, 0, 0.12) 0px 0px 2px,
+        rgba(0, 0, 0, 0.14) 0px 4px 8px,
+        rgba(255, 255, 255, 0.5) 0 0 0 1px inset,
+        rgba(200, 200, 200, 0.5) 0 -1px 0 0 inset;
+    }
+  }
+  #sydiime-kbd {
+    @apply grid [grid-template-columns:repeat(58,1fr)] [grid-template-rows:repeat(10,1fr)] justify-center;
+    @apply select-none mx-auto mb-0 p-[5px] sm:p-[8px] relative max-h-[50vh] h-[300px] gap-[3px] sm:gap-[8px];
+  }
+
+  .sydiime-key {
+    @apply col-span-4 row-span-2 p-0 text-center border-0 cursor-pointer whitespace-nowrap flex justify-center items-center relative;
+    @apply text-[26px] rounded-[6px];
+    @apply bg-white dark:bg-slate-800;
+    font-family: var(--sydiime-font-family);
+
+    &.sydiime-active {
+      @apply !bg-gray-300 dark:!bg-gray-700;
+    }
+  }
+
+  .sydiime-text {
+    @apply text-xl 2xl:text-base
+         whitespace-nowrap
+         absolute top-0
+         p-0
+         overflow-visible
+         text-center
+         min-w-[20%]
+         h-[120%]
+         mx-auto;
+
+    &.sydiime-active {
+      @apply text-current  dark:text-white;
+    }
+
+    &.sydiime-mute {
+      @apply text-neutral-300 dark:text-neutral-600;
+    }
+  }
+
+  .sydiime-t0 {
+    transform: translate(-130%, 30%);
+  }
+
+  .sydiime-t1 {
+    /* transform: translate(10%, -4%); */
+  }
+
+  .sydiime-t2 {
+    transform: translate(0, 30%);
+  }
+  .sydiime-t2,
+  .sydiime-t3 {
+    @apply text-neutral-300 dark:text-neutral-600;
+    right: 5%;
+  }
+
+  /* Special keys */
+  #sydiime-k-ShiftLeft,
+  #sydiime-k-ShiftRight,
+  #sydiime-k-Enter,
+  #sydiime-k-Backspace,
+  #sydiime-k-Tab,
+  #sydiime-k-AltRight,
+  #sydiime-k-CapsLock,
+  #sydiime-k-btnF1 {
+    @apply bg-gray-300 dark:bg-gray-600;
+    font-family: var(--mnc-font-key-symbol);
+
+    .sydiime-text {
+      visibility: hidden;
+    }
+
+    &::after {
+      @apply absolute visible pt-[5px] text-default;
+    }
+
+    &.sydiime-active {
+      @apply !bg-gray-400 dark:!bg-gray-700;
+    }
+  }
+
+  #sydiime-k-Tab {
+    @apply col-span-6;
+
+    &::after {
+      content: '↹';
+    }
+  }
+
+  #sydiime-k-CapsLock {
+    @apply col-span-7;
+
+    &::after {
+      content: '⇪';
+    }
+  }
+
+  /* #sydiime-k-KeyA {
+  @apply col-start-8;
+} */
+
+  #sydiime-k-ShiftLeft {
+    @apply col-span-9;
+  }
+
+  #sydiime-k-ShiftRight {
+    @apply col-span-9;
+  }
+
+  #sydiime-k-ShiftLeft::after,
+  #sydiime-k-ShiftRight::after {
+    content: '⇧';
+  }
+
+  #sydiime-k-Enter {
+    @apply col-span-7;
+
+    &::after {
+      content: '⏎';
+    }
+  }
+
+  #sydiime-k-Backspace {
+    @apply col-span-6;
+    &::after {
+      content: '⌫';
+    }
+  }
+
+  #sydiime-k-btnF1::after {
+    content: 'aก';
+  }
+
+  #sydiime-seltrLays {
+    @apply bg-gray-300 dark:bg-gray-600;
+    @apply text-xl 2xl:text-base pl-2;
+    text-align: start;
+    grid-column-start: span 13;
+    grid-column-end: span 13;
+  }
+
+  #sydiime-k-AltRight::after {
+    content: '⎇';
+  }
+
+  #sydiime-k-Space {
+    grid-column-start: 18;
+    grid-column-end: span 20;
   }
 </style>
 <Layout metadata={metadata}>
@@ -16,30 +251,47 @@ const metadata = {
     <div id="sydiime-textEditor">
       <textarea
         id="sydiime-textArea"
-        class="w-full h-full min-h-screen text-xl px-1.5 py-0.5 rounded border border-gray-300 bg-orange-50 dark:bg-black dark:text-white"
+        class="w-full h-full min-h-screen text-xl px-1.5 py-0.5 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg border border-gray-300 bg-orange-50 dark:bg-black dark:text-white"
         aria-label="text area"
         inputmode="none"
         placeholder="พิมพ์ตรงนี้ได้เลย! ตัวเปลี่ยนแป้นอยู่มุมขวาล่าง กดTabเพื่อสลับแป้นที่ใช้ล่าสุด..."
       ></textarea>
     </div>
+  </div>
 
-    <div
-      id="sydiime-kbd"
-      class="fixed p-1 right-0 bottom-0 z-30 rounded border border-gray-300 bg-white dark:bg-slate-900"
-    >
-      <button
-        id="sydiime-btnF1"
-        class="h-10 text-xl px-1.5 py-0.5 rounded border border-gray-300 bg-white dark:bg-slate-900"
-        >aก</button
-      >
-      <select
-        id="sydiime-seltrLays"
-        class="h-10 text-xl px-1.5 py-0.5 rounded border border-gray-300 bg-white dark:bg-slate-900"
-      >
-        <option value="default">System</option>
-        <option value="thai-mnc">Thai Manoonchai</option>
-        <option value="thai-mnc-jis">Thai Manoonchai JIS</option>
-      </select>
+  <div
+    id="sydiime-kbdvtCont"
+    class="intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter intersect-no-queue"
+  >
+    <div id="sydiime-kbd" class="sydiime-kbd">
+      {
+        pc.map(key =>
+          key === 'seltrLays' ? (
+            <select class="sydiime-key" id="sydiime-seltrLays">
+              <option value="default">System</option>
+              <option value="thai-mnc">มนูญชัย</option>
+              <option value="thai-mnc-jis">มนูญชัย JIS</option>
+              <option value="thai-tis">มอก. 820-2538</option>
+              <option value="thai-ptj">ปัตตโชติ</option>
+            </select>
+          ) : (
+            <div class="sydiime-key" id={`sydiime-k-${key}`}>
+              <div class="sydiime-text sydiime-t0">
+                {layoutsData['thai-mnc'].main_keys[key]?.[0]}
+              </div>
+              <div class="sydiime-text sydiime-t1">
+                {layoutsData['thai-mnc'].main_keys[key]?.[1]}
+              </div>
+              <div class="sydiime-text sydiime-t2">
+                {layoutsData['thai-mnc'].main_keys[key]?.[2]}
+              </div>
+              <div class="sydiime-text sydiime-t3">
+                {layoutsData['thai-mnc'].main_keys[key]?.[3]}
+              </div>
+            </div>
+          ),
+        )
+      }
     </div>
   </div>
 </Layout>

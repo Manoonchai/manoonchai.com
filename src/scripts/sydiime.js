@@ -1,3 +1,5 @@
+import { layoutsData } from "../scripts/sydiime-layouts.js";
+
 const SyDiIME = (() => {
 	let isActive = false;
 	const defaultSinput = {
@@ -19,6 +21,8 @@ const SyDiIME = (() => {
 	let boxText;
 	let seltrLays;
 	let btnF1;
+	let keyTimeouts = {};
+	const keyCache = {};
 
 	const listeners = [];
 
@@ -39,8 +43,8 @@ const SyDiIME = (() => {
 		isActive = true;
 		boxText = document.getElementById('sydiime-textArea');
 		seltrLays = document.getElementById('sydiime-seltrLays');
-		btnF1 = document.getElementById('sydiime-btnF1');
-
+		btnF1 = document.getElementById('sydiime-k-btnF1');
+		initKeyCache();
 		if (!boxText) return;
 
 		seltrLays.value = sinput.currentLayout;
@@ -60,13 +64,14 @@ const SyDiIME = (() => {
 		on(boxText, "compositionupdate", handleEvent);
 		on(boxText, "compositionend", handleEvent);
 
-		on(btnF1, "click", chLang);
+		on(btnF1, "click", btnF1Click);
 		on(seltrLays, "change", changeLayoutHandler);
 
 		on(window, "beforeunload", beforeUnloadHandler);
 		on(document, "visibilitychange", visibilityChangeHandler);
 
 		console.debug("sydiime init");
+		changeKbdvtLayout();
 	}
 
 	function destroy() {
@@ -88,6 +93,25 @@ const SyDiIME = (() => {
 
 		console.debug("sydiime destroy");
 	}
+
+	function initKeyCache() {
+
+		const keyDivs = document.querySelectorAll('.sydiime-key');
+
+		for (const keyDiv of keyDivs) {
+
+			const id = keyDiv.id.replace('sydiime-k-', '');
+
+			keyCache[id] = {
+				div: keyDiv,
+				t0: keyDiv.querySelector('.sydiime-t0'),
+				t1: keyDiv.querySelector('.sydiime-t1'),
+				t2: keyDiv.querySelector('.sydiime-t2'),
+				t3: keyDiv.querySelector('.sydiime-t3')
+			};
+		}
+	}
+
 
 	async function changeLayoutHandler(event) {
 		await setKeyboardLayout(event.target.value);
@@ -212,18 +236,10 @@ const SyDiIME = (() => {
 		if (sinput.currentLayout == "default") {
 			return
 		}
-		if (event.code === 'ArrowUp' || event.code === 'ArrowDown') {
-			return
-		}
-		if (event.code === 'ArrowLeft') {
-			event.preventDefault();
-			modifyText.mvLeft();
-			return
-		}
-
-		if (event.code === 'ArrowRight') {
-			event.preventDefault();
-			modifyText.mvRight();
+		if (event.code === 'ArrowUp' ||
+			event.code === 'ArrowDown' ||
+			event.code === 'ArrowLeft' ||
+			event.code === 'ArrowRight') {
 			return
 		}
 
@@ -240,6 +256,10 @@ const SyDiIME = (() => {
 			/* let key = remapCodes[event.key] || event.code; */
 			let key = getFixedCode(event);
 
+			const keyDiv = keyCache[key]?.div;
+			if (keyDiv) {
+				keyDiv.classList.add('sydiime-active');
+			}
 			activeSymbol(event);
 			if (speciKeys.includes(key)) {
 				handleKeyPress(key);
@@ -272,6 +292,8 @@ const SyDiIME = (() => {
 				let output = sentOutput(key, layoutsData[sinput.currentLayout]);
 				modifyText.add(checkOrdering(output));
 			}
+		} else {
+			toggleKeyColumns();
 		}
 	}
 
@@ -290,15 +312,17 @@ const SyDiIME = (() => {
 		//if (!up) boxCnsl.debug("caps" + isCapsOn);
 		if (isCapsOn) {
 			modifState.shiftToggle = true;
+			keyCache["CapsLock"]?.div.classList.add('sydiime-active');
 		} else if (!isCapsOn) {
 			modifState.shiftToggle = false;
+			keyCache["CapsLock"]?.div.classList.remove('sydiime-active');
 		}
 	}
 
 	function keyupHandler(event) {
 		/* let key = remapCodes[event.code] || event.code; */
 		let key = getFixedCode(event);
-
+		const keyDiv = keyCache[key]?.div;
 		activeSymbol(event, 1);
 		if (sinput.currentLayout == "default") {
 			return
@@ -306,9 +330,21 @@ const SyDiIME = (() => {
 		if (event.key === 'Shift') {
 			modifState.shiftPressed = false;
 			modifState.shiftAltPressed = false;
+			toggleKeyColumns();
 		} else if (event.key === 'Alt' || event.key === 'AltGraph') {
 			modifState.altPressed = false;
 			modifState.shiftAltPressed = false;
+			toggleKeyColumns();
+		}
+
+		if (keyDiv && key != 'CapsLock') {
+			if (keyTimeouts[key]) {
+				clearTimeout(keyTimeouts[key]);
+			}
+			keyTimeouts[key] = setTimeout(() => {
+				keyDiv.classList.remove('sydiime-active');
+				delete keyTimeouts[key];
+			}, 60);
 		}
 	};
 
@@ -467,11 +503,11 @@ const SyDiIME = (() => {
 	function checkOrdering(output) {
 		output = output.replace(/　|ZWSP|ZWNJ|ZWJ/g, (match) => {
 			switch (match) {
-				case "　": return "";         // Remove full-width space (U+3000)
+				case "　": return "";           // Remove full-width space (U+3000)
 				case "u3000": return "\u3000";  // Get full-width back
 				case "ZWSP": return "\u200B";   // Zero-width space
 				case "ZWNJ": return "\u200C";   // Zero-width non-joiner
-				case "ZWJ": return "\u200D";   // Zero-width joiner
+				case "ZWJ": return "\u200D";    // Zero-width joiner
 			}
 		});
 		if (sinput.currentLayout.startsWith("latn-")) {
@@ -490,6 +526,12 @@ const SyDiIME = (() => {
 			}
 		}
 		return output;
+	}
+
+	function btnF1Click() {
+		keyCache["btnF1"]?.div.classList.add('sydiime-active');
+		chLang();
+		setTimeout(() => keyCache["btnF1"]?.div.classList.remove('sydiime-active'), 100);
 	}
 
 	function chLang() {
@@ -521,6 +563,7 @@ const SyDiIME = (() => {
 		if (wtFm != 1) {
 			saveLcSt("sydiime-savedInput", sinput);
 		}
+		changeKbdvtLayout();
 	}
 
 	function resetKbd() {
@@ -545,185 +588,11 @@ const SyDiIME = (() => {
 		localStorage.setItem(type, JSON.stringify(data));
 	}
 
-	/**
-		* some keyboards lack a dedicated Backquote key
-		*/
-	const layoutsData = {
-		"default": {
-			"name": "This is Placeholder, Reference",
-			"main_keys": {
-				"Backquote": ["`", "~", "", ""],
-				"Digit1": ["1", "!", "", ""],
-				"Digit2": ["2", "@", "", ""],
-				"Digit3": ["3", "#", "", ""],
-				"Digit4": ["4", "$", "", ""],
-				"Digit5": ["5", "%", "", ""],
-				"Digit6": ["6", "^", "", ""],
-				"Digit7": ["7", "&", "", ""],
-				"Digit8": ["8", "*", "", ""],
-				"Digit9": ["9", "(", "", ""],
-				"Digit0": ["0", ")", "", ""],
-				"Minus": ["-", "_", "÷", ""],
-				"Equal": ["=", "+", "×", ""],
-				"KeyQ": ["q", "Q", "‘", ""],
-				"KeyW": ["w", "W", "’", ""],
-				"KeyE": ["e", "E", "“", ""],
-				"KeyR": ["r", "R", "”", ""],
-				"KeyT": ["t", "T", "…", ""],
-				"KeyY": ["y", "Y", "", ""],
-				"KeyU": ["u", "U", "", ""],
-				"KeyI": ["i", "I", "", ""],
-				"KeyO": ["o", "O", "", ""],
-				"KeyP": ["p", "P", "", ""],
-				"BracketLeft": ["[", "{", "", ""],
-				"BracketRight": ["]", "}", "", ""],
-				"KeyA": ["a", "A", "◌", ""],
-				"KeyS": ["s", "S", "", ""],
-				"KeyD": ["d", "D", "", ""],
-				"KeyF": ["f", "F", "", ""],
-				"KeyG": ["g", "G", "", ""],
-				"KeyH": ["h", "H", "", ""],
-				"KeyJ": ["j", "J", "", ""],
-				"KeyK": ["k", "K", "", ""],
-				"KeyL": ["l", "L", "", ""],
-				"Semicolon": [";", ":", "", ""],
-				"Quote": ["'", "\"", "", ""],
-				"Backslash": ["\\", "|", "", ""],
-				"KeyZ": ["z", "Z", "`", ""],
-				"KeyX": ["x", "X", "~", ""],
-				"KeyC": ["c", "C", "", ""],
-				"KeyV": ["v", "V", "", ""],
-				"KeyB": ["b", "B", "", ""],
-				"KeyN": ["n", "N", "", ""],
-				"KeyM": ["m", "M", "", ""],
-				"Comma": [",", "<", "«", ""],
-				"Period": [".", ">", "»", ""],
-				"Slash": ["/", "?", "", ""],
-				"Space": [" ", " ", " ", " "],
-				"IntlBackslash": ["<", ">", "", ""],
-				"IntlRo": ["_", "_", "", ""],
-				"IntlYen": ["¥", "|", "", ""],
-			}
-		},
-		"thai-mnc": {
-			"name": "Thai Manoonchai",
-			"main_keys": {
-				"Backquote": ["`", "~", "`", "~"],
-				"Digit1": ["1", "!", "๑", ""],
-				"Digit2": ["2", "@", "๒", ""],
-				"Digit3": ["3", "#", "๓", ""],
-				"Digit4": ["4", "$", "๔", ""],
-				"Digit5": ["5", "%", "๕", ""],
-				"Digit6": ["6", "^", "๖", ""],
-				"Digit7": ["7", "&", "๗", ""],
-				"Digit8": ["8", "*", "๘", ""],
-				"Digit9": ["9", "(", "๙", ""],
-				"Digit0": ["0", ")", "๐", ""],
-				"Minus": ["-", "_", "÷", ""],
-				"Equal": ["=", "+", "×", ""],
-				"KeyQ": ["ใ", "ฒ", "‘", ""],
-				"KeyW": ["ต", "ฏ", "’", ""],
-				"KeyE": ["ห", "ซ", "“", ""],
-				"KeyR": ["ล", "ญ", "”", ""],
-				"KeyT": ["ส", "ฟ", "…", ""],
-				"KeyY": ["ป", "ฉ", "", ""],
-				"KeyU": ["ั", "ึ", "ฺ", "ົ"],
-				"KeyI": ["ก", "ธ", "", ""],
-				"KeyO": ["ิ", "ฐ", "", ""],
-				"KeyP": ["บ", "ฎ", "", ""],
-				"BracketLeft": ["็", "ฆ", "[", "{"],
-				"BracketRight": ["ฬ", "ฑ", "]", "}"],
-				"KeyA": ["ง", "ษ", "◌", ""],
-				"KeyS": ["เ", "ถ", "๏", ""],
-				"KeyD": ["ร", "แ", "๛", ""],
-				"KeyF": ["น", "ช", "฿", ""],
-				"KeyG": ["ม", "พ", "", ""],
-				"KeyH": ["อ", "ผ", "ํ", ""],
-				"KeyJ": ["า", "ำ", "ๅ", ""],
-				"KeyK": ["่", "ข", "ฃ", ""],
-				"KeyL": ["้", "โ", "", ""],
-				"Semicolon": ["ว", "ภ", ";", ":"],
-				"Quote": ["ื", "\"", "'", ""],
-				"Backslash": ["ฯ", "ฌ", "\\", "|"],
-				"KeyZ": ["ุ", "ฤ", "ฦ", ""],
-				"KeyX": ["ไ", "ฝ", "", ""],
-				"KeyC": ["ท", "ๆ", "๚", "«"],
-				"KeyV": ["ย", "ณ", "", "»"],
-				"KeyB": ["จ", "๊", "", ""],
-				"KeyN": ["ค", "๋", "ฅ", "–"],
-				"KeyM": ["ี", "์", "๎", "—"],
-				"Comma": ["ด", "ศ", ",", "<"],
-				"Period": ["ะ", "ฮ", ".", ">"],
-				"Slash": ["ู", "?", "/", ""],
-				"Space": [" ", " ", " ", " "],
-				"IntlBackslash": [".", ",", "", ""],
-				"IntlRo": [".", ",", "+", "_"],
-				"IntlYen": ["`", "~", "", ""],
-			},
-		},
-		"thai-mnc-jis": {
-			"name": "Thai Manoonchai JIS",
-			"main_keys": {
-				"Backquote": ["\\", "|", "¥", "|"],
-				"Digit1": ["1", "!", "๑", ""],
-				"Digit2": ["2", "\"", "๒", ""],
-				"Digit3": ["3", "#", "๓", ""],
-				"Digit4": ["4", "$", "๔", ""],
-				"Digit5": ["5", "%", "๕", ""],
-				"Digit6": ["6", "&", "๖", ""],
-				"Digit7": ["7", "'", "๗", ""],
-				"Digit8": ["8", "(", "๘", ""],
-				"Digit9": ["9", ")", "๙", ""],
-				"Digit0": ["0", "_", "๐", ""],
-				"Minus": ["-", "=", "÷", ""],
-				"Equal": ["^", "~", "×", ""],
-				"KeyQ": ["ใ", "ฒ", "‘", ""],
-				"KeyW": ["ต", "ฏ", "’", ""],
-				"KeyE": ["ห", "ซ", "“", ""],
-				"KeyR": ["ล", "ญ", "”", ""],
-				"KeyT": ["ส", "ฟ", "…", ""],
-				"KeyY": ["ป", "ฉ", "", ""],
-				"KeyU": ["ั", "ึ", "ฺ", "ົ"],
-				"KeyI": ["ก", "ธ", "", ""],
-				"KeyO": ["ิ", "ฐ", "", ""],
-				"KeyP": ["บ", "ฎ", "", ""],
-				"BracketLeft": ["็", "ฆ", "@", "`"],
-				"BracketRight": ["ฬ", "ฑ", "[", "{"],
-				"KeyA": ["ง", "ษ", "◌", ""],
-				"KeyS": ["เ", "ถ", "๏", ""],
-				"KeyD": ["ร", "แ", "๛", ""],
-				"KeyF": ["น", "ช", "฿", ""],
-				"KeyG": ["ม", "พ", "", ""],
-				"KeyH": ["อ", "ผ", "ํ", ""],
-				"KeyJ": ["า", "ำ", "ๅ", ""],
-				"KeyK": ["่", "ข", "ฃ", ""],
-				"KeyL": ["้", "โ", "", ""],
-				"Semicolon": ["ว", "ภ", ";", "+"],
-				"Quote": ["ื", "*", ":", "*"],
-				"Backslash": ["ฯ", "ฌ", "]", "}"],
-				"KeyZ": ["ุ", "ฤ", "ฦ", ""],
-				"KeyX": ["ไ", "ฝ", "", ""],
-				"KeyC": ["ท", "ๆ", "๚", "«"],
-				"KeyV": ["ย", "ณ", "", "»"],
-				"KeyB": ["จ", "๊", "", ""],
-				"KeyN": ["ค", "๋", "ฅ", "–"],
-				"KeyM": ["ี", "์", "๎", "—"],
-				"Comma": ["ด", "ศ", ",", "<"],
-				"Period": ["ะ", "ฮ", ".", ">"],
-				"Slash": ["ู", "?", "/", ""],
-				"Space": [" ", " ", " ", " "],
-				"IntlBackslash": [".", ",", "", ""],
-				"IntlRo": [".", ",", "+", "_"],
-				"IntlYen": ["\\", "|", "¥", "|"],
-			},
-		},
-	}
-
 	function beforeUnloadHandler(event) {
 		if (boxText) {
 			localStorage.setItem("savedText", boxText.value);
 		}
-		event.preventDefault();
+		// event.preventDefault();
 		event.returnValue = "";
 	}
 
@@ -731,6 +600,80 @@ const SyDiIME = (() => {
 		if (document.hidden && boxText) {
 			history.pushState(null, null, location.href);
 			localStorage.setItem("savedText", boxText.value);
+		}
+	}
+	function changeKbdvtLayout() {
+
+		const layout = layoutsData[sinput.currentLayout].main_keys;
+
+		for (const keyId in layout) {
+
+			const k = keyCache[keyId];
+			if (!k) continue;
+
+			const keyData = layout[keyId];
+			const v0 = keyData[0];
+
+			if (k.t0) {
+				if (/^[a-z]$/.test(v0)) {
+					k.t0.textContent = noKey;
+				} else {
+					k.t0.textContent = v0 || noKey;
+				}
+			}
+
+			if (k.t1) k.t1.textContent = keyData[1] || '';
+			if (k.t2) k.t2.textContent = keyData[2] || '';
+			if (k.t3) k.t3.textContent = keyData[3] || '';
+		}
+	}
+
+	function toggleKeyColumns() {
+
+		const shiftActive =
+			modifState.shiftAltPressed ||
+			modifState.shiftAltToggle ||
+			modifState.shiftPressed ||
+			modifState.shiftToggle;
+
+		const altActive =
+			modifState.shiftAltPressed ||
+			modifState.shiftAltToggle ||
+			modifState.altPressed ||
+			modifState.altToggle;
+
+		// if (shiftActive) {
+		// 	keyCache["ShiftLeft"].div.classList.add('sydiime-active');
+		// } else {
+		// 	keyCache["shiftLeft"].div.classList.remove('sydiime-active');
+		// }
+
+		// if (shiftActive) {
+		// 	keyCache["shiftRight"].div.classList.add('sydiime-active');
+		// } else {
+		// 	keyCache["shiftRight"].div.classList.remove('sydiime-active');
+		// }
+		const layout = layoutsData[sinput.currentLayout].main_keys;
+		// if (altActive) {
+		// 	keyCache["altRight"].div.classList.add('sydiime-active');
+		// } else {
+		// 	keyCache["altRight"].div.classList.remove('sydiime-active');
+		// }
+		for (const keyId in layout) {
+			const k = keyCache[keyId];
+			if (!k) continue;
+			if (altActive) {
+				k.t0?.classList.add('sydiime-mute');
+				k.t1?.classList.add('sydiime-mute');
+				k.t2?.classList.add('sydiime-active');
+				k.t3?.classList.add('sydiime-active');
+			} else {
+				k.t0?.classList.remove('sydiime-mute');
+				k.t1?.classList.remove('sydiime-mute');
+				k.t2?.classList.remove('sydiime-active');
+				k.t3?.classList.remove('sydiime-active');
+			}
+
 		}
 	}
 
