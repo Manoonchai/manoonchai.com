@@ -87,6 +87,7 @@ const pc = [
   }
   #sydiime-kbdvtCont {
     @apply mx-auto max-w-[860px] w-full z-20 fixed bottom-0 tall-sm:bottom-4 left-0 right-0;
+    touch-action: manipulation;
     &::before {
       content: ' ';
       @apply z-[-1] absolute inset-0 bg-gray-200 dark:bg-gray-900 rounded-[8px];
@@ -109,6 +110,7 @@ const pc = [
     @apply text-[26px] rounded-[6px];
     @apply bg-white dark:bg-slate-800;
     font-family: var(--sydiime-font-family);
+    touch-action: manipulation;
 
     &.sydiime-active {
       @apply !bg-gray-300 dark:!bg-gray-700;
