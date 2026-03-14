@@ -119,6 +119,9 @@ const SyDiIME = (() => {
 		return event.code || null;
 	}
 
+	const flags = {
+		isGbd: false,
+	}
 	const modifState = {
 		shiftAltPressed: false,
 		shiftAltToggle: false,
@@ -165,8 +168,19 @@ const SyDiIME = (() => {
 	// };
 
 	function handleEvent(event) {
-		// boxCnsl.debug(`${event.type}: ${event.inputType}: ${event.data}`);
-
+		// console.debug(`${event.type}: ${event.inputType}: ${event.data} ${flags.isGbd}`);
+		if (sinput.currentLayout == "default") {
+			switch (event.type) {
+				case "compositionstart":
+					flags.isGbd = true;
+					break
+				case "compositionend":
+					flags.isGbd = false;
+				default:
+					break;
+			}
+			return
+		}
 		if (event.inputType == "insertText" || event.inputType == "insertCompositionText") {
 			boxText.readOnly = true;
 			event.preventDefault();
@@ -200,7 +214,7 @@ const SyDiIME = (() => {
 	}
 
 	function keydownHandler(event) {
-		// boxCnsl.debug(`${event.code}:  ${event.key}`);
+		// console.debug(`${event.code}:  ${event.key}`);
 
 		if (event.metaKey) {
 			boxTextUnReadOnly();
@@ -208,11 +222,18 @@ const SyDiIME = (() => {
 		}
 
 		if (event.code === 'Tab') {
-			btnF1.click();
-			event.preventDefault();
+			if (!flags.isGbd) {
+				btnF1.click();
+				event.preventDefault();
+				return
+			}
+		}
+		if (sinput.currentLayout == "default") {
 			return
 		}
-
+		if (event.code === 'ArrowUp' || event.code === 'ArrowDown') {
+			return
+		}
 		if (event.code === 'ArrowLeft') {
 			event.preventDefault();
 			modifyText.mvLeft();
@@ -298,7 +319,9 @@ const SyDiIME = (() => {
 		let key = getFixedCode(event);
 
 		activeSymbol(event, 1);
-
+		if (sinput.currentLayout == "default") {
+			return
+		}
 		if (event.key === 'Shift') {
 			modifState.shiftPressed = false;
 			modifState.shiftAltPressed = false;
@@ -538,7 +561,7 @@ const SyDiIME = (() => {
 			}
 		}
 
-		if (sinput.currentLayout.startsWith("default")) {
+		if (sinput.currentLayout == "default") {
 			if (output.startsWith("Dead")) {
 				output = "";
 			}
@@ -547,10 +570,13 @@ const SyDiIME = (() => {
 	}
 
 	function chLang() {
-		seltrLays.value = sinput.beforeLayout;
-		setKeyboardLayout(sinput.beforeLayout);
-		resetKbd();
-		boxTextFocus();
+		if (!flags.isGbd) {
+			seltrLays.value = sinput.beforeLayout;
+			setKeyboardLayout(sinput.beforeLayout);
+			resetKbd();
+			boxTextFocus();
+		}
+
 	}
 	function setKeyboardLayout(layoutName, wtFm) {
 
