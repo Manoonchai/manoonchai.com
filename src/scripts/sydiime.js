@@ -399,14 +399,13 @@ const SyDiIME = (() => {
 
 		function rm() {
 			const { start, end } = getCursor();
-			if (start <= 0) return;
-
 			const text = boxText.value;
 			if (start !== end) {
 				boxText.value = text.slice(0, start) + text.slice(end);
 				setCursor(start);
 				return;
 			}
+			if (start <= 0) return;
 
 			const prevCP = (pos) => {
 				if (
