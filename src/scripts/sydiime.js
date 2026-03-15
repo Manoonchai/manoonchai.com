@@ -126,6 +126,7 @@ const SyDiIME = (() => {
 	function changeLayoutHandler(event) {
 		setKeyboardLayout(event.target.value);
 		resetKbd();
+		boxTextFocus();
 	}
 	/**
 		* `IntlRo` `IntlYen` `IntlBackslash` 
