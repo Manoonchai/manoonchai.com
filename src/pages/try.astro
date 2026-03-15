@@ -114,7 +114,7 @@ const pc = [
   .sydiime-key {
     @apply col-span-4 row-span-2 p-0 text-center border-0 cursor-pointer whitespace-nowrap flex justify-center items-center relative;
     @apply text-[26px] rounded-[6px];
-    @apply bg-white dark:bg-slate-800;
+    @apply bg-white dark:bg-slate-800 border-b border-gray-400 dark:border-gray-800;
     font-family: var(--sydiime-font-family);
     touch-action: manipulation;
 
@@ -144,20 +144,24 @@ const pc = [
   }
 
   .sydiime-t0 {
-    transform: translate(-130%, 30%);
+    right: 10%;
+    top: 40%;
   }
 
   .sydiime-t1 {
-    /* transform: translate(10%, -4%); */
+    left: 20%;
   }
 
   .sydiime-t2 {
-    transform: translate(0, 30%);
+    right: 5%;
+  }
+
+  .sydiime-t3{
+    right: 30%;
   }
   .sydiime-t2,
   .sydiime-t3 {
     @apply text-neutral-300 dark:text-neutral-600;
-    right: 5%;
   }
 
   /* Special keys */
@@ -202,9 +206,10 @@ const pc = [
     }
   }
 
-  /* #sydiime-k-KeyA {
-  @apply col-start-8;
-} */
+  #sydiime-k-KeyF,
+  #sydiime-k-KeyJ {
+    @apply border-blue-500;
+  }
 
   #sydiime-k-ShiftLeft {
     @apply col-span-9;
@@ -292,17 +297,17 @@ const pc = [
             </select>
           ) : (
             <div class="sydiime-key" id={`sydiime-k-${key}`}>
-              <div class="sydiime-text sydiime-t0">
-                {layoutsData['thai-mnc'].main_keys[key]?.[0]}
-              </div>
-              <div class="sydiime-text sydiime-t1">
-                {layoutsData['thai-mnc'].main_keys[key]?.[1]}
-              </div>
               <div class="sydiime-text sydiime-t2">
                 {layoutsData['thai-mnc'].main_keys[key]?.[2]}
               </div>
               <div class="sydiime-text sydiime-t3">
                 {layoutsData['thai-mnc'].main_keys[key]?.[3]}
+              </div>
+              <div class="sydiime-text sydiime-t0">
+                {layoutsData['thai-mnc'].main_keys[key]?.[0]}
+              </div>
+              <div class="sydiime-text sydiime-t1">
+                {layoutsData['thai-mnc'].main_keys[key]?.[1]}
               </div>
             </div>
           ),
