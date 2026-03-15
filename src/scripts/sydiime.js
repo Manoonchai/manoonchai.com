@@ -121,10 +121,8 @@ const SyDiIME = (() => {
 				t3: keyDiv.querySelector('.sydiime-t3')
 			};
 
-			on(keyDiv, "mousedown", startTouch);
-			on(keyDiv, "touchstart", startTouch);
-			on(keyDiv, "mouseup", endTouch);
-			on(keyDiv, "touchend", endTouch);
+			on(keyDiv, "pointerdown", startTouch);
+			on(keyDiv, "pointerup", endTouch);
 		}
 	}
 
