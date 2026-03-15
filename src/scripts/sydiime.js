@@ -457,9 +457,9 @@ const SyDiIME = (() => {
 	}
 
 	function btnF1Click() {
-		keyCache["btnF1"]?.div.classList.add('sydiime-active');
+		btnF1.classList.add('sydiime-active');
 		chLang();
-		setTimeout(() => keyCache["btnF1"]?.div.classList.remove('sydiime-active'), 100);
+		setTimeout(() => btnF1.classList.remove('sydiime-active'), 100);
 	}
 
 	function btnHideClick() {
