@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero2 from '~/components/widgets/Hero2.astro';
+import Hero from '~/components/widgets/Hero.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import { Image } from 'astro:assets';
 import img_manoochaiLayout from '~/assets/images/manoonchai-layout.png';
@@ -21,7 +21,7 @@ const metadata = {
 </style>
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
-  <Hero2
+  <Hero
     actions={[
       {
         variant: 'primary',
@@ -33,6 +33,13 @@ const metadata = {
       {
         text: '<span class=\"whitespace-nowrap\">ทดลองพิมพ์</span>',
         href: '/try',
+        icon: 'tabler:keyboard',
+        class: 'whitespace-nowrap',
+      },
+        {
+        text: '<span class=\"whitespace-nowrap\">ฝึกพิมพ์</span>',
+        href: 'https://manoontype.web.app',
+        target: '_blank',
         icon: 'tabler:keyboard',
         class: 'whitespace-nowrap',
       },
