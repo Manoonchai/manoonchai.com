@@ -2,6 +2,7 @@ import { layoutsData } from "../scripts/sydiime-layouts.js";
 
 const SyDiIME = (() => {
 	let isActive = false;
+	const seg = new Intl.Segmenter(undefined, { granularity: "grapheme" });
 	const defaultSinput = {
 		currentLayout: "thai-mnc",
 		beforeLayout: "default",
@@ -17,7 +18,6 @@ const SyDiIME = (() => {
 	const speciKeys = ['Backspace', 'Tab', 'Enter', 'BLANK'];
 	const noKey = "";
 
-	// let boxLog;
 	let boxText;
 	let kbdvtCont;
 	let fltCont;
@@ -27,7 +27,6 @@ const SyDiIME = (() => {
 	let btnShow;
 	let keyTimeouts = {};
 	const keyCache = {};
-
 	const listeners = [];
 
 	function on(el, ev, fn, opt) {
@@ -105,11 +104,9 @@ const SyDiIME = (() => {
 	}
 
 	function initKeyCache() {
-
 		const keyDivs = document.querySelectorAll('.sydiime-key');
 
 		for (const keyDiv of keyDivs) {
-
 			if (!keyDiv.id.startsWith('sydiime-k-')) continue;
 			const id = keyDiv.id.slice(10);
 
@@ -126,25 +123,23 @@ const SyDiIME = (() => {
 		}
 	}
 
-
-	async function changeLayoutHandler(event) {
-		await setKeyboardLayout(event.target.value);
+	function changeLayoutHandler(event) {
+		setKeyboardLayout(event.target.value);
 		resetKbd();
 	}
 	/**
-		* Map `IntlRo` and `IntlBackslash` to `Backquote` because some keyboards 
-		* lack a dedicated Backquote key (e.g., JIS on Mac, certain tablet keyboards) 
-		* 
-		* But in WKWebView KeyboardViewController on iOS and iPadOS, 
-		* it sends `unidentified` for `event.code`. You can still get `event.key`, 
-		* but it conflicts with its own existing `@event.code`.
+		* `IntlRo` `IntlYen` `IntlBackslash` 
+		* WKWebView KeyboardViewController (iOS/iPadOS)
+		* reports `event.code` as `Unidentified`.
+		* Remapping from `event.key` may collide with existing `event.code` keys.
 		*
 		* @type {Object<string, string>}
 		*/
 	const remapKeys = {
 		'_': 'IntlRo',
 		'|': 'IntlYen',
-		'¥': 'IntlYen'
+		'¥': 'IntlYen',
+		'§': 'IntlBackslash',
 	};
 
 	function getFixedCode(event) {
@@ -182,16 +177,16 @@ const SyDiIME = (() => {
 				default:
 					break;
 			}
-			return
+			return;
 		}
 		if (event.inputType == "insertText" || event.inputType == "insertCompositionText") {
 			boxText.readOnly = true;
 			event.preventDefault();
 
-			/* Hard remap-code for dead keys that don’t work the same on Mac.  
-			* Keydown is not detected.  
-			* Mimics QWERTY behavior.  
-			*/
+			/** Hard remap for dead keys with inconsistent browser behavior (macOS).  
+				* In some cases `keydown` is not detected.  
+				* Mimics QWERTY behavior.  
+				*/
 			switch (event.data) {
 				case '´':
 					typing("KeyE");
@@ -218,7 +213,6 @@ const SyDiIME = (() => {
 
 	function keydownHandler(event) {
 		// console.debug(`${event.code}:  ${event.key}`);
-
 		if (event.metaKey) {
 			boxTextUnReadOnly();
 			return;
@@ -241,10 +235,10 @@ const SyDiIME = (() => {
 			return
 		}
 
-		if (speciCodes.includes(event.code) || event.code.startsWith('F')) {
+		if (speciCodes.includes(event.code) ||
+			event.code.startsWith('F')) {
 			return;
 		} else {
-
 			if (event.ctrlKey || event.metaKey) {
 				boxTextUnReadOnly()
 				return;
@@ -252,7 +246,6 @@ const SyDiIME = (() => {
 			event.preventDefault();
 
 			let key = getFixedCode(event);
-
 			const keyDiv = keyCache[key]?.div;
 			if (keyDiv) {
 				keyDiv.classList.add('sydiime-active');
@@ -276,7 +269,6 @@ const SyDiIME = (() => {
 				}
 
 				typing(key);
-
 			}
 		}
 	};
@@ -292,6 +284,8 @@ const SyDiIME = (() => {
 
 	function activeSymbol(event, up) {
 		/** 
+			* Originally for symbol layer activation, now used as ShiftLock.
+			* CapsLock event behavior varies across browsers/platforms.
 			* Firefox on Linux sends both keydown and keyup for 'CapsLock'.
 			* Firefox on macOS sends keydown only.
 			* Chrome on macOS may send keyup only (?).
@@ -300,7 +294,6 @@ const SyDiIME = (() => {
 			* 
 			* Some layouts activate CapsLock via Shift+CapsLock.
 			*/
-
 		const isCapsOn = event.getModifierState("CapsLock");
 		// if (!up) console.debug("caps" + isCapsOn);
 		if (isCapsOn) {
@@ -388,17 +381,6 @@ const SyDiIME = (() => {
 			let start = boxText.selectionStart;
 			let end = boxText.selectionEnd;
 
-			// Surrogate pair adjustment
-			if (boxText.value.length > 1 && end > 0) {
-				const lastChar = boxText.value.charCodeAt(end);
-				const secondLastChar = boxText.value.charCodeAt(end - 1);
-				if (lastChar >= 0xDC00 && lastChar <= 0xDFFF &&
-					secondLastChar >= 0xD800 && secondLastChar <= 0xDBFF) {
-					start++;
-					end++;
-				}
-			}
-
 			lastStart = start;
 			lastEnd = end;
 
@@ -416,45 +398,51 @@ const SyDiIME = (() => {
 		}
 
 		function rm() {
-			let { start, end } = getCursor();
+			const { start, end } = getCursor();
 			if (start <= 0) return;
 
-			// Handle surrogate pairs
-			if (end > 1 && boxText.value.charCodeAt(end - 2) >= 0xD800 && boxText.value.charCodeAt(end - 2) <= 0xDBFF) {
-				start--;
+			const text = boxText.value;
+			if (start !== end) {
+				boxText.value = text.slice(0, start) + text.slice(end);
+				setCursor(start);
+				return;
 			}
 
-			if (end > 1 && boxText.value.charCodeAt(end - 3) === 0x200D) {
-				start--;
+			const prevCP = (pos) => {
+				if (
+					pos > 0 &&
+					text.charCodeAt(pos) >= 0xDC00 &&
+					text.charCodeAt(pos) <= 0xDFFF &&
+					text.charCodeAt(pos - 1) >= 0xD800 &&
+					text.charCodeAt(pos - 1) <= 0xDBFF
+				) pos--;
+				return pos;
+			};
+
+			let pos = prevCP(start - 1);
+			const cp = text.codePointAt(pos);
+
+			let prev = pos;
+
+			if ((cp >= 0xFE00 && cp <= 0xFE0F) || (cp >= 0xE0100 && cp <= 0xE01EF)) {
+				prev = prevCP(pos - 1);
 			}
 
-			if (end > 1) {
-				const code = boxText.value.charCodeAt(end - 1);
-				if (code >= 0xFE00 && code <= 0xFE0F) {
-					start--;
-					if (boxText.value.charCodeAt(end - 3) === 0xD805) {
-						start--;
-					}
-				}
-			}
-
-			boxText.value = boxText.value.slice(0, start - 1) + boxText.value.slice(end);
-			setCursor(start - 1);
+			boxText.value = text.slice(0, prev) + text.slice(start);
+			setCursor(prev);
 		}
 
-		function prev_a(n) {
-			const { end, start } = getCursor();
-			const rmVS = boxText.value.slice(end - n, start + 1);
-			const rmVSn = (rmVS.match(/\uFE00/g) || []).length;
-			return boxText.value.charAt(end - n - rmVSn);
-		}
 		return {
 			add,
 			rm,
-			prev_a,
 		};
 	})();
 
+	/**
+		* Legacy helper for character reordering checks.
+		* Previously used to normalize special markers and input order.
+		* Rarely needed for Thai input now.
+		*/
 	function checkOrdering(output) {
 		output = output.replace(/　|ZWSP|ZWNJ|ZWJ/g, (match) => {
 			switch (match) {
@@ -491,25 +479,19 @@ const SyDiIME = (() => {
 		}
 
 	}
-	function setKeyboardLayout(layoutName, wtFm) {
 
-		if (wtFm == 1) {
-		} else {
-			sinput.beforeLayout = sinput.currentLayout;
-		}
+	function setKeyboardLayout(layoutName) {
+		sinput.beforeLayout = sinput.currentLayout;
 		sinput.currentLayout = layoutName;
 
 		if (!layoutsData[sinput.currentLayout]) {
-			console.log(`Loading layout: ${sinput.currentLayout}`);
-			// await loadKeyboardLayout(sinput.currentLayout);
+			console.warn(`Missing layout: ${sinput.currentLayout}`);
 		}
 
 		// console.debug(layoutsData);
 		console.log(`Current layout set to: ${sinput.currentLayout}`);
 
-		if (wtFm != 1) {
-			saveLcSt("sydiime-savedInput", sinput);
-		}
+		saveLcSt("sydiime-savedInput", sinput);
 		changeKbdvtLayout();
 	}
 
@@ -550,12 +532,10 @@ const SyDiIME = (() => {
 			localStorage.setItem("savedText", boxText.value);
 		}
 	}
+
 	function changeKbdvtLayout() {
-
 		const layout = layoutsData[sinput.currentLayout].main_keys;
-
 		for (const keyId in layout) {
-
 			const k = keyCache[keyId];
 			if (!k) continue;
 
@@ -569,7 +549,6 @@ const SyDiIME = (() => {
 					k.t0.textContent = v0 || noKey;
 				}
 			}
-
 			if (k.t1) k.t1.textContent = keyData[1] || '';
 			if (k.t2) k.t2.textContent = keyData[2] || '';
 			if (k.t3) k.t3.textContent = keyData[3] || '';
@@ -577,7 +556,6 @@ const SyDiIME = (() => {
 	}
 
 	function toggleKeyColumns() {
-
 		const shiftActive =
 			modifState.shiftAltPressed ||
 			modifState.shiftAltToggle ||
@@ -611,12 +589,11 @@ const SyDiIME = (() => {
 					k.t2?.classList.remove('sydiime-active');
 					k.t3?.classList.remove('sydiime-active');
 				}
-
 			}
-
 		}
 	}
 
+	// TODO: Replace with declarative Astro + Tailwind UI
 	function hideKbdvt(type) {
 		const showKeyboard = () => {
 			fltCont.classList.add('hidden');
@@ -688,7 +665,6 @@ const SyDiIME = (() => {
 				}
 			}
 		}
-
 	}
 
 	function endTouch(event) {
@@ -709,7 +685,6 @@ const SyDiIME = (() => {
 			}
 		}
 	}
-
 
 	return {
 		init,
