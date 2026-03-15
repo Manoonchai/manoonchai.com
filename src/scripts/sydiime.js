@@ -110,7 +110,8 @@ const SyDiIME = (() => {
 
 		for (const keyDiv of keyDivs) {
 
-			const id = keyDiv.id.replace('sydiime-k-', '');
+			if (!keyDiv.id.startsWith('sydiime-k-')) continue;
+			const id = keyDiv.id.slice(10);
 
 			keyCache[id] = {
 				div: keyDiv,
@@ -119,6 +120,11 @@ const SyDiIME = (() => {
 				t2: keyDiv.querySelector('.sydiime-t2'),
 				t3: keyDiv.querySelector('.sydiime-t3')
 			};
+
+			on(keyDiv, "mousedown", startTouch);
+			on(keyDiv, "touchstart", startTouch);
+			on(keyDiv, "mouseup", endTouch);
+			on(keyDiv, "touchend", endTouch);
 		}
 	}
 
@@ -161,6 +167,7 @@ const SyDiIME = (() => {
 		shiftAltToggle: false,
 		shiftPressed: false,
 		shiftToggle: false,
+		shiftToggleVt: false,
 		altPressed: false,
 		altToggle: false,
 	};
@@ -296,12 +303,8 @@ const SyDiIME = (() => {
 
 	function typing(key) {
 		if (layoutsData[sinput.currentLayout]['main_keys'][key]) {
-			if (sinput.currentLayout == "default") {
-				modifyText.add(checkOrdering(event.key));
-			} else {
-				let output = sentOutput(key, layoutsData[sinput.currentLayout]);
-				modifyText.add(checkOrdering(output));
-			}
+			let output = sentOutput(key, layoutsData[sinput.currentLayout]);
+			modifyText.add(checkOrdering(output));
 		} else {
 			toggleKeyColumns();
 		}
@@ -319,13 +322,15 @@ const SyDiIME = (() => {
 			*/
 
 		const isCapsOn = event.getModifierState("CapsLock");
-		//if (!up) boxCnsl.debug("caps" + isCapsOn);
+		// if (!up) console.debug("caps" + isCapsOn);
 		if (isCapsOn) {
 			modifState.shiftToggle = true;
 			keyCache["CapsLock"]?.div.classList.add('sydiime-active');
 		} else if (!isCapsOn) {
-			modifState.shiftToggle = false;
-			keyCache["CapsLock"]?.div.classList.remove('sydiime-active');
+			if (!modifState.shiftToggleVt) {
+				modifState.shiftToggle = false;
+				keyCache["CapsLock"]?.div.classList.remove('sydiime-active');
+			}
 		}
 	}
 
@@ -361,7 +366,9 @@ const SyDiIME = (() => {
 	function sentOutput(key, layoutData) {
 		let output = key;
 		if (layoutData['main_keys'][key]) {
-			if (modifState.shiftAltPressed || modifState.shiftAltToggle) {
+			if (modifState.shiftAltPressed ||
+				modifState.shiftAltToggle ||
+				((modifState.shiftPressed || modifState.shiftToggle) && (modifState.altPressed || modifState.altToggle))) {
 				output = layoutData['main_keys'][key][3] || noKey;
 			} else if (modifState.shiftPressed || modifState.shiftToggle) {
 				output = layoutData['main_keys'][key][1] || noKey;
@@ -378,6 +385,9 @@ const SyDiIME = (() => {
 		switch (key) {
 			case 'Backspace':
 				modifyText.rm();
+				break;
+			case 'Tab':
+				modifyText.add("\t")
 				break;
 			case 'Enter':
 				modifyText.add("\n")
@@ -589,6 +599,7 @@ const SyDiIME = (() => {
 		modifState.shiftAltToggle = false;
 		modifState.shiftPressed = false;
 		modifState.shiftToggle = false;
+		modifState.shiftToggleVt = false;
 		modifState.altPressed = false;
 		modifState.altToggle = false;
 	}
@@ -726,6 +737,67 @@ const SyDiIME = (() => {
 				break;
 		}
 	}
+
+	function startTouch(event) {
+		const keyDiv = event.currentTarget;
+		const key = keyDiv.id.replace('sydiime-k-', '');
+		// console.debug("pressed", key);
+		if (keyDiv) {
+			keyDiv.classList.add('sydiime-active');
+		}
+		if (speciKeys.includes(key)) {
+			handleKeyPress(key);
+		} else {
+			if (layoutsData[sinput.currentLayout]['main_keys'][key]) {
+				let output = sentOutput(key, layoutsData[sinput.currentLayout]);
+				modifyText.add(checkOrdering(output));
+				modifState.shiftToggle = false;
+				modifState.shiftToggleVt = false;
+				modifState.altToggle = false;
+				modifState.shiftAltToggle = false;
+				toggleKeyColumns();
+				keyCache['ShiftLeft'].div.classList.remove('sydiime-active');
+				keyCache['ShiftRight'].div.classList.remove('sydiime-active');
+				keyCache['AltRight'].div.classList.remove('sydiime-active');
+				keyCache['CapsLock'].div.classList.remove('sydiime-active');
+			} else {
+				if (key === 'ShiftLeft' || key == 'ShiftRight' || key == 'CapsLock') {
+					modifState.shiftToggle = !modifState.shiftToggle;
+					modifState.shiftToggleVt = modifState.shiftToggle;
+				}
+				if (key === 'AltRight') {
+					modifState.altToggle = !modifState.altToggle;
+					toggleKeyColumns();
+				}
+				if (modifState.shiftToggle && modifState.altToggle) {
+					modifState.shiftAltToggle = true;
+				} else {
+					modifState.shiftAltToggle = false;
+				}
+			}
+		}
+
+	}
+
+	function endTouch(event) {
+		boxTextFocus();
+		const keyDiv = event.currentTarget;
+		const key = keyDiv.id.replace('sydiime-k-', '');
+		// console.debug("pressed", key, modifState);
+		if (keyDiv) {
+			if ((key === 'ShiftLeft' ||
+				key == 'ShiftRight' ||
+				key == 'AltRight' ||
+				key == 'CapsLock') &&
+				(modifState.shiftToggle ||
+					modifState.altToggle)) {
+			}
+			else {
+				keyDiv.classList.remove('sydiime-active');
+			}
+		}
+	}
+
 
 	return {
 		init,
