@@ -73,6 +73,18 @@ const pc = [
   'AltRight',
   'btnHide',
 ];
+
+const iconKeys = {
+  Tab: 'tabler:arrow-bar-to-right',
+  Enter: 'tabler:corner-down-left',
+  Backspace: 'tabler:backspace',
+  ShiftLeft: 'tabler:arrow-big-up',
+  ShiftRight: 'tabler:arrow-big-up',
+  CapsLock: 'tabler:arrow-big-up-line',
+  AltRight: 'tabler:trending-up-2',
+  btnF1: 'tabler:world',
+  btnHide: 'tabler:keyboard-show',
+};
 ---
 
 <style is:global>
@@ -88,12 +100,23 @@ const pc = [
     font-family: var(--sydiime-font-family);
   }
   #sydiime-fltCont {
-    @apply  fixed right-0 bottom-0 p-2 bg-gray-200 dark:bg-gray-900 rounded-[8px];
+    @apply fixed right-0 bottom-0 p-2 bg-gray-200 dark:bg-gray-900 rounded-lg z-20;
+    box-shadow:
+      rgba(66, 68, 90, 0.5) 0px 0px 1px 0px,
+      rgba(0, 0, 0, 0.12) 0px 0px 2px,
+      rgba(0, 0, 0, 0.14) 0px 4px 8px,
+      rgba(255, 255, 255, 0.5) 0 0 0 1px inset,
+      rgba(200, 200, 200, 0.5) 0 -1px 0 0 inset;
   }
   #sydiime-kbdvtCont {
     @apply mx-auto max-w-[860px] w-full z-20 fixed bottom-0 tall-sm:bottom-4 left-0 right-0;
     touch-action: manipulation;
-    transition: transform 0.1s ease-out, max-width 0.1s ease-out, bottom 0.1s ease-out, right 0.1s ease-out, opacity 0.1s ease-out;
+    transition:
+      transform 0.1s ease-out,
+      max-width 0.1s ease-out,
+      bottom 0.1s ease-out,
+      right 0.1s ease-out,
+      opacity 0.1s ease-out;
     &::before {
       content: ' ';
       @apply z-[-1] absolute inset-0 bg-gray-200 dark:bg-gray-900 rounded-[8px];
@@ -156,7 +179,7 @@ const pc = [
     right: 5%;
   }
 
-  .sydiime-t3{
+  .sydiime-t3 {
     right: 30%;
   }
   .sydiime-t2,
@@ -175,16 +198,6 @@ const pc = [
   #sydiime-k-btnF1,
   #sydiime-k-btnHide {
     @apply bg-gray-300 dark:bg-gray-600;
-    font-family: var(--mnc-font-key-symbol);
-
-    .sydiime-text {
-      visibility: hidden;
-    }
-
-    &::after {
-      @apply absolute visible pt-[5px] text-default;
-    }
-
     &.sydiime-active {
       @apply !bg-gray-400 dark:!bg-gray-700;
     }
@@ -192,18 +205,10 @@ const pc = [
 
   #sydiime-k-Tab {
     @apply col-span-6;
-
-    &::after {
-      content: '↹';
-    }
   }
 
   #sydiime-k-CapsLock {
     @apply col-span-7;
-
-    &::after {
-      content: '⇪';
-    }
   }
 
   #sydiime-k-KeyF,
@@ -219,28 +224,12 @@ const pc = [
     @apply col-span-9;
   }
 
-  #sydiime-k-ShiftLeft::after,
-  #sydiime-k-ShiftRight::after {
-    content: '⇧';
-  }
-
   #sydiime-k-Enter {
     @apply col-span-7;
-
-    &::after {
-      content: '⏎';
-    }
   }
 
   #sydiime-k-Backspace {
     @apply col-span-6;
-    &::after {
-      content: '⌫';
-    }
-  }
-
-  #sydiime-k-btnF1::after {
-    content: 'aก';
   }
 
   #sydiime-seltrLays {
@@ -251,20 +240,13 @@ const pc = [
     grid-column-end: span 13;
   }
 
-  #sydiime-k-AltRight::after {
-    content: '⎇';
-  }
-
   #sydiime-k-Space {
     grid-column-start: 18;
     grid-column-end: span 20;
   }
 
-  #sydiime-k-btnHide{
+  #sydiime-k-btnHide {
     grid-column-start: 55;
-    &::after {
-      content: '▼';
-    }
   }
 </style>
 <Layout metadata={metadata}>
@@ -280,10 +262,7 @@ const pc = [
     </div>
   </div>
 
-  <div
-    id="sydiime-kbdvtCont"
-    class=""
-  >
+  <div id="sydiime-kbdvtCont" class="">
     <div id="sydiime-kbd" class="sydiime-kbd">
       {
         pc.map(key =>
@@ -295,6 +274,10 @@ const pc = [
               <option value="thai-tis">มอก. 820-2538</option>
               <option value="thai-ptj">ปัตตะโชติ</option>
             </select>
+          ) : iconKeys[key] ? (
+            <div class="sydiime-key" id={`sydiime-k-${key}`}>
+              <Icon name={iconKeys[key]} />
+            </div>
           ) : (
             <div class="sydiime-key" id={`sydiime-k-${key}`}>
               <div class="sydiime-text sydiime-t2">
@@ -316,8 +299,14 @@ const pc = [
     </div>
   </div>
   <div id="sydiime-fltCont" class="hidden">
-    <button id="sydiime-btnShow" class="text-lg">▲<Icon name="tabler:keyboard" class="w-6 h-6 inline-block" /></button>
+    <button id="sydiime-btnShow" class="text-lg p-1"
+      ><Icon
+        name="tabler:keyboard-hide"
+        class="w-6 h-6 inline-block"
+      /></button
+    >
   </div>
+  <Fragment slot="footer" />
 </Layout>
 
 <script>
