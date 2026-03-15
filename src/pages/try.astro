@@ -82,6 +82,9 @@ const iconKeys = {
   ShiftRight: 'tabler:arrow-big-up',
   CapsLock: 'tabler:arrow-big-up-line',
   AltRight: 'tabler:trending-up-2',
+};
+
+const iconBtns = {
   btnF1: 'tabler:world',
   btnHide: 'tabler:keyboard-show',
 };
@@ -158,11 +161,15 @@ const iconKeys = {
          mx-auto;
 
     &.sydiime-active {
-      @apply text-current  dark:text-white;
+      @apply text-current dark:text-white;
     }
 
     &.sydiime-mute {
       @apply text-neutral-300 dark:text-neutral-600;
+    }
+
+    &.sydiime-mute-s {
+      @apply text-gray-500 dark:text-gray-400;
     }
   }
 
@@ -173,6 +180,7 @@ const iconKeys = {
 
   .sydiime-t1 {
     left: 20%;
+    @apply text-gray-500 dark:text-gray-400;
   }
 
   .sydiime-t2 {
@@ -195,8 +203,8 @@ const iconKeys = {
   #sydiime-k-Tab,
   #sydiime-k-AltRight,
   #sydiime-k-CapsLock,
-  #sydiime-k-btnF1,
-  #sydiime-k-btnHide {
+  #sydiime-btnF1,
+  #sydiime-btnHide {
     @apply bg-gray-300 dark:bg-gray-600;
     &.sydiime-active {
       @apply !bg-gray-400 dark:!bg-gray-700;
@@ -245,7 +253,7 @@ const iconKeys = {
     grid-column-end: span 20;
   }
 
-  #sydiime-k-btnHide {
+  #sydiime-btnHide {
     grid-column-start: 55;
   }
 </style>
@@ -274,6 +282,10 @@ const iconKeys = {
               <option value="thai-tis">มอก. 820-2538</option>
               <option value="thai-ptj">ปัตตะโชติ</option>
             </select>
+          ) : iconBtns[key] ? (
+            <div class="sydiime-key" id={`sydiime-${key}`}>
+              <Icon name={iconBtns[key]} />
+            </div>
           ) : iconKeys[key] ? (
             <div class="sydiime-key" id={`sydiime-k-${key}`}>
               <Icon name={iconKeys[key]} />
@@ -300,13 +312,10 @@ const iconKeys = {
   </div>
   <div id="sydiime-fltCont" class="hidden">
     <button id="sydiime-btnShow" class="text-lg p-1"
-      ><Icon
-        name="tabler:keyboard-hide"
-        class="w-6 h-6 inline-block"
-      /></button
+      ><Icon name="tabler:keyboard-hide" class="w-6 h-6 inline-block" /></button
     >
   </div>
-  <Fragment slot="footer" />
+  <Fragment slot="footer"></Fragment>
 </Layout>
 
 <script>

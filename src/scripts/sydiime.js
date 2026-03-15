@@ -49,8 +49,8 @@ const SyDiIME = (() => {
 		kbdvtCont = document.getElementById('sydiime-kbdvtCont');
 		fltCont = document.getElementById('sydiime-fltCont');
 		seltrLays = document.getElementById('sydiime-seltrLays');
-		btnF1 = document.getElementById('sydiime-k-btnF1');
-		btnHide = document.getElementById('sydiime-k-btnHide');
+		btnF1 = document.getElementById('sydiime-btnF1');
+		btnHide = document.getElementById('sydiime-btnHide');
 		btnShow = document.getElementById('sydiime-btnShow');
 		initKeyCache();
 		if (!boxText) return;
@@ -170,23 +170,6 @@ const SyDiIME = (() => {
 		altToggle: false,
 	};
 
-	// const boxCnsl = {
-	// 	logs: [],
-	// 	maxLines: 10,
-	// 	target: null,
-
-	// 	debug(...args) {
-	// 		const message = args.map(arg =>
-	// 			typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
-	// 		).join(' ');
-	// 		this.logs.unshift(message);
-	// 		this.logs = this.logs.slice(0, this.maxLines);
-	// 		if (this.target) {
-	// 			this.target.textContent = this.logs.join(' ← ');
-	// 		}
-	// 	},
-	// };
-
 	function handleEvent(event) {
 		// console.debug(`${event.type}: ${event.inputType}: ${event.data} ${flags.isGbd}`);
 		if (sinput.currentLayout == "default") {
@@ -268,7 +251,6 @@ const SyDiIME = (() => {
 			}
 			event.preventDefault();
 
-			/* let key = remapCodes[event.key] || event.code; */
 			let key = getFixedCode(event);
 
 			const keyDiv = keyCache[key]?.div;
@@ -442,11 +424,6 @@ const SyDiIME = (() => {
 				start--;
 			}
 
-			// Handle |ZWSP and ZWJ and variation selectors (Ahom + others)
-			if (end > 1 && boxText.value.charCodeAt(end - 4) === 0xFE00 && boxText.value.charAt(end - 3) === "|" && boxText.value.charAt(end - 1) === "\u103C") {
-				start -= 2;
-			}
-
 			if (end > 1 && boxText.value.charCodeAt(end - 3) === 0x200D) {
 				start--;
 			}
@@ -471,50 +448,10 @@ const SyDiIME = (() => {
 			const rmVSn = (rmVS.match(/\uFE00/g) || []).length;
 			return boxText.value.charAt(end - n - rmVSn);
 		}
-
-		function mvLeft() {
-			let { start, end } = getCursor();
-			if (end > 1 && boxText.value.charCodeAt(end - 2) >= 0xD800 && boxText.value.charCodeAt(end - 2) <= 0xDBFF) {
-				start--;
-			}
-			if (end > 1 && boxText.value.charCodeAt(end - 4) === 0xFE00 && boxText.value.charAt(end - 3) === "|" && boxText.value.charAt(end - 1) === "\u103C") {
-				start -= 2;
-			}
-			if (end > 1 && boxText.value.charCodeAt(end - 3) === 0x200D) {
-				start--;
-			}
-			if (end > 1) {
-				const code = boxText.value.charCodeAt(end - 1);
-				if (code >= 0xFE00 && code <= 0xFE0F) {
-					start--;
-					if (boxText.value.charCodeAt(end - 3) === 0xD805) {
-						start--;
-					}
-				}
-			}
-			setCursor(start - 1);
-		}
-
-		function mvRight() {
-			let { start, end } = getCursor();
-			if (end > 1 && boxText.value.charCodeAt(end - 2) >= 0xD800 && boxText.value.charCodeAt(end - 2) <= 0xDBFF) {
-				start++;
-			}
-			if (end > 1 && boxText.value.charCodeAt(end - 4) === 0xFE00 && boxText.value.charAt(end - 3) === "|" && boxText.value.charAt(end - 1) === "\u103C") {
-				start += 2;
-			}
-			if (end > 1 && boxText.value.charCodeAt(end - 3) === 0x200D) {
-				start++;
-			}
-			setCursor(start + 1);
-		}
-
 		return {
 			add,
 			rm,
 			prev_a,
-			mvLeft,
-			mvRight,
 		};
 	})();
 
@@ -528,21 +465,6 @@ const SyDiIME = (() => {
 				case "ZWJ": return "\u200D";    // Zero-width joiner
 			}
 		});
-		if (sinput.currentLayout.startsWith("latn-")) {
-			const allTnMk = /[̨̧̣̤̦̀́̂̃̄̆̇̈̊̌]/u;
-			if (allTnMk.test(output)) {
-				var prev = modifyText.prev_a(1);
-				modifyText.rm();
-				const combined = (prev ? prev : "") + output;
-				output = combined.normalize("NFC");
-			}
-		}
-
-		if (sinput.currentLayout == "default") {
-			if (output.startsWith("Dead")) {
-				output = "";
-			}
-		}
 		return output;
 	}
 
@@ -582,8 +504,7 @@ const SyDiIME = (() => {
 			// await loadKeyboardLayout(sinput.currentLayout);
 		}
 
-		console.debug(layoutsData);
-
+		// console.debug(layoutsData);
 		console.log(`Current layout set to: ${sinput.currentLayout}`);
 
 		if (wtFm != 1) {
@@ -619,7 +540,7 @@ const SyDiIME = (() => {
 		if (boxText) {
 			localStorage.setItem("savedText", boxText.value);
 		}
-		// event.preventDefault();
+		event.preventDefault();
 		event.returnValue = "";
 	}
 
@@ -669,23 +590,7 @@ const SyDiIME = (() => {
 			modifState.altPressed ||
 			modifState.altToggle;
 
-		// if (shiftActive) {
-		// 	keyCache["ShiftLeft"].div.classList.add('sydiime-active');
-		// } else {
-		// 	keyCache["shiftLeft"].div.classList.remove('sydiime-active');
-		// }
-
-		// if (shiftActive) {
-		// 	keyCache["shiftRight"].div.classList.add('sydiime-active');
-		// } else {
-		// 	keyCache["shiftRight"].div.classList.remove('sydiime-active');
-		// }
 		const layout = layoutsData[sinput.currentLayout].main_keys;
-		// if (altActive) {
-		// 	keyCache["altRight"].div.classList.add('sydiime-active');
-		// } else {
-		// 	keyCache["altRight"].div.classList.remove('sydiime-active');
-		// }
 		for (const keyId in layout) {
 			const k = keyCache[keyId];
 			if (!k) continue;
@@ -695,10 +600,18 @@ const SyDiIME = (() => {
 				k.t2?.classList.add('sydiime-active');
 				k.t3?.classList.add('sydiime-active');
 			} else {
-				k.t0?.classList.remove('sydiime-mute');
-				k.t1?.classList.remove('sydiime-mute');
-				k.t2?.classList.remove('sydiime-active');
-				k.t3?.classList.remove('sydiime-active');
+				if (shiftActive) {
+					k.t0?.classList.add('sydiime-mute-s');
+					k.t1?.classList.add('sydiime-active');
+				} else {
+					k.t0?.classList.remove('sydiime-mute');
+					k.t0?.classList.remove('sydiime-mute-s');
+					k.t1?.classList.remove('sydiime-mute');
+					k.t1?.classList.remove('sydiime-active');
+					k.t2?.classList.remove('sydiime-active');
+					k.t3?.classList.remove('sydiime-active');
+				}
+
 			}
 
 		}
@@ -762,6 +675,7 @@ const SyDiIME = (() => {
 				if (key === 'ShiftLeft' || key == 'ShiftRight' || key == 'CapsLock') {
 					modifState.shiftToggle = !modifState.shiftToggle;
 					modifState.shiftToggleVt = modifState.shiftToggle;
+					toggleKeyColumns();
 				}
 				if (key === 'AltRight') {
 					modifState.altToggle = !modifState.altToggle;
