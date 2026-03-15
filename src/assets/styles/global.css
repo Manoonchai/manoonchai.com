@@ -1,10 +1,6 @@
-.key-symbol {
-  font-family: var(--mnc-font-key-symbol);
-}
-
 .inline-code {
   @apply bg-gray-200 px-1.5 py-0.5 rounded border border-gray-300 dark:bg-black dark:text-white;
-  font-family: 'SF Mono', Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+  font-family: ui-monospace,'SF Mono', SFMono-Regular, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
