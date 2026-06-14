@@ -133,13 +133,14 @@ const metadata = {
 <script>
   const el = document.getElementById('type-title');
   if (el) {
-    const text = el.textContent;
-    const h1 = el.closest('h1');
-    el.textContent = '';
+    const target = el;
+    const text = target.textContent ?? '';
+    const h1 = target.closest('h1');
+    target.textContent = '';
     let z = 0;
     function type() {
       z++;
-      el.textContent = text.slice(0, z);
+      target.textContent = text.slice(0, z);
       if (z < text.length) {
         setTimeout(type, 90);
       }
