@@ -3,6 +3,7 @@
   "version": "1.0.0-beta.52",
   "description": "AstroWind: A free template using Astro 5.0 and Tailwind CSS. Astro starter theme.",
   "type": "module",
+  "packageManager": "bun@1.4.0",
   "engines": {
     "node": ">= 22.0.0"
   },
@@ -12,11 +13,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "npm run check:astro && npm run check:eslint && npm run check:prettier",
+    "check": "bun run check:astro && bun run check:eslint && bun run check:prettier",
     "check:astro": "astro check",
     "check:eslint": "eslint .",
     "check:prettier": "prettier --check .",
-    "fix": "npm run fix:eslint && npm run fix:prettier",
+    "fix": "bun run fix:eslint && bun run fix:prettier",
     "fix:eslint": "eslint --fix .",
     "fix:prettier": "prettier -w ."
   },

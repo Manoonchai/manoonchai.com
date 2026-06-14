@@ -1,14 +1,14 @@
-FROM node:lts AS base
+FROM oven/bun:1 AS base
 WORKDIR /app
 
 FROM base AS deps
-COPY package*.json ./
-RUN npm install
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+RUN bun run build
 
 FROM nginx:stable-alpine AS deploy
 COPY --from=build /app/dist /usr/share/nginx/html
