@@ -2,6 +2,8 @@ import { layoutsData } from "../scripts/sydiime-layouts.js";
 
 const SyDiIME = (() => {
 	let isActive = false;
+	let isOSLayoutThai = true;
+	let isAutoSwitchEnabled = false;
 	const seg = new Intl.Segmenter(undefined, { granularity: "grapheme" });
 	const defaultSinput = {
 		currentLayout: "thai-mnc",
@@ -44,6 +46,27 @@ const SyDiIME = (() => {
 	function init() {
 		if (isActive) return;
 		isActive = true;
+		
+		const autoSwitchEl = document.getElementById('sydiime-auto-switch');
+		if (autoSwitchEl) {
+			isAutoSwitchEnabled = localStorage.getItem('sydiime-autoSwitch') === 'true';
+			autoSwitchEl.checked = isAutoSwitchEnabled;
+			isOSLayoutThai = !isAutoSwitchEnabled;
+			
+			on(autoSwitchEl, 'change', (event) => {
+				isAutoSwitchEnabled = event.target.checked;
+				localStorage.setItem('sydiime-autoSwitch', isAutoSwitchEnabled.toString());
+				isOSLayoutThai = !isAutoSwitchEnabled;
+				changeKbdvtLayout();
+				toggleKeyColumns();
+				resetKbd();
+				boxTextFocus();
+			});
+		} else {
+			isAutoSwitchEnabled = false;
+			isOSLayoutThai = true;
+		}
+
 		boxText = document.getElementById('sydiime-textArea');
 		kbdvtCont = document.getElementById('sydiime-kbdvtCont');
 		fltCont = document.getElementById('sydiime-fltCont');
@@ -153,6 +176,31 @@ const SyDiIME = (() => {
 		return event.code || null;
 	}
 
+	function isThaiKeystroke(event) {
+		let key = getFixedCode(event);
+		if (!key) return null;
+		
+		// If it's a special key or modifier key or space, don't use it to detect language
+		if (speciKeys.includes(key) || modifKeys.includes(key) || speciCodes.includes(key) || key === 'Space' || key.startsWith('Arrow')) {
+			return null;
+		}
+		
+		const tisKey = layoutsData['thai-tis']?.main_keys?.[key];
+		if (tisKey && (event.key === tisKey[0] || event.key === tisKey[1])) {
+			return true;
+		}
+		
+		if (/[\u0e00-\u0e7f]/.test(event.key)) {
+			return true;
+		}
+		
+		if (/^[a-zA-Z]$/.test(event.key)) {
+			return false;
+		}
+		
+		return null;
+	}
+
 	const flags = {
 		isGbd: false,
 	}
@@ -168,7 +216,8 @@ const SyDiIME = (() => {
 
 	function handleEvent(event) {
 		// console.debug(`${event.type}: ${event.inputType}: ${event.data} ${flags.isGbd}`);
-		if (sinput.currentLayout == "default") {
+		const activeLayout = (isAutoSwitchEnabled && !isOSLayoutThai) ? 'default' : sinput.currentLayout;
+		if (activeLayout == "default") {
 			switch (event.type) {
 				case "compositionstart":
 					flags.isGbd = true;
@@ -219,6 +268,19 @@ const SyDiIME = (() => {
 			return;
 		}
 
+		if (isAutoSwitchEnabled) {
+			const isThai = isThaiKeystroke(event);
+			if (isThai !== null && isThai !== isOSLayoutThai) {
+				isOSLayoutThai = isThai;
+				changeKbdvtLayout();
+				toggleKeyColumns();
+			}
+		} else {
+			isOSLayoutThai = true;
+		}
+
+		const activeLayout = (isAutoSwitchEnabled && !isOSLayoutThai) ? 'default' : sinput.currentLayout;
+
 		if (event.code === 'Tab') {
 			if (!flags.isGbd) {
 				btnF1.click();
@@ -226,7 +288,7 @@ const SyDiIME = (() => {
 				return
 			}
 		}
-		if (sinput.currentLayout == "default") {
+		if (activeLayout == "default") {
 			return
 		}
 		if (event.code === 'ArrowUp' ||
@@ -275,8 +337,9 @@ const SyDiIME = (() => {
 	};
 
 	function typing(key) {
-		if (layoutsData[sinput.currentLayout]['main_keys'][key]) {
-			let output = sentOutput(key, layoutsData[sinput.currentLayout]);
+		const activeLayout = (isAutoSwitchEnabled && !isOSLayoutThai) ? 'default' : sinput.currentLayout;
+		if (layoutsData[activeLayout]['main_keys'][key]) {
+			let output = sentOutput(key, layoutsData[activeLayout]);
 			modifyText.add(checkOrdering(output));
 		} else {
 			toggleKeyColumns();
@@ -313,7 +376,9 @@ const SyDiIME = (() => {
 		let key = getFixedCode(event);
 		const keyDiv = keyCache[key]?.div;
 		activeSymbol(event, 1);
-		if (sinput.currentLayout == "default") {
+		
+		const activeLayout = (isAutoSwitchEnabled && !isOSLayoutThai) ? 'default' : sinput.currentLayout;
+		if (activeLayout == "default") {
 			return
 		}
 		if (event.key === 'Shift') {
@@ -534,7 +599,8 @@ const SyDiIME = (() => {
 	}
 
 	function changeKbdvtLayout() {
-		const layout = layoutsData[sinput.currentLayout].main_keys;
+		const activeLayout = (isAutoSwitchEnabled && !isOSLayoutThai) ? 'default' : sinput.currentLayout;
+		const layout = layoutsData[activeLayout].main_keys;
 		for (const keyId in layout) {
 			const k = keyCache[keyId];
 			if (!k) continue;
@@ -568,7 +634,8 @@ const SyDiIME = (() => {
 			modifState.altPressed ||
 			modifState.altToggle;
 
-		const layout = layoutsData[sinput.currentLayout].main_keys;
+		const activeLayout = (isAutoSwitchEnabled && !isOSLayoutThai) ? 'default' : sinput.currentLayout;
+		const layout = layoutsData[activeLayout].main_keys;
 		for (const keyId in layout) {
 			const k = keyCache[keyId];
 			if (!k) continue;
@@ -636,8 +703,9 @@ const SyDiIME = (() => {
 		if (speciKeys.includes(key)) {
 			handleKeyPress(key);
 		} else {
-			if (layoutsData[sinput.currentLayout]['main_keys'][key]) {
-				let output = sentOutput(key, layoutsData[sinput.currentLayout]);
+			const activeLayout = (isAutoSwitchEnabled && !isOSLayoutThai) ? 'default' : sinput.currentLayout;
+			if (layoutsData[activeLayout]['main_keys'][key]) {
+				let output = sentOutput(key, layoutsData[activeLayout]);
 				modifyText.add(checkOrdering(output));
 				modifState.shiftToggle = false;
 				modifState.shiftToggleVt = false;
