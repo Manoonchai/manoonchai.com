@@ -24,7 +24,7 @@ const articles = [
 <style>
   :global(.text-muted),
   :global(.text-muted a) {
-    font-family: 'Sarabun', sans-serif;
+    font-family: var(--thai-body-font);
   }
 </style>
 <Layout metadata={metadata}>
@@ -120,7 +120,7 @@ const articles = [
       },
       {
         title:
-          'Step 8: <span class="font-light"> เลือก <code class="inline-code">Thai</code>/<code class="inline-code">ภาษาไทย</code> หรือค้นหาว่า <code class="inline-code">Manoonchai</code>แล้วทำการ Add/เพิ่ม จากนั้นกด Done/เสร็จสิ้น</span>',
+          'Step 8: <span class="font-light"> เลือก <code class="inline-code">Thai</code>/<code class="inline-code">ภาษาไทย</code> หรือค้นหาว่า <code class="inline-code">Manoonchai</code>แล้วทำการ <code class="inline-code">Add</code>/<code class="inline-code">เพิ่ม</code> จากนั้นกด <code class="inline-code">Done</code>/<code class="inline-code">เสร็จสิ้น</code></span>',
         description:
           'หากไม่พบในหมวดหมู่ <code class="inline-code">Thai</code> ลองไปที่ <code class="inline-code">Other</code>/<code class="inline-code">อื่นๆ</code>',
         icon: 'tabler:settings',
