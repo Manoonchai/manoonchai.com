@@ -7,7 +7,7 @@ export const headerData = {
       href: getPermalink('/'),
     },
     {
-      text: 'ทดลอง',
+      text: 'พิมพ์ออนไลน์',
       href: getPermalink('/try'),
     },
     {
@@ -30,7 +30,6 @@ export const headerData = {
 export const footerData = {
   socialLinks: [
     { ariaLabel: 'Discord Guild', icon: 'tabler:brand-discord', href: 'https://discord.gg/aNbFWTmuHU' },
-    { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/manoonchai/manoonchai' },
   ],
   footNote: `

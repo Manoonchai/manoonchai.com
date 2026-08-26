@@ -26,12 +26,6 @@ const articles = [
     permalink:
       'https://narze.medium.com/บันทึกการสร้างแป้นพิมพ์ไทย-manoonchai-3-วิเคราะห์แป้นพิมพ์-manoonchai-เทียบกับเกษมณี-ปัตตโชติ-e4d9bd82f2ea',
   },
-  {
-    title: 'วิธีใช้งานเว็บ Manoontype',
-    excerpt: 'คู่มือสั้นๆ',
-    permalink:
-      'https://narze.medium.com/manoonchai-layout-วิธีใช้งานเว็บ-manoontype-แบบสั้นๆ-5a4937856f78',
-  },
 ];
 ---
 
@@ -51,9 +45,7 @@ const articles = [
           rel="noreferrer"
           class="rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900 p-6"
         >
-          <h3 class="md:h-32 md:text-xl font-bold">
-            {a.title}
-          </h3>
+          <h3 class="md:h-32 md:text-xl font-bold">{a.title}</h3>
           <p class="text-muted dark:text-slate-400 text-lg">{a.excerpt}</p>
         </a>
       ))

@@ -6,11 +6,12 @@ const metadata = {
   title: 'Frequently Asked Questions',
 };
 ---
+
 <style>
-:global(#faq-manoonchai a),
-:global(#faq-manoonchai p) {
-  font-family: 'Sarabun', sans-serif;
-}
+  :global(#faq-manoonchai a),
+  :global(#faq-manoonchai p) {
+    font-family: var(--thai-body-font);
+  }
 </style>
 <Layout metadata={metadata}>
   <!-- FAQs Widget ******************* -->
@@ -41,12 +42,12 @@ const metadata = {
       },
       {
         title: 'เลขไทยหายไปไหน? จุลภาค, มหัพภาค, ทับ อยู่ที่ไหน?',
-        description: `ใน AltGr Layer ซึ่งสามารถเข้าถึงได้โดยการกด <code class="inline-code">Alt</code>ขวา (หรือ <code class="inline-code">Ctrl</code> + <code class="inline-code">Alt</code> ด้านซ้าย สำหรับระบบปฏิบัติการ Windows) หรือกด <code class="inline-code">⌥option</code> สำหรับระบบปฏิบัติการ macOS โดยตำแหน่งจะอยู่ตรงกับตัวเลขอารบิกทุก ๆ ตัวของแป้นพิมพ์ภาษาอังกฤษแบบอเมริกา ANSI`,
+        description: `ใน AltGr Layer ซึ่งสามารถเข้าถึงได้โดยการกด <code class="inline-code">Alt</code>ขวา (หรือ <code class="inline-code">Ctrl</code> + <code class="inline-code">Alt</code> ด้านซ้าย) สำหรับระบบปฏิบัติการ Windows หรือกด <code class="inline-code">⌥option</code> สำหรับระบบปฏิบัติการ macOS โดยตำแหน่งจะอยู่ตรงกับตัวเลขอารบิกทุก ๆ ตัวของแป้นพิมพ์ภาษาอังกฤษแบบอเมริกา ANSI`,
         icon: 'tabler:chevrons-right',
       },
       {
         title: 'ฃ ฃวด, ฅ ฅน อยู่ที่ไหน?',
-        description: `ใน AltGr Layer ซึ่งสามารถเข้าถึงได้โดยการกด <code class="inline-code">Alt</code>ขวา (หรือ <code class="inline-code">Ctrl</code> + <code class="inline-code">Alt</code> ด้านซ้าย สำหรับระบบปฏิบัติการ Windows) หรือกด <code class="inline-code">⌥option</code> สำหรับระบบปฏิบัติการ macOS โดยตำแหน่งจะอยู่ตรงกับตัว ข ไข่ และ ค ควาย เพื่อให้จำง่าย`,
+        description: `ใน AltGr Layer ซึ่งสามารถเข้าถึงได้โดยการกด <code class="inline-code">Alt</code>ขวา (หรือ <code class="inline-code">Ctrl</code> + <code class="inline-code">Alt</code> ด้านซ้าย) สำหรับระบบปฏิบัติการ Windows หรือกด <code class="inline-code">⌥option</code> สำหรับระบบปฏิบัติการ macOS โดยตำแหน่งจะอยู่ตรงกับตัว ข ไข่ และ ค ควาย เพื่อให้จำง่าย`,
         icon: 'tabler:chevrons-right',
       },
       {
@@ -62,19 +63,19 @@ const metadata = {
       },
       {
         title: 'ฝึกพิมพ์มนูญชัยอย่างไร?',
-        description: `สามารถฝึกได้ที่เว็บ Manoontype หรือพิมพ์รูปแป้นพิมพ์ในกระดาษแล้วติดไว้ใต้จอคอมพิวเตอร์ หรือเปิดโปรแกรม On-Screen Keyboard และฝึกพิมพ์
-            <a
+        description: `สามารถฝึกได้ที่เว็บ <a
               class="underline link-external"
-              href="https://narze.medium.com/manoonchai-layout-วิธีใช้งานเว็บ-manoontype-แบบสั้นๆ-5a4937856f78"
+              href="https://learn.manoonchai.com/"
               target="_blank"
               rel="noreferrer"
-            >อ่านวิธีใช้เว็บ Manoontype ในการฝึกแป้นพิมพ์มนูญชัย</a>
+            >Learn Manoonchai</a><br />
+            หรือพิมพ์รูปแป้นพิมพ์ลงกระดาษติดไว้ใต้จอคอมพิวเตอร์ หรือเปิดโปรแกรม On-Screen Keyboard แล้วฝึกพิมพ์
             <a
               class="underline link-external"
               href="Manoonchai-print.pdf"
               target="_blank"
               rel="noreferrer"
-            >รูปแป้นพิมพ์มนูญชัย สำหรับฝึกพิมพ์</a>`,
+            >รูปแป้นพิมพ์มนูญชัย สำหรับฝึกพิมพ์.pdf</a>`,
         icon: 'tabler:chevrons-right',
       },
       {
@@ -86,7 +87,7 @@ const metadata = {
       {
         title:
           'จะทำสติ๊กเกอร์แปะบนคีย์บอร์ด คีย์แคป หรือตัวคีย์บอร์ดที่เป็นแป้นพิมพ์มนูญชัยหรือไม่?',
-        description: `ไม่มีแผนที่จะทำ เพราะผู้พัฒนาต้องการส่งเสริมการฝึกพิมพ์ด้วยวิธีพิมพ์สัมผัส แต่หากต้องการทำด้วยตัวเอง สามารถทำได้`,
+        description: `ไม่มีแผนจะทำ เพราะผู้พัฒนาต้องการส่งเสริมการฝึกพิมพ์ด้วยวิธีพิมพ์สัมผัส แต่หากต้องการทำด้วยตัวเอง สามารถทำได้`,
         icon: 'tabler:chevrons-right',
       },
       {

@@ -16,7 +16,7 @@ const metadata = {
 <style>
   :global(#features a),
   :global(#features p) {
-    font-family: 'Sarabun', sans-serif;
+    font-family: var(--thai-body-font);
   }
 </style>
 <Layout metadata={metadata}>
@@ -31,7 +31,7 @@ const metadata = {
         class: 'whitespace-nowrap',
       },
       {
-        text: '<span class=\"whitespace-nowrap\">ทดลอง</span>',
+        text: '<span class=\"whitespace-nowrap\">พิมพ์ออนไลน์</span>',
         href: '/try',
         icon: 'tabler:keyboard',
         class: 'whitespace-nowrap',
@@ -85,7 +85,7 @@ const metadata = {
       {
         title: 'ใช้เลขอารบิกเป็นค่าเริ่มต้น',
         description:
-          'การใช้งานภาษาไทยในปัจจุบันแทบไม่มีการพิมพ์เลขไทยแล้ว เราจึงนำเลขอารบิกเป็นค่าเริ่มต้นแทน เมื่อต้องการพิมพ์ตัวเลข ผู้ใช้ไม่จำเป็นต้องสลับเป็นแป้นพิมพ์ภาษาอังกฤษอีกต่อไป (หากต้องการพิมพ์เลขไทยยังสามารถพิมพ์ด้วยการกด <code class="inline-code">Alt</code>ขวา หรือ <code class="inline-code">⌥option</code> ค้างเอาไว้ได้)',
+          'การใช้งานภาษาไทยในปัจจุบันแทบไม่มีการพิมพ์เลขไทยแล้ว เราจึงนำเลขอารบิกเป็นค่าเริ่มต้นแทน เมื่อต้องการพิมพ์ตัวเลข ผู้ใช้ไม่จำเป็นต้องสลับเป็นแป้นพิมพ์ภาษาอังกฤษอีกต่อไป <br />(หากต้องการพิมพ์เลขไทย สามารถพิมพ์ด้วยการกด <code class="inline-code">Alt</code>ขวา หรือ <code class="inline-code">⌥option</code> ค้างเอาไว้ ตามด้วยตัวเลขอารบิก)',
         icon: 'tabler:number-123',
       },
       {
@@ -97,7 +97,7 @@ const metadata = {
       {
         title: 'ไม่มีตัวอักษรไทยบนแถวตัวเลข',
         description:
-          'บนแป้นพิมพ์มนูญชัย จะไม่มีตัวอักษรไทยอยู่บนแถวตัวเลข เหมาะกับการใช้กับคีย์บอร์ดแลปทอป หรือคีย์บอร์ดขนาดเล็กที่มีความนิยมมากขึ้นในปัจจุบัน',
+          'บนแป้นพิมพ์มนูญชัย จะไม่มีตัวอักษรไทยอยู่บนแถวตัวเลข เหมาะกับการใช้กับคีย์บอร์ดแล็ปท็อป หรือคีย์บอร์ดขนาดเล็กที่มีความนิยมมากขึ้นในปัจจุบัน',
         icon: 'tabler:device-laptop',
       },
       {

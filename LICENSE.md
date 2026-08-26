@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2021 Manassarn Manoonchai
+Copyright (c) 2021 Manassarn Manoonchai  
 Copyright (c) 2023 onWidget (AstroWind)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,8 +27,8 @@ This project is licensed under the MIT License.
 
 However, some parts are licensed separately:
 
-- SyyDai IME Minimal Core — LGPL-3.0
-  Copyright (C) 2024-2025  SyyDai, Saamkhaih Kyakya
+SyyDai IME Minimal Core — LGPL-3.0  
+Copyright (C) 2024-2025  SyyDai, Saamkhaih Kyakya  
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as
 published by the Free Software Foundation, either version 3 of the
