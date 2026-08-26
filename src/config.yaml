@@ -19,8 +19,8 @@ metadata:
     site_name: แป้นพิมพ์มนูญชัย
     images:
       - url: '~/assets/images/manoonchai-layout.png'
-        width: 1747
-        height: 617
+        width: 1200
+        height: 630
     type: website
   twitter:
     handle: '@narze'
